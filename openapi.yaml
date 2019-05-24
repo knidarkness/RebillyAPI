@@ -11771,6 +11771,8 @@ components:
           nullable: true
           example: PO123456
           type: string
+        customFields:
+          $ref: '#/components/schemas/ResourceCustomFields'
         _links:
           type: array
           description: The links related to resource
