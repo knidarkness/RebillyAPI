@@ -1,0 +1,26 @@
+parameters:
+  - $ref: "#/components/parameters/resourceId"
+get:
+  tags:
+    - Change Order
+  summary: Retrieve Order Change preview
+  description: |
+    Retrieve preview of Order Change with specified identifier
+  responses:
+    200:
+      description: Order Change preview was retrieved successfully
+      headers:
+        Rate-Limit-Limit:
+          $ref: "#/components/headers/Rate-Limit-Limit"
+        Rate-Limit-Remaining:
+          $ref: "#/components/headers/Rate-Limit-Remaining"
+        Rate-Limit-Reset:
+          $ref: "#/components/headers/Rate-Limit-Reset"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OrderChangePreview"
+    401:
+      $ref: "#/components/responses/AccessForbidden"
+    404:
+      $ref: "#/components/responses/NotFound"
