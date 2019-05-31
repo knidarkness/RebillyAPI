@@ -14679,6 +14679,321 @@
           }
         ]
       },
+      "BankAccountToken": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The token identifier string",
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResourceId"
+              }
+            ]
+          },
+          "isUsed": {
+            "description": "Whether the token was already used",
+            "type": "boolean",
+            "default": false,
+            "readOnly": true
+          },
+          "method": {
+            "description": "The token payment method",
+            "type": "string",
+            "enum": [
+              "ach"
+            ]
+          },
+          "paymentInstrument": {
+            "description": "The payment instrument details",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TokenBankAccountInstrument"
+              }
+            ]
+          },
+          "fingerprint": {
+            "description": "Device fingerprint hash",
+            "type": "string"
+          },
+          "billingAddress": {
+            "description": "The billing address object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContactObject"
+              }
+            ]
+          },
+          "leadSource": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LeadSource"
+              }
+            ],
+            "writeOnly": true
+          },
+          "createdTime": {
+            "description": "Token created time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          },
+          "updatedTime": {
+            "description": "Token updated time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          },
+          "usageTime": {
+            "description": "Token usage time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          },
+          "expirationTime": {
+            "description": "Token expiration time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          },
+          "_links": {
+            "type": "array",
+            "description": "The links related to resource",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/SelfLink"
+            }
+          }
+        }
+      },
+      "CreateBankAccountToken": {
+        "type": "object",
+        "required": [
+          "method",
+          "paymentInstrument",
+          "billingAddress"
+        ],
+        "properties": {
+          "method": {
+            "description": "The token payment method",
+            "type": "string",
+            "enum": [
+              "ach"
+            ]
+          },
+          "paymentInstrument": {
+            "description": "The payment instrument details.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TokenBankAccountInstrument"
+              }
+            ]
+          },
+          "fingerprint": {
+            "description": "Device fingerprint hash",
+            "type": "string"
+          },
+          "billingAddress": {
+            "description": "The billing address object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContactObject"
+              }
+            ]
+          },
+          "leadSource": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LeadSource"
+              }
+            ]
+          }
+        }
+      },
+      "CreatePaymentCardToken": {
+        "type": "object",
+        "required": [
+          "method",
+          "paymentInstrument",
+          "billingAddress"
+        ],
+        "properties": {
+          "method": {
+            "description": "The token payment method",
+            "type": "string",
+            "enum": [
+              "payment-card"
+            ]
+          },
+          "paymentInstrument": {
+            "description": "The payment instrument details.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TokenPaymentCardInstrument"
+              }
+            ]
+          },
+          "fingerprint": {
+            "description": "Device fingerprint hash",
+            "type": "string"
+          },
+          "billingAddress": {
+            "description": "The billing address object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContactObject"
+              }
+            ]
+          },
+          "leadSource": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LeadSource"
+              }
+            ]
+          }
+        }
+      },
+      "CreateToken": {
+        "type": "object",
+        "required": [
+          "method",
+          "billingAddress"
+        ],
+        "properties": {
+          "method": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TokenMethod"
+              }
+            ]
+          },
+          "fingerprint": {
+            "description": "Device fingerprint hash",
+            "type": "string"
+          },
+          "billingAddress": {
+            "description": "The billing address object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContactObject"
+              }
+            ]
+          },
+          "leadSource": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LeadSource"
+              }
+            ]
+          }
+        }
+      },
+      "PaymentCardToken": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The token identifier string",
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResourceId"
+              }
+            ]
+          },
+          "isUsed": {
+            "description": "Whether the token was already used",
+            "type": "boolean",
+            "default": false,
+            "readOnly": true
+          },
+          "method": {
+            "description": "The token payment method",
+            "type": "string",
+            "enum": [
+              "payment-card"
+            ]
+          },
+          "paymentInstrument": {
+            "description": "The payment instrument details",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TokenPaymentCardInstrument"
+              }
+            ]
+          },
+          "fingerprint": {
+            "description": "Device fingerprint hash",
+            "type": "string"
+          },
+          "billingAddress": {
+            "description": "The billing address object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContactObject"
+              }
+            ]
+          },
+          "leadSource": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LeadSource"
+              }
+            ],
+            "writeOnly": true
+          },
+          "createdTime": {
+            "description": "Token created time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          },
+          "updatedTime": {
+            "description": "Token updated time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          },
+          "usageTime": {
+            "description": "Token usage time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          },
+          "expirationTime": {
+            "description": "Token expiration time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          },
+          "_links": {
+            "type": "array",
+            "description": "The links related to resource",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/SelfLink"
+            }
+          }
+        }
+      },
       "BBANBankAccountInstrument": {
         "description": "Payment Token instrument object",
         "allOf": [
@@ -14765,369 +15080,6 @@
           }
         ]
       },
-      "BankAccountToken": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "The token identifier string",
-            "readOnly": true,
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ResourceId"
-              }
-            ]
-          },
-          "isUsed": {
-            "description": "Whether the token was already used",
-            "type": "boolean",
-            "default": false,
-            "readOnly": true
-          },
-          "method": {
-            "type": "string",
-            "enum": [
-              "ach"
-            ]
-          },
-          "paymentInstrument": {
-            "description": "The payment instrument details",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TokenBankAccountInstrument"
-              }
-            ]
-          },
-          "fingerprint": {
-            "description": "Device fingerprint hash",
-            "type": "string"
-          },
-          "billingAddress": {
-            "description": "The billing address object",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ContactObject"
-              }
-            ]
-          },
-          "leadSource": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/LeadSource"
-              }
-            ],
-            "writeOnly": true
-          },
-          "createdTime": {
-            "description": "Token created time",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ServerTimestamp"
-              }
-            ]
-          },
-          "updatedTime": {
-            "description": "Token updated time",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ServerTimestamp"
-              }
-            ]
-          },
-          "usageTime": {
-            "description": "Token usage time",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ServerTimestamp"
-              }
-            ]
-          },
-          "expirationTime": {
-            "description": "Token expiration time",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ServerTimestamp"
-              }
-            ]
-          },
-          "_links": {
-            "type": "array",
-            "description": "The links related to resource",
-            "readOnly": true,
-            "minItems": 1,
-            "items": {
-              "$ref": "#/components/schemas/SelfLink"
-            }
-          }
-        }
-      },
-      "CreateBankAccountToken": {
-        "type": "object",
-        "required": [
-          "method",
-          "paymentInstrument",
-          "billingAddress"
-        ],
-        "properties": {
-          "method": {
-            "type": "string",
-            "enum": [
-              "ach"
-            ]
-          },
-          "paymentInstrument": {
-            "description": "The payment instrument details.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TokenBankAccountInstrument"
-              }
-            ]
-          },
-          "fingerprint": {
-            "description": "Device fingerprint hash",
-            "type": "string"
-          },
-          "billingAddress": {
-            "description": "The billing address object",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ContactObject"
-              }
-            ]
-          },
-          "leadSource": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/LeadSource"
-              }
-            ]
-          }
-        }
-      },
-      "CreatePaymentCardToken": {
-        "type": "object",
-        "required": [
-          "method",
-          "paymentInstrument",
-          "billingAddress"
-        ],
-        "properties": {
-          "method": {
-            "type": "string",
-            "enum": [
-              "payment-card"
-            ]
-          },
-          "paymentInstrument": {
-            "description": "The payment instrument details.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TokenPaymentCardInstrument"
-              }
-            ]
-          },
-          "fingerprint": {
-            "description": "Device fingerprint hash",
-            "type": "string"
-          },
-          "billingAddress": {
-            "description": "The billing address object",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ContactObject"
-              }
-            ]
-          },
-          "leadSource": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/LeadSource"
-              }
-            ]
-          }
-        }
-      },
-      "CreateToken": {
-        "type": "object",
-        "required": [
-          "method",
-          "billingAddress"
-        ],
-        "properties": {
-          "method": {
-            "type": "string",
-            "enum": [
-              "cash",
-              "paypal",
-              "Alipay",
-              "AstroPay Card",
-              "bank-transfer",
-              "bitcoin",
-              "Boleto",
-              "cash-deposit",
-              "CASHlib",
-              "CashToCode",
-              "China UnionPay",
-              "domestic-cards",
-              "echeck",
-              "ecoPayz",
-              "ecoVoucher",
-              "EPS",
-              "ePay.bg",
-              "Flexepin",
-              "Giropay",
-              "Gpaysafe",
-              "iDebit",
-              "iDEAL",
-              "INOVAPAY-pin",
-              "INOVAPAY-wallet",
-              "InstaDebit",
-              "instant-bank-transfer",
-              "Interac-online",
-              "Interac-eTransfer",
-              "invoice",
-              "Jeton",
-              "Klarna",
-              "miscellaneous",
-              "Neteller",
-              "Nordea-Solo",
-              "OchaPay",
-              "online-bank-transfer",
-              "Onlineueberweisen",
-              "Paysafecard",
-              "Pay4Fun",
-              "PinPay",
-              "phone",
-              "POLi",
-              "Przelewy24",
-              "QQPay",
-              "Resurs",
-              "SEPA",
-              "Skrill",
-              "Skrill Rapid Transfer",
-              "SMSVoucher",
-              "SparkPay",
-              "Trustly",
-              "UPayCard",
-              "voucher",
-              "WeChat Pay"
-            ]
-          },
-          "fingerprint": {
-            "description": "Device fingerprint hash",
-            "type": "string"
-          },
-          "billingAddress": {
-            "description": "The billing address object",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ContactObject"
-              }
-            ]
-          },
-          "leadSource": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/LeadSource"
-              }
-            ]
-          }
-        }
-      },
-      "PaymentCardToken": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "The token identifier string",
-            "readOnly": true,
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ResourceId"
-              }
-            ]
-          },
-          "isUsed": {
-            "description": "Whether the token was already used",
-            "type": "boolean",
-            "default": false,
-            "readOnly": true
-          },
-          "method": {
-            "type": "string",
-            "enum": [
-              "payment-card"
-            ]
-          },
-          "paymentInstrument": {
-            "description": "The payment instrument details",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TokenPaymentCardInstrument"
-              }
-            ]
-          },
-          "fingerprint": {
-            "description": "Device fingerprint hash",
-            "type": "string"
-          },
-          "billingAddress": {
-            "description": "The billing address object",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ContactObject"
-              }
-            ]
-          },
-          "leadSource": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/LeadSource"
-              }
-            ],
-            "writeOnly": true
-          },
-          "createdTime": {
-            "description": "Token created time",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ServerTimestamp"
-              }
-            ]
-          },
-          "updatedTime": {
-            "description": "Token updated time",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ServerTimestamp"
-              }
-            ]
-          },
-          "usageTime": {
-            "description": "Token usage time",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ServerTimestamp"
-              }
-            ]
-          },
-          "expirationTime": {
-            "description": "Token expiration time",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ServerTimestamp"
-              }
-            ]
-          },
-          "_links": {
-            "type": "array",
-            "description": "The links related to resource",
-            "readOnly": true,
-            "minItems": 1,
-            "items": {
-              "$ref": "#/components/schemas/SelfLink"
-            }
-          }
-        }
-      },
       "PaymentToken": {
         "type": "object",
         "properties": {
@@ -15147,62 +15099,10 @@
             "readOnly": true
           },
           "method": {
-            "type": "string",
-            "enum": [
-              "cash",
-              "paypal",
-              "Alipay",
-              "AstroPay Card",
-              "bank-transfer",
-              "bitcoin",
-              "Boleto",
-              "cash-deposit",
-              "CASHlib",
-              "CashToCode",
-              "China UnionPay",
-              "domestic-cards",
-              "echeck",
-              "ecoPayz",
-              "ecoVoucher",
-              "EPS",
-              "ePay.bg",
-              "Flexepin",
-              "Giropay",
-              "Gpaysafe",
-              "iDebit",
-              "iDEAL",
-              "INOVAPAY-pin",
-              "INOVAPAY-wallet",
-              "InstaDebit",
-              "instant-bank-transfer",
-              "Interac-online",
-              "Interac-eTransfer",
-              "invoice",
-              "Jeton",
-              "Klarna",
-              "miscellaneous",
-              "Neteller",
-              "Nordea-Solo",
-              "OchaPay",
-              "online-bank-transfer",
-              "Onlineueberweisen",
-              "Paysafecard",
-              "Pay4Fun",
-              "PinPay",
-              "phone",
-              "POLi",
-              "Przelewy24",
-              "QQPay",
-              "Resurs",
-              "SEPA",
-              "Skrill",
-              "Skrill Rapid Transfer",
-              "SMSVoucher",
-              "SparkPay",
-              "Trustly",
-              "UPayCard",
-              "voucher",
-              "WeChat Pay"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TokenMethod"
+              }
             ]
           },
           "fingerprint": {
@@ -15291,6 +15191,66 @@
             ]
           }
         }
+      },
+      "TokenMethod": {
+        "type": "string",
+        "description": "The token payment method",
+        "enum": [
+          "cash",
+          "paypal",
+          "Alipay",
+          "AstroPay Card",
+          "bank-transfer",
+          "bitcoin",
+          "Boleto",
+          "cash-deposit",
+          "CASHlib",
+          "CashToCode",
+          "China UnionPay",
+          "domestic-cards",
+          "echeck",
+          "ecoPayz",
+          "ecoVoucher",
+          "EPS",
+          "ePay.bg",
+          "Flexepin",
+          "Giropay",
+          "Gpaysafe",
+          "iDebit",
+          "iDEAL",
+          "INOVAPAY-pin",
+          "INOVAPAY-wallet",
+          "InstaDebit",
+          "instant-bank-transfer",
+          "Interac-online",
+          "Interac-eTransfer",
+          "invoice",
+          "Jeton",
+          "Klarna",
+          "miscellaneous",
+          "Neteller",
+          "Nordea-Solo",
+          "OchaPay",
+          "online-bank-transfer",
+          "Onlineueberweisen",
+          "Paysafecard",
+          "Pay4Fun",
+          "PinPay",
+          "phone",
+          "POLi",
+          "Przelewy24",
+          "QQPay",
+          "Resurs",
+          "SEPA",
+          "Skrill",
+          "Skrill Rapid Transfer",
+          "SMSVoucher",
+          "SparkPay",
+          "Trustly",
+          "UPayCard",
+          "voucher",
+          "WeChat Pay"
+        ]
       },
       "TokenPaymentCardInstrument": {
         "type": "object",
