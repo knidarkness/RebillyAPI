@@ -10026,6 +10026,7 @@ components:
         - instant-bank-transfer
         - Interac-online
         - Interac-eTransfer
+        - Interac
         - invoice
         - Jeton
         - Klarna
