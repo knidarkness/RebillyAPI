@@ -7132,9 +7132,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Transaction'
+                $ref: '#/components/schemas/Transaction'
         '401':
           $ref: '#/components/responses/AccessForbidden'
         '409':
