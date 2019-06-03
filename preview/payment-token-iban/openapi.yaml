@@ -6947,9 +6947,9 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: '#/components/schemas/CreatePaymentCardToken'
-                - $ref: '#/components/schemas/CreateBankAccountToken'
-                - $ref: '#/components/schemas/CreatePaymentToken'
+                - $ref: '#/components/schemas/PaymentCardToken'
+                - $ref: '#/components/schemas/BankAccountToken'
+                - $ref: '#/components/schemas/PaymentToken'
         description: PaymentToken resource
         required: true
       security:
@@ -10616,6 +10616,11 @@ components:
             - type
     BankAccountToken:
       type: object
+      title: Bank Account Token
+      required:
+        - method
+        - paymentInstrument
+        - billingAddress
       properties:
         id:
           description: The token identifier string
@@ -10670,82 +10675,13 @@ components:
           minItems: 1
           items:
             $ref: '#/components/schemas/SelfLink'
-    CreateBankAccountToken:
-      type: object
-      title: Bank Account Token
-      required:
-        - method
-        - paymentInstrument
-        - billingAddress
-      properties:
-        method:
-          description: The token payment method
-          type: string
-          enum:
-            - ach
-        paymentInstrument:
-          description: The payment instrument details.
-          allOf:
-            - $ref: '#/components/schemas/TokenBankAccountInstrument'
-        fingerprint:
-          description: Device fingerprint hash
-          type: string
-        billingAddress:
-          description: The billing address object
-          allOf:
-            - $ref: '#/components/schemas/ContactObject'
-        leadSource:
-          allOf:
-            - $ref: '#/components/schemas/LeadSource'
-    CreatePaymentCardToken:
+    PaymentCardToken:
       type: object
       title: Payment Card Token
       required:
         - method
         - paymentInstrument
         - billingAddress
-      properties:
-        method:
-          description: The token payment method
-          type: string
-          enum:
-            - payment-card
-        paymentInstrument:
-          description: The payment instrument details.
-          allOf:
-            - $ref: '#/components/schemas/TokenPaymentCardInstrument'
-        fingerprint:
-          description: Device fingerprint hash
-          type: string
-        billingAddress:
-          description: The billing address object
-          allOf:
-            - $ref: '#/components/schemas/ContactObject'
-        leadSource:
-          allOf:
-            - $ref: '#/components/schemas/LeadSource'
-    CreatePaymentToken:
-      type: object
-      title: Payment Token
-      required:
-        - method
-        - billingAddress
-      properties:
-        method:
-          allOf:
-            - $ref: '#/components/schemas/TokenMethod'
-        fingerprint:
-          description: Device fingerprint hash
-          type: string
-        billingAddress:
-          description: The billing address object
-          allOf:
-            - $ref: '#/components/schemas/ContactObject'
-        leadSource:
-          allOf:
-            - $ref: '#/components/schemas/LeadSource'
-    PaymentCardToken:
-      type: object
       properties:
         id:
           description: The token identifier string
@@ -10861,6 +10797,10 @@ components:
               readOnly: true
     PaymentToken:
       type: object
+      title: Payment Token
+      required:
+        - method
+        - billingAddress
       properties:
         id:
           description: The token identifier string
