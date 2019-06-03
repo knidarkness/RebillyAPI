@@ -19318,17 +19318,6 @@
         "description": "Payment resource",
         "required": true
       },
-      "PaymentToken": {
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/PaymentToken"
-            }
-          }
-        },
-        "description": "PaymentToken resource",
-        "required": true
-      },
       "Plan": {
         "content": {
           "application/json": {
