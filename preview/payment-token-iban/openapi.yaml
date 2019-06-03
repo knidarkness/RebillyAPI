@@ -6949,7 +6949,7 @@ paths:
               oneOf:
                 - $ref: '#/components/schemas/CreatePaymentCardToken'
                 - $ref: '#/components/schemas/CreateBankAccountToken'
-                - $ref: '#/components/schemas/CreateToken'
+                - $ref: '#/components/schemas/CreatePaymentToken'
         description: PaymentToken resource
         required: true
       security:
@@ -10672,6 +10672,7 @@ components:
             $ref: '#/components/schemas/SelfLink'
     CreateBankAccountToken:
       type: object
+      title: Bank Account Token
       required:
         - method
         - paymentInstrument
@@ -10698,6 +10699,7 @@ components:
             - $ref: '#/components/schemas/LeadSource'
     CreatePaymentCardToken:
       type: object
+      title: Payment Card Token
       required:
         - method
         - paymentInstrument
@@ -10722,8 +10724,9 @@ components:
         leadSource:
           allOf:
             - $ref: '#/components/schemas/LeadSource'
-    CreateToken:
+    CreatePaymentToken:
       type: object
+      title: Payment Token
       required:
         - method
         - billingAddress
@@ -10797,7 +10800,7 @@ components:
           minItems: 1
           items:
             $ref: '#/components/schemas/SelfLink'
-    BBANBankAccountInstrument:
+    BBANInstrument:
       description: Payment Token instrument object
       allOf:
         - $ref: '#/components/schemas/TokenBankAccountInstrument'
@@ -10833,7 +10836,7 @@ components:
               description: Bank Account Number's last 4 digits
               type: string
               readOnly: true
-    IBANBankAccountInstrument:
+    IBANInstrument:
       description: Payment Token instrument object
       allOf:
         - $ref: '#/components/schemas/TokenBankAccountInstrument'
@@ -10913,8 +10916,8 @@ components:
       discriminator:
         propertyName: accountNumberType
         mapping:
-          BBAN: '#/components/schemas/BBANBankAccountInstrument'
-          IBAN: '#/components/schemas/IBANBankAccountInstrument'
+          BBAN: '#/components/schemas/BBANInstrument'
+          IBAN: '#/components/schemas/IBANInstrument'
       properties:
         accountNumberType:
           description: Bank's Account Number type. A valid value is basic bank account number (BBAN) or international bank account number (IBAN).

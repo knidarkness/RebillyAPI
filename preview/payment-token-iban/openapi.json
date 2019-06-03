@@ -9223,7 +9223,7 @@
                     "$ref": "#/components/schemas/CreateBankAccountToken"
                   },
                   {
-                    "$ref": "#/components/schemas/CreateToken"
+                    "$ref": "#/components/schemas/CreatePaymentToken"
                   }
                 ]
               }
@@ -14777,6 +14777,7 @@
       },
       "CreateBankAccountToken": {
         "type": "object",
+        "title": "Bank Account Token",
         "required": [
           "method",
           "paymentInstrument",
@@ -14821,6 +14822,7 @@
       },
       "CreatePaymentCardToken": {
         "type": "object",
+        "title": "Payment Card Token",
         "required": [
           "method",
           "paymentInstrument",
@@ -14863,8 +14865,9 @@
           }
         }
       },
-      "CreateToken": {
+      "CreatePaymentToken": {
         "type": "object",
+        "title": "Payment Token",
         "required": [
           "method",
           "billingAddress"
@@ -14994,7 +14997,7 @@
           }
         }
       },
-      "BBANBankAccountInstrument": {
+      "BBANInstrument": {
         "description": "Payment Token instrument object",
         "allOf": [
           {
@@ -15045,7 +15048,7 @@
           }
         ]
       },
-      "IBANBankAccountInstrument": {
+      "IBANInstrument": {
         "description": "Payment Token instrument object",
         "allOf": [
           {
@@ -15176,8 +15179,8 @@
         "discriminator": {
           "propertyName": "accountNumberType",
           "mapping": {
-            "BBAN": "#/components/schemas/BBANBankAccountInstrument",
-            "IBAN": "#/components/schemas/IBANBankAccountInstrument"
+            "BBAN": "#/components/schemas/BBANInstrument",
+            "IBAN": "#/components/schemas/IBANInstrument"
           }
         },
         "properties": {
