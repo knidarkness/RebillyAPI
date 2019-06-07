@@ -5,9 +5,9 @@ allOf:
   -
     type: "object"
     required:
-      - itemId
+      - invoiceItemId
     properties:
-      itemId:
-        description: Order Item identifier string
+      invoiceItemId:
+        description: Upcoming Invoice's Item identifier string
         allOf:
           - $ref: "#/components/schemas/ResourceId"
