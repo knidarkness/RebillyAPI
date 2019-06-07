@@ -10070,6 +10070,138 @@
           }
         }
       },
+      "BBANType": {
+        "description": "BBAN type object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BankAccountCreatePlain"
+          },
+          {
+            "type": "object",
+            "required": [
+              "customerId",
+              "accountNumber",
+              "routingNumber",
+              "accountType",
+              "address"
+            ],
+            "properties": {
+              "customerId": {
+                "description": "The Customer's ID.",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ResourceId"
+                  }
+                ]
+              },
+              "accountNumber": {
+                "description": "Bank's Account Number.",
+                "type": "string",
+                "pattern": "^[0-9]+$"
+              },
+              "routingNumber": {
+                "description": "Bank's Routing Number.",
+                "type": "string",
+                "pattern": "^[0-9]+$"
+              },
+              "accountType": {
+                "description": "Bank's Account type.",
+                "type": "string",
+                "enum": [
+                  "checking",
+                  "savings",
+                  "other"
+                ]
+              },
+              "bankName": {
+                "description": "Bank's name.",
+                "type": "string"
+              },
+              "bic": {
+                "description": "Bank Identifier Code.",
+                "type": "string"
+              },
+              "address": {
+                "description": "The Address.",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ContactObject"
+                  }
+                ]
+              },
+              "status": {
+                "description": "Bank Account status.",
+                "type": "string",
+                "enum": [
+                  "active",
+                  "deactivated"
+                ]
+              },
+              "customFields": {
+                "$ref": "#/components/schemas/ResourceCustomFields"
+              }
+            }
+          }
+        ]
+      },
+      "IBANType": {
+        "description": "IBAN type object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BankAccountCreatePlain"
+          },
+          {
+            "type": "object",
+            "required": [
+              "customerId",
+              "accountNumber",
+              "address"
+            ],
+            "properties": {
+              "customerId": {
+                "description": "The Customer's ID.",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ResourceId"
+                  }
+                ]
+              },
+              "accountNumber": {
+                "description": "Bank's Account Number.",
+                "type": "string",
+                "pattern": "^[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}$"
+              },
+              "bankName": {
+                "description": "Bank's name.",
+                "type": "string"
+              },
+              "bic": {
+                "description": "Bank Identifier Code.",
+                "type": "string"
+              },
+              "address": {
+                "description": "The Address.",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ContactObject"
+                  }
+                ]
+              },
+              "status": {
+                "description": "Bank Account status.",
+                "type": "string",
+                "enum": [
+                  "active",
+                  "deactivated"
+                ]
+              },
+              "customFields": {
+                "$ref": "#/components/schemas/ResourceCustomFields"
+              }
+            }
+          }
+        ]
+      },
       "BankAccount": {
         "type": "object",
         "required": [
@@ -10210,71 +10342,24 @@
       "BankAccountCreatePlain": {
         "type": "object",
         "required": [
-          "customerId",
-          "accountNumberType",
-          "address"
+          "accountNumberType"
         ],
+        "discriminator": {
+          "propertyName": "accountNumberType",
+          "mapping": {
+            "BBAN": "#/components/schemas/BBANType",
+            "IBAN": "#/components/schemas/IBANType"
+          }
+        },
         "properties": {
-          "customerId": {
-            "description": "The Customer's ID.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ResourceId"
-              }
-            ]
-          },
-          "bankName": {
-            "description": "Bank's name.",
-            "type": "string"
-          },
-          "routingNumber": {
-            "description": "Bank's Routing Number. Required for BBAN account number type.",
-            "type": "string"
-          },
           "accountNumberType": {
             "description": "Bank's Account Number type. A valid value is basic bank account number (BBAN) or international bank account number (IBAN).",
             "type": "string",
             "default": "BBAN",
             "enum": [
-              "BBAN",
-              "IBAN"
+              "IBAN",
+              "BBAN"
             ]
-          },
-          "accountNumber": {
-            "description": "Bank's Account Number.",
-            "type": "string"
-          },
-          "accountType": {
-            "description": "Bank's Account type. Required for BBAN account number type.",
-            "type": "string",
-            "enum": [
-              "checking",
-              "savings",
-              "other"
-            ]
-          },
-          "bic": {
-            "description": "Bank Identifier Code",
-            "type": "string"
-          },
-          "address": {
-            "description": "The Address.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ContactObject"
-              }
-            ]
-          },
-          "status": {
-            "description": "Bank Account status",
-            "type": "string",
-            "enum": [
-              "active",
-              "deactivated"
-            ]
-          },
-          "customFields": {
-            "$ref": "#/components/schemas/ResourceCustomFields"
           }
         }
       },
