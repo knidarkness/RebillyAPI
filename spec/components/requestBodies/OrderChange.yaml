@@ -1,6 +1,6 @@
 content:
   application/json:
     schema:
-      $ref: "#/components/schemas/OrderChange"
-description: OrderChange resource
+      $ref: "#/components/schemas/ChangeOrder"
+description: ChangeOrder resource
 required: true

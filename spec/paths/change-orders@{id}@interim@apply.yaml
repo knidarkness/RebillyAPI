@@ -3,12 +3,12 @@ parameters:
 post:
   tags:
     - Change Order
-  summary: Apply and issue Deferred Invoice.
+  summary: Apply and issue Interim Invoice.
   description: |
-    Apply and issue Deferred Invoice.
+    Apply and issue Interim Invoice.
   responses:
     201:
-      description: Deferred Invoice was applied and issued.
+      description: Interim Invoice was applied and issued.
       headers:
         Rate-Limit-Limit:
           $ref: "#/components/headers/Rate-Limit-Limit"
@@ -19,7 +19,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/OrderChange"
+            $ref: "#/components/schemas/ChangeOrder"
     401:
       $ref: "#/components/responses/AccessForbidden"
     409:

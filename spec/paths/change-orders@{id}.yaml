@@ -19,7 +19,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/OrderChange"
+            $ref: "#/components/schemas/ChangeOrder"
     401:
       $ref: "#/components/responses/AccessForbidden"
     404:
@@ -33,7 +33,7 @@ put:
     Only one pending Order Change for single Order can exist at a time.
     Only pending Order Change can be updated.
   requestBody:
-    $ref: "#/components/requestBodies/OrderChange"
+    $ref: "#/components/requestBodies/ChangeOrder"
   responses:
     200:
       description: Pending Order Change was updated
@@ -47,7 +47,7 @@ put:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/OrderChange"
+            $ref: "#/components/schemas/ChangeOrder"
     201:
       description: Pending Order Change was created.
       headers:
@@ -60,7 +60,7 @@ put:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/OrderChange"
+            $ref: "#/components/schemas/ChangeOrder"
     401:
       $ref: "#/components/responses/AccessForbidden"
     404:

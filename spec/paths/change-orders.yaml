@@ -28,7 +28,7 @@ get:
           schema:
             type: array
             items:
-              $ref: "#/components/schemas/OrderChange"
+              $ref: "#/components/schemas/ChangeOrder"
     401:
       $ref: "#/components/responses/AccessForbidden"
 post:
@@ -38,7 +38,7 @@ post:
   description: |
     Create a pending Order Change. Only one pending Order Change for single Order can exist at a time.
   requestBody:
-    $ref: "#/components/requestBodies/OrderChange"
+    $ref: "#/components/requestBodies/ChangeOrder"
   responses:
     201:
       description: Order Change was created
@@ -52,7 +52,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/OrderChange"
+            $ref: "#/components/schemas/ChangeOrder"
     401:
       $ref: "#/components/responses/AccessForbidden"
     409:

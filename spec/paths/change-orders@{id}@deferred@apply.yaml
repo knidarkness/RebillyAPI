@@ -1,14 +1,14 @@
 parameters:
   - $ref: "#/components/parameters/resourceId"
-get:
+post:
   tags:
     - Change Order
-  summary: Retrieve Order Change preview
+  summary: Apply and issue Deferred Invoice.
   description: |
-    Retrieve preview of Order Change with specified identifier
+    Apply and issue Deferred Invoice.
   responses:
-    200:
-      description: Order Change preview was retrieved successfully
+    201:
+      description: Deferred Invoice was applied and issued.
       headers:
         Rate-Limit-Limit:
           $ref: "#/components/headers/Rate-Limit-Limit"
@@ -19,8 +19,10 @@ get:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/OrderChangePreview"
+            $ref: "#/components/schemas/ChangeOrder"
     401:
       $ref: "#/components/responses/AccessForbidden"
-    404:
-      $ref: "#/components/responses/NotFound"
+    409:
+      $ref: "#/components/responses/Conflict"
+    422:
+      $ref: "#/components/responses/InvalidDataError"

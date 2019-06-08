@@ -24,7 +24,7 @@ properties:
     description: Order changes
     type: array
     items:
-      $ref: "#/components/schemas/OrderChangeItem"
+      $ref: "#/components/schemas/ChangeOrderItem"
   changedBy:
     description: The author of Order Change.
     type: string

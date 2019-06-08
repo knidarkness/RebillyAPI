@@ -2,11 +2,11 @@ type: object
 discriminator:
   propertyName: changeType
   mapping:
-    "item-remove": "#/components/schemas/OrderChangeItemRemove"
-    "plan-add": "#/components/schemas/OrderChangePlanAdd"
-    "renewal-time": "#/components/schemas/OrderChangeRenewalTime"
-    "billing-anchor": "#/components/schemas/OrderChangeBillingAnchor"
-    #"pricing": "#/components/schemas/OrderChangePricing"
+    "item-remove": "#/components/schemas/ChangeOrderItemRemove"
+    "plan-add": "#/components/schemas/ChangeOrderPlanAdd"
+    "renewal-time": "#/components/schemas/ChangeOrderRenewalTime"
+    "billing-anchor": "#/components/schemas/ChangeOrderBillingAnchor"
+    #"pricing": "#/components/schemas/ChangeOrderPricing"
 properties:
   id:
     description: Change Order Item ID.

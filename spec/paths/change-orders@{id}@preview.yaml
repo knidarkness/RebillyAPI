@@ -1,14 +1,14 @@
 parameters:
   - $ref: "#/components/parameters/resourceId"
-post:
+get:
   tags:
     - Change Order
-  summary: Apply and issue Interim Invoice.
+  summary: Retrieve Order Change preview
   description: |
-    Apply and issue Interim Invoice.
+    Retrieve preview of Order Change with specified identifier
   responses:
-    201:
-      description: Interim Invoice was applied and issued.
+    200:
+      description: Order Change preview was retrieved successfully
       headers:
         Rate-Limit-Limit:
           $ref: "#/components/headers/Rate-Limit-Limit"
@@ -19,10 +19,8 @@ post:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/OrderChange"
+            $ref: "#/components/schemas/ChangeOrderPreview"
     401:
       $ref: "#/components/responses/AccessForbidden"
-    409:
-      $ref: "#/components/responses/Conflict"
-    422:
-      $ref: "#/components/responses/InvalidDataError"
+    404:
+      $ref: "#/components/responses/NotFound"

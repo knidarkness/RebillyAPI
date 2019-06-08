@@ -1,7 +1,7 @@
 description: Remove Item from Order.
 allOf:
   -
-    $ref: "#/components/schemas/OrderChangeItem"
+    $ref: "#/components/schemas/ChangeOrderItem"
   -
     type: "object"
     required:
