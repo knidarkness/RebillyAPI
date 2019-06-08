@@ -1232,6 +1232,254 @@ paths:
         - lang: PHP
           source: |
             $client->blacklists()->delete('blacklistId');
+  /change-orders:
+    get:
+      tags:
+        - Change Order
+      summary: Retrieve a list of orders changes
+      description: |
+        Retrieve a list of orders changes
+      parameters:
+        - $ref: '#/components/parameters/collectionLimit'
+        - $ref: '#/components/parameters/collectionOffset'
+      responses:
+        '200':
+          description: A list of orders changes was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              $ref: '#/components/headers/Rate-Limit-Limit'
+            Rate-Limit-Remaining:
+              $ref: '#/components/headers/Rate-Limit-Remaining'
+            Rate-Limit-Reset:
+              $ref: '#/components/headers/Rate-Limit-Reset'
+            Pagination-Total:
+              $ref: '#/components/headers/Pagination-Total'
+            Pagination-Limit:
+              $ref: '#/components/headers/Pagination-Limit'
+            Pagination-Offset:
+              $ref: '#/components/headers/Pagination-Offset'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChangeOrder'
+        '401':
+          $ref: '#/components/responses/AccessForbidden'
+    post:
+      tags:
+        - Change Order
+      summary: Create a pending Order Change
+      description: |
+        Create a pending Order Change. Only one pending Order Change for single Order can exist at a time.
+      requestBody:
+        $ref: '#/components/requestBodies/ChangeOrder'
+      responses:
+        '201':
+          description: Order Change was created
+          headers:
+            Rate-Limit-Limit:
+              $ref: '#/components/headers/Rate-Limit-Limit'
+            Rate-Limit-Remaining:
+              $ref: '#/components/headers/Rate-Limit-Remaining'
+            Rate-Limit-Reset:
+              $ref: '#/components/headers/Rate-Limit-Reset'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeOrder'
+        '401':
+          $ref: '#/components/responses/AccessForbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/InvalidDataError'
+  '/change-orders/{id}':
+    parameters:
+      - $ref: '#/components/parameters/resourceId'
+    get:
+      tags:
+        - Change Order
+      summary: Retrieve an Order Change
+      description: |
+        Retrieve an Order Change with specified identifier string
+      responses:
+        '200':
+          description: Order Change was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              $ref: '#/components/headers/Rate-Limit-Limit'
+            Rate-Limit-Remaining:
+              $ref: '#/components/headers/Rate-Limit-Remaining'
+            Rate-Limit-Reset:
+              $ref: '#/components/headers/Rate-Limit-Reset'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeOrder'
+        '401':
+          $ref: '#/components/responses/AccessForbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      tags:
+        - Change Order
+      summary: Upsert an Order Change with predefined ID
+      description: |
+        Create or update an Order Change with predefined identifier string.
+        Only one pending Order Change for single Order can exist at a time.
+        Only pending Order Change can be updated.
+      requestBody:
+        $ref: '#/components/requestBodies/ChangeOrder'
+      responses:
+        '200':
+          description: Pending Order Change was updated
+          headers:
+            Rate-Limit-Limit:
+              $ref: '#/components/headers/Rate-Limit-Limit'
+            Rate-Limit-Remaining:
+              $ref: '#/components/headers/Rate-Limit-Remaining'
+            Rate-Limit-Reset:
+              $ref: '#/components/headers/Rate-Limit-Reset'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeOrder'
+        '201':
+          description: Pending Order Change was created.
+          headers:
+            Rate-Limit-Limit:
+              $ref: '#/components/headers/Rate-Limit-Limit'
+            Rate-Limit-Remaining:
+              $ref: '#/components/headers/Rate-Limit-Remaining'
+            Rate-Limit-Reset:
+              $ref: '#/components/headers/Rate-Limit-Reset'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeOrder'
+        '401':
+          $ref: '#/components/responses/AccessForbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/InvalidDataError'
+  '/change-orders/{id}/cancel':
+    parameters:
+      - $ref: '#/components/parameters/resourceId'
+    post:
+      tags:
+        - Change Order
+      summary: Cancel a pending Order Change
+      description: |
+        Cancel a pending Order Change. Only pending Order Change can be canceled.
+      responses:
+        '201':
+          description: Order Change was canceled
+          headers:
+            Rate-Limit-Limit:
+              $ref: '#/components/headers/Rate-Limit-Limit'
+            Rate-Limit-Remaining:
+              $ref: '#/components/headers/Rate-Limit-Remaining'
+            Rate-Limit-Reset:
+              $ref: '#/components/headers/Rate-Limit-Reset'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeOrder'
+        '401':
+          $ref: '#/components/responses/AccessForbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/InvalidDataError'
+  '/change-orders/{id}/deferred/apply':
+    parameters:
+      - $ref: '#/components/parameters/resourceId'
+    post:
+      tags:
+        - Change Order
+      summary: Apply and issue Deferred Invoice.
+      description: |
+        Apply and issue Deferred Invoice.
+      responses:
+        '201':
+          description: Deferred Invoice was applied and issued.
+          headers:
+            Rate-Limit-Limit:
+              $ref: '#/components/headers/Rate-Limit-Limit'
+            Rate-Limit-Remaining:
+              $ref: '#/components/headers/Rate-Limit-Remaining'
+            Rate-Limit-Reset:
+              $ref: '#/components/headers/Rate-Limit-Reset'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeOrder'
+        '401':
+          $ref: '#/components/responses/AccessForbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/InvalidDataError'
+  '/change-orders/{id}/interim/apply':
+    parameters:
+      - $ref: '#/components/parameters/resourceId'
+    post:
+      tags:
+        - Change Order
+      summary: Apply and issue Interim Invoice.
+      description: |
+        Apply and issue Interim Invoice.
+      responses:
+        '201':
+          description: Interim Invoice was applied and issued.
+          headers:
+            Rate-Limit-Limit:
+              $ref: '#/components/headers/Rate-Limit-Limit'
+            Rate-Limit-Remaining:
+              $ref: '#/components/headers/Rate-Limit-Remaining'
+            Rate-Limit-Reset:
+              $ref: '#/components/headers/Rate-Limit-Reset'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeOrder'
+        '401':
+          $ref: '#/components/responses/AccessForbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/InvalidDataError'
+  '/change-orders/{id}/preview':
+    parameters:
+      - $ref: '#/components/parameters/resourceId'
+    get:
+      tags:
+        - Change Order
+      summary: Retrieve Order Change preview
+      description: |
+        Retrieve preview of Order Change with specified identifier
+      responses:
+        '200':
+          description: Order Change preview was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              $ref: '#/components/headers/Rate-Limit-Limit'
+            Rate-Limit-Remaining:
+              $ref: '#/components/headers/Rate-Limit-Remaining'
+            Rate-Limit-Reset:
+              $ref: '#/components/headers/Rate-Limit-Reset'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeOrderPreview'
+        '401':
+          $ref: '#/components/responses/AccessForbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
   /contacts:
     get:
       tags:
@@ -4043,254 +4291,6 @@ paths:
           $ref: '#/components/responses/NotFound'
         '422':
           $ref: '#/components/responses/InvalidDataError'
-  /order-changes:
-    get:
-      tags:
-        - Change Order
-      summary: Retrieve a list of orders changes
-      description: |
-        Retrieve a list of orders changes
-      parameters:
-        - $ref: '#/components/parameters/collectionLimit'
-        - $ref: '#/components/parameters/collectionOffset'
-      responses:
-        '200':
-          description: A list of orders changes was retrieved successfully
-          headers:
-            Rate-Limit-Limit:
-              $ref: '#/components/headers/Rate-Limit-Limit'
-            Rate-Limit-Remaining:
-              $ref: '#/components/headers/Rate-Limit-Remaining'
-            Rate-Limit-Reset:
-              $ref: '#/components/headers/Rate-Limit-Reset'
-            Pagination-Total:
-              $ref: '#/components/headers/Pagination-Total'
-            Pagination-Limit:
-              $ref: '#/components/headers/Pagination-Limit'
-            Pagination-Offset:
-              $ref: '#/components/headers/Pagination-Offset'
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/OrderChange'
-        '401':
-          $ref: '#/components/responses/AccessForbidden'
-    post:
-      tags:
-        - Change Order
-      summary: Create a pending Order Change
-      description: |
-        Create a pending Order Change. Only one pending Order Change for single Order can exist at a time.
-      requestBody:
-        $ref: '#/components/requestBodies/OrderChange'
-      responses:
-        '201':
-          description: Order Change was created
-          headers:
-            Rate-Limit-Limit:
-              $ref: '#/components/headers/Rate-Limit-Limit'
-            Rate-Limit-Remaining:
-              $ref: '#/components/headers/Rate-Limit-Remaining'
-            Rate-Limit-Reset:
-              $ref: '#/components/headers/Rate-Limit-Reset'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrderChange'
-        '401':
-          $ref: '#/components/responses/AccessForbidden'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/InvalidDataError'
-  '/order-changes/{id}':
-    parameters:
-      - $ref: '#/components/parameters/resourceId'
-    get:
-      tags:
-        - Change Order
-      summary: Retrieve an Order Change
-      description: |
-        Retrieve an Order Change with specified identifier string
-      responses:
-        '200':
-          description: Order Change was retrieved successfully
-          headers:
-            Rate-Limit-Limit:
-              $ref: '#/components/headers/Rate-Limit-Limit'
-            Rate-Limit-Remaining:
-              $ref: '#/components/headers/Rate-Limit-Remaining'
-            Rate-Limit-Reset:
-              $ref: '#/components/headers/Rate-Limit-Reset'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrderChange'
-        '401':
-          $ref: '#/components/responses/AccessForbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-    put:
-      tags:
-        - Change Order
-      summary: Upsert an Order Change with predefined ID
-      description: |
-        Create or update an Order Change with predefined identifier string.
-        Only one pending Order Change for single Order can exist at a time.
-        Only pending Order Change can be updated.
-      requestBody:
-        $ref: '#/components/requestBodies/OrderChange'
-      responses:
-        '200':
-          description: Pending Order Change was updated
-          headers:
-            Rate-Limit-Limit:
-              $ref: '#/components/headers/Rate-Limit-Limit'
-            Rate-Limit-Remaining:
-              $ref: '#/components/headers/Rate-Limit-Remaining'
-            Rate-Limit-Reset:
-              $ref: '#/components/headers/Rate-Limit-Reset'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrderChange'
-        '201':
-          description: Pending Order Change was created.
-          headers:
-            Rate-Limit-Limit:
-              $ref: '#/components/headers/Rate-Limit-Limit'
-            Rate-Limit-Remaining:
-              $ref: '#/components/headers/Rate-Limit-Remaining'
-            Rate-Limit-Reset:
-              $ref: '#/components/headers/Rate-Limit-Reset'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrderChange'
-        '401':
-          $ref: '#/components/responses/AccessForbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/InvalidDataError'
-  '/order-changes/{id}/cancel':
-    parameters:
-      - $ref: '#/components/parameters/resourceId'
-    post:
-      tags:
-        - Change Order
-      summary: Cancel a pending Order Change
-      description: |
-        Cancel a pending Order Change. Only pending Order Change can be canceled.
-      responses:
-        '201':
-          description: Order Change was canceled
-          headers:
-            Rate-Limit-Limit:
-              $ref: '#/components/headers/Rate-Limit-Limit'
-            Rate-Limit-Remaining:
-              $ref: '#/components/headers/Rate-Limit-Remaining'
-            Rate-Limit-Reset:
-              $ref: '#/components/headers/Rate-Limit-Reset'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrderChange'
-        '401':
-          $ref: '#/components/responses/AccessForbidden'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/InvalidDataError'
-  '/order-changes/{id}/deferred/apply':
-    parameters:
-      - $ref: '#/components/parameters/resourceId'
-    post:
-      tags:
-        - Change Order
-      summary: Apply and issue Deferred Invoice.
-      description: |
-        Apply and issue Deferred Invoice.
-      responses:
-        '201':
-          description: Deferred Invoice was applied and issued.
-          headers:
-            Rate-Limit-Limit:
-              $ref: '#/components/headers/Rate-Limit-Limit'
-            Rate-Limit-Remaining:
-              $ref: '#/components/headers/Rate-Limit-Remaining'
-            Rate-Limit-Reset:
-              $ref: '#/components/headers/Rate-Limit-Reset'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrderChange'
-        '401':
-          $ref: '#/components/responses/AccessForbidden'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/InvalidDataError'
-  '/order-changes/{id}/interim/apply':
-    parameters:
-      - $ref: '#/components/parameters/resourceId'
-    post:
-      tags:
-        - Change Order
-      summary: Apply and issue Interim Invoice.
-      description: |
-        Apply and issue Interim Invoice.
-      responses:
-        '201':
-          description: Interim Invoice was applied and issued.
-          headers:
-            Rate-Limit-Limit:
-              $ref: '#/components/headers/Rate-Limit-Limit'
-            Rate-Limit-Remaining:
-              $ref: '#/components/headers/Rate-Limit-Remaining'
-            Rate-Limit-Reset:
-              $ref: '#/components/headers/Rate-Limit-Reset'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrderChange'
-        '401':
-          $ref: '#/components/responses/AccessForbidden'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/InvalidDataError'
-  '/order-changes/{id}/preview':
-    parameters:
-      - $ref: '#/components/parameters/resourceId'
-    get:
-      tags:
-        - Change Order
-      summary: Retrieve Order Change preview
-      description: |
-        Retrieve preview of Order Change with specified identifier
-      responses:
-        '200':
-          description: Order Change preview was retrieved successfully
-          headers:
-            Rate-Limit-Limit:
-              $ref: '#/components/headers/Rate-Limit-Limit'
-            Rate-Limit-Remaining:
-              $ref: '#/components/headers/Rate-Limit-Remaining'
-            Rate-Limit-Reset:
-              $ref: '#/components/headers/Rate-Limit-Reset'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrderChangePreview'
-        '401':
-          $ref: '#/components/responses/AccessForbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
   /password-tokens:
     get:
       tags:
@@ -11998,7 +11998,7 @@ components:
               - $ref: '#/components/schemas/CustomerEmbed'
               - $ref: '#/components/schemas/WebsiteEmbed'
               - $ref: '#/components/schemas/LeadSourceEmbed'
-    OrderChange:
+    ChangeOrder:
       type: object
       properties:
         id:
@@ -12025,7 +12025,7 @@ components:
           description: Order changes
           type: array
           items:
-            $ref: '#/components/schemas/OrderChangeItem'
+            $ref: '#/components/schemas/ChangeOrderItem'
         changedBy:
           description: The author of Order Change.
           type: string
@@ -12042,10 +12042,10 @@ components:
           description: The change applied time
           allOf:
             - $ref: '#/components/schemas/ServerTimestamp'
-    OrderChangeBillingAnchor:
+    ChangeOrderBillingAnchor:
       description: Change Order Billing Anchor.
       allOf:
-        - $ref: '#/components/schemas/OrderChangeItem'
+        - $ref: '#/components/schemas/ChangeOrderItem'
         - type: object
           required:
             - billingAnchor
@@ -12056,10 +12056,10 @@ components:
               example: null
               allOf:
                 - $ref: '#/components/schemas/PlanBillingAnchor'
-    OrderChangeItemRemove:
+    ChangeOrderItemRemove:
       description: Remove Item from Order.
       allOf:
-        - $ref: '#/components/schemas/OrderChangeItem'
+        - $ref: '#/components/schemas/ChangeOrderItem'
         - type: object
           required:
             - invoiceItemId
@@ -12068,10 +12068,10 @@ components:
               description: Upcoming Invoice's Item identifier string
               allOf:
                 - $ref: '#/components/schemas/ResourceId'
-    OrderChangePlanAdd:
+    ChangeOrderPlanAdd:
       description: Add Plan to Order.
       allOf:
-        - $ref: '#/components/schemas/OrderChangeItem'
+        - $ref: '#/components/schemas/ChangeOrderItem'
         - type: object
           required:
             - planId
@@ -12083,10 +12083,10 @@ components:
             quantity:
               description: Number of units of the product on the given plan
               type: integer
-    OrderChangeRenewalTime:
+    ChangeOrderRenewalTime:
       description: Change Order Renewal Time.
       allOf:
-        - $ref: '#/components/schemas/OrderChangeItem'
+        - $ref: '#/components/schemas/ChangeOrderItem'
         - type: object
           required:
             - renewalTime
@@ -12095,15 +12095,15 @@ components:
               description: Changed renewal time
               type: string
               format: date-time
-    OrderChangeItem:
+    ChangeOrderItem:
       type: object
       discriminator:
         propertyName: changeType
         mapping:
-          item-remove: '#/components/schemas/OrderChangeItemRemove'
-          plan-add: '#/components/schemas/OrderChangePlanAdd'
-          renewal-time: '#/components/schemas/OrderChangeRenewalTime'
-          billing-anchor: '#/components/schemas/OrderChangeBillingAnchor'
+          item-remove: '#/components/schemas/ChangeOrderItemRemove'
+          plan-add: '#/components/schemas/ChangeOrderPlanAdd'
+          renewal-time: '#/components/schemas/ChangeOrderRenewalTime'
+          billing-anchor: '#/components/schemas/ChangeOrderBillingAnchor'
       properties:
         id:
           description: Change Order Item ID.
@@ -12129,7 +12129,7 @@ components:
           description: The change created time
           allOf:
             - $ref: '#/components/schemas/ServerTimestamp'
-    OrderChangePreview:
+    ChangeOrderPreview:
       type: object
       properties:
         difference:
@@ -13907,6 +13907,13 @@ components:
             $ref: '#/components/schemas/Blacklist'
       description: Blacklist resource
       required: true
+    ChangeOrder:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ChangeOrder'
+      description: ChangeOrder resource
+      required: true
     Contact:
       content:
         application/json:
@@ -13948,13 +13955,6 @@ components:
           schema:
             $ref: '#/components/schemas/Invoice'
       description: Invoice resource
-      required: true
-    OrderChange:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OrderChange'
-      description: OrderChange resource
       required: true
     Payment:
       content:
