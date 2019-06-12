@@ -11347,8 +11347,8 @@
               "$ref": "#/components/schemas/Tag"
             }
           },
-          "kyc": {
-            "description": "KYC document status for customer",
+          "kycStatus": {
+            "description": "KYC document status for customer.  If set to `null`, then KYC document haven't yet been uploaded/analyzed",
             "readOnly": true,
             "type": "string",
             "enum": [
