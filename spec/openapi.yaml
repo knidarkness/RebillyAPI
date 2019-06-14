@@ -154,7 +154,7 @@ tags:
       3rd parties.
   - name: Change Order
     description: |
-      TODO
+      Change Order API allows to modify Subscriptions by adding or removing items, changing quantities, changing renewal time or billing anchor.
 ################################################################################
 x-tagGroups:
   - name: Customers
