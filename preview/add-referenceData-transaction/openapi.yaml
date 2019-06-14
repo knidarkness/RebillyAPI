@@ -13291,6 +13291,7 @@ components:
           example:
             gatewayTransactionId: GAT123
           readOnly: true
+          nullable: true
         bin:
           description: Payment Card BIN
           type: string

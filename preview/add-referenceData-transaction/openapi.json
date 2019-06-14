@@ -18455,7 +18455,8 @@
             "example": {
               "gatewayTransactionId": "GAT123"
             },
-            "readOnly": true
+            "readOnly": true,
+            "nullable": true
           },
           "bin": {
             "description": "Payment Card BIN",
