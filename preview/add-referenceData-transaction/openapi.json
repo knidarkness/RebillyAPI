@@ -18446,6 +18446,17 @@
             "type": "integer",
             "readOnly": true
           },
+          "referenceData": {
+            "description": "HTTP headers",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "example": {
+              "gatewayTransactionId": "GAT123"
+            },
+            "readOnly": true
+          },
           "bin": {
             "description": "Payment Card BIN",
             "type": "string",
