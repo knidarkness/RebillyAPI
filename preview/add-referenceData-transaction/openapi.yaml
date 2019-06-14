@@ -13284,7 +13284,7 @@ components:
           type: integer
           readOnly: true
         referenceData:
-          description: HTTP headers
+          description: Transaction reference data
           type: object
           additionalProperties:
             type: string
