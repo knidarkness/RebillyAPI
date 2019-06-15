@@ -18446,6 +18446,18 @@
             "type": "integer",
             "readOnly": true
           },
+          "referenceData": {
+            "description": "Transaction reference data",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "example": {
+              "gatewayTransactionId": "GAT123"
+            },
+            "readOnly": true,
+            "nullable": true
+          },
           "bin": {
             "description": "Payment Card BIN",
             "type": "string",
