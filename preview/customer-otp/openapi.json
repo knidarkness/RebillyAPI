@@ -1217,6 +1217,81 @@
           }
         ]
       },
+      "patch": {
+        "tags": [
+          "Bank Accounts"
+        ],
+        "summary": "Update a bank account's values",
+        "description": "Update bank account's values except for the account number and routing number\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "bankName": {
+                    "description": "Bank's name.",
+                    "type": "string"
+                  },
+                  "accountType": {
+                    "description": "Bank's Account type.",
+                    "type": "string",
+                    "enum": [
+                      "checking",
+                      "savings",
+                      "other"
+                    ]
+                  },
+                  "address": {
+                    "description": "The Address.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ContactObject"
+                      }
+                    ]
+                  },
+                  "customFields": {
+                    "$ref": "#/components/schemas/ResourceCustomFields"
+                  }
+                }
+              }
+            }
+          },
+          "description": "Bank Account"
+        },
+        "responses": {
+          "200": {
+            "description": "BankAccount was updated",
+            "headers": {
+              "Rate-Limit-Limit": {
+                "$ref": "#/components/headers/Rate-Limit-Limit"
+              },
+              "Rate-Limit-Remaining": {
+                "$ref": "#/components/headers/Rate-Limit-Remaining"
+              },
+              "Rate-Limit-Reset": {
+                "$ref": "#/components/headers/Rate-Limit-Reset"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankAccount"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/AccessForbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidDataError"
+          }
+        }
+      },
       "put": {
         "tags": [
           "Bank Accounts"
@@ -9137,7 +9212,25 @@
         "operationId": "paymentTokenCreation",
         "description": "[FramePay](https://rebilly.github.io/framepay-docs/)\nis the recommended way to \ncreate a payment token because it minimizes\nPCI DSS compliance.  Once a payment token \nis created, it can only be used once.\n\nA payment token expires upon first use\nor within 30 minutes of the token creation\n(whichever comes first).\n",
         "requestBody": {
-          "$ref": "#/components/requestBodies/PaymentToken"
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/PaymentCardToken"
+                  },
+                  {
+                    "$ref": "#/components/schemas/BankAccountToken"
+                  },
+                  {
+                    "$ref": "#/components/schemas/PaymentToken"
+                  }
+                ]
+              }
+            }
+          },
+          "description": "PaymentToken resource",
+          "required": true
         },
         "security": [
           {
@@ -9167,7 +9260,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaymentToken"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/PaymentCardToken"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BankAccountToken"
+                    },
+                    {
+                      "$ref": "#/components/schemas/PaymentToken"
+                    }
+                  ]
                 }
               }
             }
@@ -9323,10 +9426,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Transaction"
-                  }
+                  "$ref": "#/components/schemas/Transaction"
                 }
               }
             }
@@ -9954,8 +10054,153 @@
                 }
               ]
             }
+          },
+          "_embedded": {
+            "type": "array",
+            "description": "Any embedded objects available that are requested by the `expand` querystring parameter.",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/FileEmbed"
+                }
+              ]
+            }
           }
         }
+      },
+      "BBANType": {
+        "description": "BBAN type object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BankAccountCreatePlain"
+          },
+          {
+            "type": "object",
+            "required": [
+              "customerId",
+              "accountNumber",
+              "routingNumber",
+              "accountType",
+              "address"
+            ],
+            "properties": {
+              "customerId": {
+                "description": "The Customer's ID.",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ResourceId"
+                  }
+                ]
+              },
+              "accountNumber": {
+                "description": "Bank's Account Number.",
+                "type": "string",
+                "pattern": "^[0-9]+$"
+              },
+              "routingNumber": {
+                "description": "Bank's Routing Number.",
+                "type": "string",
+                "pattern": "^[0-9]+$"
+              },
+              "accountType": {
+                "description": "Bank's Account type.",
+                "type": "string",
+                "enum": [
+                  "checking",
+                  "savings",
+                  "other"
+                ]
+              },
+              "bankName": {
+                "description": "Bank's name.",
+                "type": "string"
+              },
+              "bic": {
+                "description": "Bank Identifier Code.",
+                "type": "string"
+              },
+              "address": {
+                "description": "The Address.",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ContactObject"
+                  }
+                ]
+              },
+              "status": {
+                "description": "Bank Account status.",
+                "type": "string",
+                "enum": [
+                  "active",
+                  "deactivated"
+                ]
+              },
+              "customFields": {
+                "$ref": "#/components/schemas/ResourceCustomFields"
+              }
+            }
+          }
+        ]
+      },
+      "IBANType": {
+        "description": "IBAN type object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BankAccountCreatePlain"
+          },
+          {
+            "type": "object",
+            "required": [
+              "customerId",
+              "accountNumber",
+              "address"
+            ],
+            "properties": {
+              "customerId": {
+                "description": "The Customer's ID.",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ResourceId"
+                  }
+                ]
+              },
+              "accountNumber": {
+                "description": "Bank's Account Number.",
+                "type": "string",
+                "pattern": "^[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}$"
+              },
+              "bankName": {
+                "description": "Bank's name.",
+                "type": "string"
+              },
+              "bic": {
+                "description": "Bank Identifier Code.",
+                "type": "string"
+              },
+              "address": {
+                "description": "The Address.",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ContactObject"
+                  }
+                ]
+              },
+              "status": {
+                "description": "Bank Account status.",
+                "type": "string",
+                "enum": [
+                  "active",
+                  "deactivated"
+                ]
+              },
+              "customFields": {
+                "$ref": "#/components/schemas/ResourceCustomFields"
+              }
+            }
+          }
+        ]
       },
       "BankAccount": {
         "type": "object",
@@ -10078,77 +10323,43 @@
                 }
               ]
             }
+          },
+          "_embedded": {
+            "type": "array",
+            "description": "Any embedded objects available that are requested by the `expand` querystring parameter.",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/CustomerEmbed"
+                }
+              ]
+            }
           }
         }
       },
       "BankAccountCreatePlain": {
         "type": "object",
         "required": [
-          "customerId",
-          "accountNumberType",
-          "address"
+          "accountNumberType"
         ],
+        "discriminator": {
+          "propertyName": "accountNumberType",
+          "mapping": {
+            "BBAN": "#/components/schemas/BBANType",
+            "IBAN": "#/components/schemas/IBANType"
+          }
+        },
         "properties": {
-          "customerId": {
-            "description": "The Customer's ID.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ResourceId"
-              }
-            ]
-          },
-          "bankName": {
-            "description": "Bank's name.",
-            "type": "string"
-          },
-          "routingNumber": {
-            "description": "Bank's Routing Number. Required for BBAN account number type.",
-            "type": "string"
-          },
           "accountNumberType": {
             "description": "Bank's Account Number type. A valid value is basic bank account number (BBAN) or international bank account number (IBAN).",
             "type": "string",
             "default": "BBAN",
             "enum": [
-              "BBAN",
-              "IBAN"
+              "IBAN",
+              "BBAN"
             ]
-          },
-          "accountNumber": {
-            "description": "Bank's Account Number.",
-            "type": "string"
-          },
-          "accountType": {
-            "description": "Bank's Account type. Required for BBAN account number type.",
-            "type": "string",
-            "enum": [
-              "checking",
-              "savings",
-              "other"
-            ]
-          },
-          "bic": {
-            "description": "Bank Identifier Code",
-            "type": "string"
-          },
-          "address": {
-            "description": "The Address.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ContactObject"
-              }
-            ]
-          },
-          "status": {
-            "description": "Bank Account status",
-            "type": "string",
-            "enum": [
-              "active",
-              "deactivated"
-            ]
-          },
-          "customFields": {
-            "$ref": "#/components/schemas/ResourceCustomFields"
           }
         }
       },
@@ -10350,6 +10561,19 @@
                 },
                 {
                   "$ref": "#/components/schemas/CustomerLink"
+                }
+              ]
+            }
+          },
+          "_embedded": {
+            "type": "array",
+            "description": "Any embedded objects available that are requested by the `expand` querystring parameter.",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/CustomerEmbed"
                 }
               ]
             }
@@ -11061,6 +11285,14 @@
               }
             ]
           },
+          "websiteId": {
+            "description": "The website's ID",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResourceId"
+              }
+            ]
+          },
           "paymentToken": {
             "type": "string",
             "writeOnly": true,
@@ -11144,6 +11376,19 @@
                 },
                 {
                   "$ref": "#/components/schemas/WebsiteLink"
+                }
+              ]
+            }
+          },
+          "_embedded": {
+            "type": "array",
+            "description": "Any embedded objects available that are requested by the `expand` querystring parameter.",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/LeadSourceEmbed"
                 }
               ]
             }
@@ -11255,15 +11500,6 @@
             "type": "string",
             "readOnly": true
           },
-          "customerId": {
-            "description": "The customer's ID",
-            "readOnly": true,
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ResourceId"
-              }
-            ]
-          },
           "invalidate": {
             "description": "Whether to invalidate token after exchange or not",
             "type": "boolean",
@@ -11277,6 +11513,15 @@
             "pattern": "^[0-9]{6}$",
             "example": "123456",
             "writeOnly": true
+          },
+          "customerId": {
+            "description": "The customer's ID",
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResourceId"
+              }
+            ]
           },
           "createdTime": {
             "description": "Session created time",
@@ -11745,6 +11990,39 @@
                 }
               ]
             }
+          },
+          "_embedded": {
+            "type": "array",
+            "description": "Any embedded objects available that are requested by the `expand` querystring parameter.",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/TransactionEmbed"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "AuthTransactionEmbed": {
+        "type": "object",
+        "description": "Auth Transaction object",
+        "readOnly": true,
+        "properties": {
+          "authTransaction": {
+            "$ref": "#/components/schemas/Transaction"
+          }
+        }
+      },
+      "BankAccountEmbed": {
+        "type": "object",
+        "description": "Bank Account object",
+        "readOnly": true,
+        "properties": {
+          "bankAccount": {
+            "$ref": "#/components/schemas/BankAccount"
           }
         }
       },
@@ -11758,6 +12036,26 @@
           }
         }
       },
+      "FileEmbed": {
+        "type": "object",
+        "description": "File object",
+        "readOnly": true,
+        "properties": {
+          "file": {
+            "$ref": "#/components/schemas/File"
+          }
+        }
+      },
+      "GatewayAccountEmbed": {
+        "type": "object",
+        "description": "Gateway Account object",
+        "readOnly": true,
+        "properties": {
+          "gatewayAccount": {
+            "$ref": "https://rebilly.github.io/RebillyUserAPI/openapi.json#/components/schemas/GatewayAccount"
+          }
+        }
+      },
       "InitialInvoiceEmbed": {
         "type": "object",
         "description": "Initial Invoice object",
@@ -11768,6 +12066,79 @@
           }
         }
       },
+      "InvoicesEmbed": {
+        "type": "object",
+        "description": "Invoices collection",
+        "readOnly": true,
+        "properties": {
+          "invoices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Invoice"
+            }
+          }
+        }
+      },
+      "LeadSourceEmbed": {
+        "type": "object",
+        "description": "Lead Source object",
+        "readOnly": true,
+        "properties": {
+          "leadSource": {
+            "$ref": "#/components/schemas/LeadSource"
+          }
+        }
+      },
+      "OrganizationEmbed": {
+        "type": "object",
+        "description": "Organization object",
+        "readOnly": true,
+        "properties": {
+          "organization": {
+            "$ref": "https://rebilly.github.io/RebillyUserAPI/openapi.json#/components/schemas/Organization"
+          }
+        }
+      },
+      "ParentTransactionEmbed": {
+        "type": "object",
+        "description": "Retried Transaction object",
+        "readOnly": true,
+        "properties": {
+          "parentTransaction": {
+            "$ref": "#/components/schemas/Transaction"
+          }
+        }
+      },
+      "PaymentCardEmbed": {
+        "type": "object",
+        "description": "Payment Card object",
+        "readOnly": true,
+        "properties": {
+          "paymentCard": {
+            "$ref": "#/components/schemas/PaymentCard"
+          }
+        }
+      },
+      "PlanEmbed": {
+        "type": "object",
+        "description": "Plan object",
+        "readOnly": true,
+        "properties": {
+          "plan": {
+            "$ref": "#/components/schemas/Plan"
+          }
+        }
+      },
+      "ProductEmbed": {
+        "type": "object",
+        "description": "Product object",
+        "readOnly": true,
+        "properties": {
+          "product": {
+            "$ref": "#/components/schemas/Product"
+          }
+        }
+      },
       "RecentInvoiceEmbed": {
         "type": "object",
         "description": "Recent Invoice object",
@@ -11775,6 +12146,36 @@
         "properties": {
           "recentInvoice": {
             "$ref": "#/components/schemas/Invoice"
+          }
+        }
+      },
+      "RetriedTransactionEmbed": {
+        "type": "object",
+        "description": "Parent Transaction object",
+        "readOnly": true,
+        "properties": {
+          "retriedTransaction": {
+            "$ref": "#/components/schemas/Transaction"
+          }
+        }
+      },
+      "SubscriptionEmbed": {
+        "type": "object",
+        "description": "Subscription object",
+        "readOnly": true,
+        "properties": {
+          "subscription": {
+            "$ref": "#/components/schemas/Subscription"
+          }
+        }
+      },
+      "TransactionEmbed": {
+        "type": "object",
+        "description": "Transaction object",
+        "readOnly": true,
+        "properties": {
+          "transaction": {
+            "$ref": "#/components/schemas/Transaction"
           }
         }
       },
@@ -12378,6 +12779,28 @@
                 }
               ]
             }
+          },
+          "_embedded": {
+            "type": "array",
+            "description": "Any embedded objects available that are requested by the `expand` querystring parameter.",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/CustomerEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/WebsiteEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/OrganizationEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/LeadSourceEmbed"
+                }
+              ]
+            }
           }
         }
       },
@@ -12500,6 +12923,22 @@
                 },
                 {
                   "$ref": "#/components/schemas/ProductLink"
+                }
+              ]
+            }
+          },
+          "_embedded": {
+            "type": "array",
+            "description": "Any embedded objects available that are requested by the `expand` querystring parameter.",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ProductEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/PlanEmbed"
                 }
               ]
             }
@@ -13042,6 +13481,26 @@
           "rel"
         ]
       },
+      "InvoicesLink": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Link"
+          }
+        ],
+        "properties": {
+          "rel": {
+            "description": "The link type",
+            "type": "string",
+            "enum": [
+              "invoices"
+            ]
+          }
+        },
+        "required": [
+          "rel"
+        ]
+      },
       "LeadSourceLink": {
         "type": "object",
         "allOf": [
@@ -13409,6 +13868,7 @@
           "instant-bank-transfer",
           "Interac-online",
           "Interac-eTransfer",
+          "Interac",
           "invoice",
           "Jeton",
           "Klarna",
@@ -13602,6 +14062,25 @@
                 }
               ]
             }
+          },
+          "_embedded": {
+            "type": "array",
+            "description": "Any embedded objects available that are requested by the `expand` querystring parameter.",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/WebsiteEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/CustomerEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/TransactionEmbed"
+                }
+              ]
+            }
           }
         }
       },
@@ -13669,7 +14148,7 @@
             "readOnly": true
           },
           "status": {
-            "description": "Payment Card status.  When a card is `active` it means it has been used at least once for an approved transaction.  \nTo remove a card from being in use, set it as `deactivated` (see the deactivation endpoint).\n",
+            "description": "Payment Card status.  When a card is `active` it means it has been used at least once for an approved transaction.\nTo remove a card from being in use, set it as `deactivated` (see the deactivation endpoint).\n",
             "type": "string",
             "readOnly": true,
             "enum": [
@@ -13741,6 +14220,22 @@
                 },
                 {
                   "$ref": "#/components/schemas/ApprovalUrlLink"
+                }
+              ]
+            }
+          },
+          "_embedded": {
+            "type": "array",
+            "description": "Any embedded objects available that are requested by the `expand` querystring parameter.",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/AuthTransactionEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/CustomerEmbed"
                 }
               ]
             }
@@ -14293,10 +14788,12 @@
           }
         ]
       },
-      "PaymentToken": {
+      "BankAccountToken": {
         "type": "object",
+        "title": "Bank Account Token",
         "required": [
           "method",
+          "paymentInstrument",
           "billingAddress"
         ],
         "properties": {
@@ -14316,13 +14813,17 @@
             "readOnly": true
           },
           "method": {
-            "$ref": "#/components/schemas/Method"
+            "description": "The token payment method",
+            "type": "string",
+            "enum": [
+              "ach"
+            ]
           },
           "paymentInstrument": {
-            "description": "The payment instrument details, if appropriate based on the method.",
+            "description": "The payment instrument details",
             "allOf": [
               {
-                "$ref": "#/components/schemas/PaymentTokenInstrument"
+                "$ref": "#/components/schemas/TokenBankAccountInstrument"
               }
             ]
           },
@@ -14389,12 +14890,391 @@
           }
         }
       },
-      "PaymentTokenInstrument": {
+      "PaymentCardToken": {
+        "type": "object",
+        "title": "Payment Card Token",
+        "required": [
+          "method",
+          "paymentInstrument",
+          "billingAddress"
+        ],
+        "properties": {
+          "id": {
+            "description": "The token identifier string",
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResourceId"
+              }
+            ]
+          },
+          "isUsed": {
+            "description": "Whether the token was already used",
+            "type": "boolean",
+            "default": false,
+            "readOnly": true
+          },
+          "method": {
+            "description": "The token payment method",
+            "type": "string",
+            "enum": [
+              "payment-card"
+            ]
+          },
+          "paymentInstrument": {
+            "description": "The payment instrument details",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TokenPaymentCardInstrument"
+              }
+            ]
+          },
+          "fingerprint": {
+            "description": "Device fingerprint hash",
+            "type": "string"
+          },
+          "billingAddress": {
+            "description": "The billing address object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContactObject"
+              }
+            ]
+          },
+          "leadSource": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LeadSource"
+              }
+            ],
+            "writeOnly": true
+          },
+          "createdTime": {
+            "description": "Token created time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          },
+          "updatedTime": {
+            "description": "Token updated time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          },
+          "usageTime": {
+            "description": "Token usage time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          },
+          "expirationTime": {
+            "description": "Token expiration time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          },
+          "_links": {
+            "type": "array",
+            "description": "The links related to resource",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/SelfLink"
+            }
+          }
+        }
+      },
+      "BBANInstrument": {
+        "description": "Payment Token instrument object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TokenBankAccountInstrument"
+          },
+          {
+            "type": "object",
+            "required": [
+              "accountNumber",
+              "routingNumber",
+              "accountType"
+            ],
+            "properties": {
+              "accountNumber": {
+                "description": "Bank Account Number",
+                "type": "string",
+                "pattern": "^[0-9]+$",
+                "writeOnly": true
+              },
+              "routingNumber": {
+                "description": "Bank Routing Number",
+                "type": "string",
+                "pattern": "^[0-9]+$"
+              },
+              "accountType": {
+                "description": "Bank Account Type",
+                "type": "string",
+                "enum": [
+                  "checking",
+                  "savings",
+                  "other"
+                ]
+              },
+              "bic": {
+                "description": "Bank Identifier Code",
+                "type": "string"
+              },
+              "bankName": {
+                "description": "Bank name",
+                "type": "string"
+              },
+              "last4": {
+                "description": "Bank Account Number's last 4 digits",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        ]
+      },
+      "IBANInstrument": {
+        "description": "Payment Token instrument object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TokenBankAccountInstrument"
+          },
+          {
+            "type": "object",
+            "required": [
+              "accountNumber"
+            ],
+            "properties": {
+              "accountNumber": {
+                "description": "Bank Account Number",
+                "type": "string",
+                "pattern": "^[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}$",
+                "writeOnly": true
+              },
+              "bic": {
+                "description": "Bank Identifier Code",
+                "type": "string"
+              },
+              "bankName": {
+                "description": "Bank name",
+                "type": "string"
+              },
+              "last4": {
+                "description": "Bank Account Number's last 4 digits",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        ]
+      },
+      "PaymentToken": {
+        "type": "object",
+        "title": "Payment Token",
+        "required": [
+          "method",
+          "billingAddress"
+        ],
+        "properties": {
+          "id": {
+            "description": "The token identifier string",
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResourceId"
+              }
+            ]
+          },
+          "websiteId": {
+            "description": "The website's ID",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResourceId"
+              }
+            ]
+          },
+          "isUsed": {
+            "description": "Whether the token was already used",
+            "type": "boolean",
+            "default": false,
+            "readOnly": true
+          },
+          "method": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TokenMethod"
+              }
+            ]
+          },
+          "fingerprint": {
+            "description": "Device fingerprint hash",
+            "type": "string"
+          },
+          "billingAddress": {
+            "description": "The billing address object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContactObject"
+              }
+            ]
+          },
+          "leadSource": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LeadSource"
+              }
+            ],
+            "writeOnly": true
+          },
+          "createdTime": {
+            "description": "Token created time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          },
+          "updatedTime": {
+            "description": "Token updated time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          },
+          "usageTime": {
+            "description": "Token usage time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          },
+          "expirationTime": {
+            "description": "Token expiration time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          },
+          "_links": {
+            "type": "array",
+            "description": "The links related to resource",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/SelfLink"
+            }
+          }
+        }
+      },
+      "TokenBankAccountInstrument": {
+        "type": "object",
+        "required": [
+          "accountNumberType"
+        ],
+        "discriminator": {
+          "propertyName": "accountNumberType",
+          "mapping": {
+            "BBAN": "#/components/schemas/BBANInstrument",
+            "IBAN": "#/components/schemas/IBANInstrument"
+          }
+        },
+        "properties": {
+          "accountNumberType": {
+            "description": "Bank's Account Number type. A valid value is basic bank account number (BBAN) or international bank account number (IBAN).",
+            "type": "string",
+            "default": "BBAN",
+            "enum": [
+              "IBAN",
+              "BBAN"
+            ]
+          }
+        }
+      },
+      "TokenMethod": {
+        "type": "string",
+        "description": "The token payment method",
+        "enum": [
+          "cash",
+          "paypal",
+          "Alipay",
+          "AstroPay Card",
+          "bank-transfer",
+          "bitcoin",
+          "Boleto",
+          "cash-deposit",
+          "CASHlib",
+          "CashToCode",
+          "China UnionPay",
+          "domestic-cards",
+          "echeck",
+          "ecoPayz",
+          "ecoVoucher",
+          "EPS",
+          "ePay.bg",
+          "Flexepin",
+          "Giropay",
+          "Gpaysafe",
+          "iDebit",
+          "iDEAL",
+          "INOVAPAY-pin",
+          "INOVAPAY-wallet",
+          "InstaDebit",
+          "instant-bank-transfer",
+          "Interac-online",
+          "Interac-eTransfer",
+          "invoice",
+          "Jeton",
+          "Klarna",
+          "miscellaneous",
+          "Neteller",
+          "Nordea-Solo",
+          "OchaPay",
+          "online-bank-transfer",
+          "Onlineueberweisen",
+          "Paysafecard",
+          "Pay4Fun",
+          "PinPay",
+          "phone",
+          "POLi",
+          "Przelewy24",
+          "QQPay",
+          "Resurs",
+          "SEPA",
+          "Skrill",
+          "Skrill Rapid Transfer",
+          "SMSVoucher",
+          "SparkPay",
+          "Trustly",
+          "UPayCard",
+          "voucher",
+          "WeChat Pay"
+        ]
+      },
+      "TokenPaymentCardInstrument": {
         "type": "object",
         "description": "Payment Token instrument object",
+        "required": [
+          "pan",
+          "billingAddress",
+          "expMonth",
+          "expYear"
+        ],
         "properties": {
           "pan": {
-            "description": "Payment Card PAN (Primary Account Number), required if the method is `payment-card`",
+            "description": "Payment Card PAN (Primary Account Number)",
             "type": "string",
             "writeOnly": true
           },
@@ -14405,7 +15285,7 @@
             "readOnly": true
           },
           "last4": {
-            "description": "Payment Card PAN's or Bank Account Number's last 4 digits",
+            "description": "Payment Card PAN's last 4 digits",
             "type": "string",
             "readOnly": true
           },
@@ -14418,34 +15298,17 @@
             ]
           },
           "expMonth": {
-            "description": "Payment Card expiry month, required if the method is `payment-card`",
+            "description": "Payment Card expiry month",
             "type": "integer"
           },
           "expYear": {
-            "description": "Payment Card expiry year, required if the method is `payment-card`",
+            "description": "Payment Card expiry year",
             "type": "integer"
           },
           "cvv": {
             "description": "Payment Card CVV/CVC",
             "type": "string",
             "writeOnly": true
-          },
-          "routingNumber": {
-            "description": "Bank Routing Number, required if the method is `ach`",
-            "type": "string"
-          },
-          "accountNumber": {
-            "description": "Bank Account Number, required if the method is `ach`",
-            "type": "string",
-            "writeOnly": true
-          },
-          "accountType": {
-            "description": "Bank Account Type, required if the method is `ach`",
-            "type": "string"
-          },
-          "bankName": {
-            "description": "Bank name",
-            "type": "string"
           }
         }
       },
@@ -15741,7 +16604,7 @@
           },
           "status": {
             "type": "string",
-            "description": "The status of the subscription service. A subscription starts\nin the `pending` status, and will become `active` when the \nservice period begins.\n",
+            "description": "The status of the subscription service. A subscription starts\nin the `pending` status, and will become `active` when the\nservice period begins.\n",
             "readOnly": true,
             "enum": [
               "pending",
@@ -15910,6 +16773,9 @@
             "example": "PO123456",
             "type": "string"
           },
+          "customFields": {
+            "$ref": "#/components/schemas/ResourceCustomFields"
+          },
           "_links": {
             "type": "array",
             "description": "The links related to resource",
@@ -15953,6 +16819,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/WebsiteEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/LeadSourceEmbed"
                 }
               ]
             }
@@ -17941,6 +18810,46 @@
                 },
                 {
                   "$ref": "#/components/schemas/DisputeLink"
+                },
+                {
+                  "$ref": "#/components/schemas/InvoicesLink"
+                }
+              ]
+            }
+          },
+          "_embedded": {
+            "type": "array",
+            "description": "Any embedded objects available that are requested by the `expand` querystring parameter.",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ParentTransactionEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/RetriedTransactionEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/GatewayAccountEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/CustomerEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/LeadSourceEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/WebsiteEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/PaymentCardEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/BankAccountEmbed"
+                },
+                {
+                  "$ref": "#/components/schemas/InvoicesEmbed"
                 }
               ]
             }
@@ -18418,17 +19327,6 @@
           }
         },
         "description": "Payment resource",
-        "required": true
-      },
-      "PaymentToken": {
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/PaymentToken"
-            }
-          }
-        },
-        "description": "PaymentToken resource",
         "required": true
       },
       "Plan": {
