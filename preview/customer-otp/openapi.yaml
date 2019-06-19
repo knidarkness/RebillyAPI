@@ -8266,6 +8266,7 @@ components:
               - $ref: '#/components/schemas/NotesLink'
               - $ref: '#/components/schemas/DefaultPaymentInstrumentLink'
               - $ref: '#/components/schemas/LeadSourceLink'
+              - $ref: '#/components/schemas/WebsiteLink'
     AuthenticationOptions:
       type: object
       properties:
