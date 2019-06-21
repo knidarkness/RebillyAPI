@@ -1318,14 +1318,14 @@ paths:
     post:
       tags:
         - Change Order
-      summary: Create a pending Order Change
+      summary: Create a pending Change Order
       description: |
-        Create a pending Order Change. Only one pending Order Change for single Order can exist at a time.
+        Create a pending Change Order. Only one pending Change Order for single Order can exist at a time.
       requestBody:
         $ref: '#/components/requestBodies/ChangeOrder'
       responses:
         '201':
-          description: Order Change was created
+          description: Change Order was created
           headers:
             Rate-Limit-Limit:
               $ref: '#/components/headers/Rate-Limit-Limit'
@@ -1349,12 +1349,12 @@ paths:
     get:
       tags:
         - Change Order
-      summary: Retrieve an Order Change
+      summary: Retrieve an Change Order
       description: |
-        Retrieve an Order Change with specified identifier string
+        Retrieve an Change Order with specified identifier string
       responses:
         '200':
-          description: Order Change was retrieved successfully
+          description: Change Order was retrieved successfully
           headers:
             Rate-Limit-Limit:
               $ref: '#/components/headers/Rate-Limit-Limit'
@@ -1373,16 +1373,16 @@ paths:
     put:
       tags:
         - Change Order
-      summary: Upsert an Order Change with predefined ID
+      summary: Upsert an Change Order with predefined ID
       description: |
-        Create or update an Order Change with predefined identifier string.
-        Only one pending Order Change for single Order can exist at a time.
-        Only pending Order Change can be updated.
+        Create or update an Change Order with predefined identifier string.
+        Only one pending Change Order for single Order can exist at a time.
+        Only pending Change Order can be updated.
       requestBody:
         $ref: '#/components/requestBodies/ChangeOrder'
       responses:
         '200':
-          description: Pending Order Change was updated
+          description: Pending Change Order was updated
           headers:
             Rate-Limit-Limit:
               $ref: '#/components/headers/Rate-Limit-Limit'
@@ -1395,7 +1395,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ChangeOrder'
         '201':
-          description: Pending Order Change was created.
+          description: Pending Change Order was created.
           headers:
             Rate-Limit-Limit:
               $ref: '#/components/headers/Rate-Limit-Limit'
@@ -1421,12 +1421,12 @@ paths:
     post:
       tags:
         - Change Order
-      summary: Cancel a pending Order Change
+      summary: Cancel a pending Change Order
       description: |
-        Cancel a pending Order Change. Only pending Order Change can be canceled.
+        Cancel a pending Change Order. Only pending Change Order can be canceled.
       responses:
         '201':
-          description: Order Change was canceled
+          description: Change Order was canceled
           headers:
             Rate-Limit-Limit:
               $ref: '#/components/headers/Rate-Limit-Limit'
@@ -1508,12 +1508,12 @@ paths:
     get:
       tags:
         - Change Order
-      summary: Retrieve Order Change preview
+      summary: Retrieve Change Order preview
       description: |
-        Retrieve preview of Order Change with specified identifier
+        Retrieve preview of Change Order with specified identifier
       responses:
         '200':
-          description: Order Change preview was retrieved successfully
+          description: Change Order preview was retrieved successfully
           headers:
             Rate-Limit-Limit:
               $ref: '#/components/headers/Rate-Limit-Limit'
@@ -7867,9 +7867,10 @@ components:
               allOf:
                 - $ref: '#/components/schemas/ResourceId'
             accountNumber:
-              description: Bank's Account Number.
+              description: |
+                Bank's Account Number. Detailed information about all ISO 13616-compliant national IBAN formats is available
+                in [SWIFT IBAN Registry](https://www.swift.com/standards/data-standards/iban).
               type: string
-              pattern: '^[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}$'
             bankName:
               description: Bank's name.
               type: string
@@ -11085,9 +11086,10 @@ components:
             - accountNumber
           properties:
             accountNumber:
-              description: Bank Account Number
+              description: |
+                Bank Account Number. Detailed information about all ISO 13616-compliant national IBAN formats is available
+                in [SWIFT IBAN Registry](https://www.swift.com/standards/data-standards/iban).
               type: string
-              pattern: '^[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}$'
               writeOnly: true
             bic:
               description: Bank Identifier Code
@@ -12396,12 +12398,12 @@ components:
           type: integer
           readOnly: true
         changes:
-          description: Order changes
+          description: Change items
           type: array
           items:
             $ref: '#/components/schemas/ChangeOrderItem'
         changedBy:
-          description: The author of Order Change.
+          description: The author of Change Order.
           type: string
           readOnly: true
         createdTime:
@@ -13382,11 +13384,10 @@ components:
             - transaction-discrepancy-found
             - transaction-amount-discrepancy-found
             - transaction-reconciled
-            - transaction-processed
+            - transaction-initiated
             - transaction-retried
             - risk-score-changed
             - transaction-timeout-resolved
-            - offsite-transaction-completed
             - dispute-created
             - dispute-won
             - dispute-lost
@@ -13722,6 +13723,15 @@ components:
           description: The number of times the transaction data has been modified
           type: integer
           readOnly: true
+        referenceData:
+          description: Transaction reference data
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            gatewayTransactionId: GAT123
+          readOnly: true
+          nullable: true
         bin:
           description: Payment Card BIN
           type: string
