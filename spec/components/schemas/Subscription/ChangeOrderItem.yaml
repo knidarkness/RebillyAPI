@@ -5,7 +5,8 @@ discriminator:
     "item-remove": "#/components/schemas/ChangeOrderItemRemove"
     "plan-add": "#/components/schemas/ChangeOrderPlanAdd"
     "renewal-time": "#/components/schemas/ChangeOrderRenewalTime"
-    "billing-anchor": "#/components/schemas/ChangeOrderBillingAnchor"
+    "service-anchor-date": "#/components/schemas/ChangeOrderServiceAnchorDate"
+    "billing-anchor-shift": "#/components/schemas/ChangeOrderBillingAnchorShift"
     #"pricing": "#/components/schemas/ChangeOrderPricing"
 properties:
   id:
@@ -19,7 +20,8 @@ properties:
       - "item-remove"
       - "plan-add"
       - "renewal-time"
-      - "billing-anchor"
+      - "service-anchor-date"
+      - "billing-anchor-shift"
       #- "pricing"
   effectiveTime:
     description: Change effective time. Set to null for next renewal time.

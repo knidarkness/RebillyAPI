@@ -1,0 +1,13 @@
+description: Change Order Service Anchor Date.
+allOf:
+  -
+    $ref: "#/components/schemas/ChangeOrderItem"
+  -
+    type: "object"
+    required:
+      - serviceAnchor
+    properties:
+      serviceAnchor:
+        description: Changed Service Anchor Date
+        allOf:
+          - $ref: "#/components/schemas/BillingScheduleInstruction"

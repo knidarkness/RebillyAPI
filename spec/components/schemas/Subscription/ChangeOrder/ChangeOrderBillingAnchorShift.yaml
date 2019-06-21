@@ -1,4 +1,4 @@
-description: Change Order Billing Anchor.
+description: Change Order Billing Anchor Shift.
 allOf:
   -
     $ref: "#/components/schemas/ChangeOrderItem"
@@ -8,7 +8,7 @@ allOf:
       - billingAnchor
     properties:
       billingAnchor:
-        description: Changed Billing Anchor
+        description: Changed Billing Anchor Shift
         nullable: true
         example: null
         allOf:
