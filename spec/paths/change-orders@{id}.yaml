@@ -3,12 +3,12 @@ parameters:
 get:
   tags:
     - Change Order
-  summary: Retrieve an Order Change
+  summary: Retrieve an Change Order
   description: |
-    Retrieve an Order Change with specified identifier string
+    Retrieve an Change Order with specified identifier string
   responses:
     200:
-      description: Order Change was retrieved successfully
+      description: Change Order was retrieved successfully
       headers:
         Rate-Limit-Limit:
           $ref: "#/components/headers/Rate-Limit-Limit"
@@ -27,16 +27,16 @@ get:
 put:
   tags:
     - Change Order
-  summary: Upsert an Order Change with predefined ID
+  summary: Upsert an Change Order with predefined ID
   description: |
-    Create or update an Order Change with predefined identifier string.
-    Only one pending Order Change for single Order can exist at a time.
-    Only pending Order Change can be updated.
+    Create or update an Change Order with predefined identifier string.
+    Only one pending Change Order for single Order can exist at a time.
+    Only pending Change Order can be updated.
   requestBody:
     $ref: "#/components/requestBodies/ChangeOrder"
   responses:
     200:
-      description: Pending Order Change was updated
+      description: Pending Change Order was updated
       headers:
         Rate-Limit-Limit:
           $ref: "#/components/headers/Rate-Limit-Limit"
@@ -49,7 +49,7 @@ put:
           schema:
             $ref: "#/components/schemas/ChangeOrder"
     201:
-      description: Pending Order Change was created.
+      description: Pending Change Order was created.
       headers:
         Rate-Limit-Limit:
           $ref: "#/components/headers/Rate-Limit-Limit"

@@ -34,14 +34,14 @@ get:
 post:
   tags:
     - Change Order
-  summary: Create a pending Order Change
+  summary: Create a pending Change Order
   description: |
-    Create a pending Order Change. Only one pending Order Change for single Order can exist at a time.
+    Create a pending Change Order. Only one pending Change Order for single Order can exist at a time.
   requestBody:
     $ref: "#/components/requestBodies/ChangeOrder"
   responses:
     201:
-      description: Order Change was created
+      description: Change Order was created
       headers:
         Rate-Limit-Limit:
           $ref: "#/components/headers/Rate-Limit-Limit"

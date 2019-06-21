@@ -21,12 +21,12 @@ properties:
     type: integer
     readOnly: true
   changes:
-    description: Order changes
+    description: Change items
     type: array
     items:
       $ref: "#/components/schemas/ChangeOrderItem"
   changedBy:
-    description: The author of Order Change.
+    description: The author of Change Order.
     type: string
     readOnly: true
   createdTime:

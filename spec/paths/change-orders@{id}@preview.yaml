@@ -3,12 +3,12 @@ parameters:
 get:
   tags:
     - Change Order
-  summary: Retrieve Order Change preview
+  summary: Retrieve Change Order preview
   description: |
-    Retrieve preview of Order Change with specified identifier
+    Retrieve preview of Change Order with specified identifier
   responses:
     200:
-      description: Order Change preview was retrieved successfully
+      description: Change Order preview was retrieved successfully
       headers:
         Rate-Limit-Limit:
           $ref: "#/components/headers/Rate-Limit-Limit"
