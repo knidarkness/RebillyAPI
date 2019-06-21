@@ -12418,8 +12418,8 @@ components:
           description: The change applied time
           allOf:
             - $ref: '#/components/schemas/ServerTimestamp'
-    ChangeOrderBillingAnchor:
-      description: Change Order Billing Anchor.
+    ChangeOrderBillingAnchorShift:
+      description: Change Order Billing Anchor Shift.
       allOf:
         - $ref: '#/components/schemas/ChangeOrderItem'
         - type: object
@@ -12427,7 +12427,7 @@ components:
             - billingAnchor
           properties:
             billingAnchor:
-              description: Changed Billing Anchor
+              description: Changed Billing Anchor Shift
               nullable: true
               example: null
               allOf:
@@ -12471,6 +12471,18 @@ components:
               description: Changed renewal time
               type: string
               format: date-time
+    ChangeOrderServiceAnchorDate:
+      description: Change Order Service Anchor Date.
+      allOf:
+        - $ref: '#/components/schemas/ChangeOrderItem'
+        - type: object
+          required:
+            - serviceAnchor
+          properties:
+            serviceAnchor:
+              description: Changed Service Anchor Date
+              allOf:
+                - $ref: '#/components/schemas/BillingScheduleInstruction'
     ChangeOrderItem:
       type: object
       discriminator:
@@ -12479,7 +12491,8 @@ components:
           item-remove: '#/components/schemas/ChangeOrderItemRemove'
           plan-add: '#/components/schemas/ChangeOrderPlanAdd'
           renewal-time: '#/components/schemas/ChangeOrderRenewalTime'
-          billing-anchor: '#/components/schemas/ChangeOrderBillingAnchor'
+          service-anchor-date: '#/components/schemas/ChangeOrderServiceAnchorDate'
+          billing-anchor-shift: '#/components/schemas/ChangeOrderBillingAnchorShift'
       properties:
         id:
           description: Change Order Item ID.
@@ -12492,7 +12505,8 @@ components:
             - item-remove
             - plan-add
             - renewal-time
-            - billing-anchor
+            - service-anchor-date
+            - billing-anchor-shift
         effectiveTime:
           description: Change effective time. Set to null for next renewal time.
           type: string
