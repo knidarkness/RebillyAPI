@@ -20,11 +20,10 @@ properties:
       - transaction-discrepancy-found
       - transaction-amount-discrepancy-found
       - transaction-reconciled
-      - transaction-processed
+      - transaction-initiated
       - transaction-retried
       - risk-score-changed
       - transaction-timeout-resolved
-      - offsite-transaction-completed
       - dispute-created
       - dispute-won
       - dispute-lost
