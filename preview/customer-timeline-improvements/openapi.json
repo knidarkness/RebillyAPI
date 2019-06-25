@@ -17725,6 +17725,7 @@
             "description": "Timeline message type",
             "type": "string",
             "enum": [
+              "customer-comment-created",
               "customer-created",
               "primary-address-changed",
               "default-payment-instrument-changed",
