@@ -12806,7 +12806,6 @@ components:
           $ref: '#/components/schemas/TimelineExtraData'
         occurredTime:
           description: Timeline message time
-          readOnly: true
           allOf:
             - $ref: '#/components/schemas/ServerTimestamp'
         _links:
@@ -12826,7 +12825,6 @@ components:
           type: string
         createdTime:
           description: Customer Timeline Custom event created time
-          readOnly: true
           allOf:
             - $ref: '#/components/schemas/ServerTimestamp'
     InvoiceTimeline:
