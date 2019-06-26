@@ -2970,6 +2970,56 @@
         }
       }
     },
+    "/customer-timeline-custom-events/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/resourceId"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Retrieve customer timeline custom event type with specified identifier string",
+        "operationId": "getCustomerTimelineCustomEventType",
+        "description": "Retrieve customer timeline custom event type\n",
+        "responses": {
+          "200": {
+            "description": "Customer Timeline custom event type was retrieved successfully",
+            "headers": {
+              "Rate-Limit-Limit": {
+                "$ref": "#/components/headers/Rate-Limit-Limit"
+              },
+              "Rate-Limit-Remaining": {
+                "$ref": "#/components/headers/Rate-Limit-Remaining"
+              },
+              "Rate-Limit-Reset": {
+                "$ref": "#/components/headers/Rate-Limit-Reset"
+              },
+              "Pagination-Total": {
+                "$ref": "#/components/headers/Pagination-Total"
+              },
+              "Pagination-Limit": {
+                "$ref": "#/components/headers/Pagination-Limit"
+              },
+              "Pagination-Offset": {
+                "$ref": "#/components/headers/Pagination-Offset"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerTimelineCustomEvent"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/AccessForbidden"
+          }
+        }
+      }
+    },
     "/customer-timeline-events": {
       "get": {
         "tags": [
@@ -17831,8 +17881,17 @@
           "name"
         ],
         "properties": {
+          "id": {
+            "description": "Customer Timeline Custom Event identifier string",
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResourceId"
+              }
+            ]
+          },
           "name": {
-            "description": "Customer Timeline Custom event type name. It must not be similar to any Rebilly system event.",
+            "description": "Customer Timeline Custom Event type name. It must not be similar to any Rebilly system event.",
             "type": "string"
           },
           "createdTime": {
@@ -17842,6 +17901,15 @@
                 "$ref": "#/components/schemas/ServerTimestamp"
               }
             ]
+          },
+          "_links": {
+            "type": "array",
+            "description": "The links related to resource",
+            "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/SelfLink"
+            }
           }
         }
       },
