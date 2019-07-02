@@ -1,16 +1,24 @@
 description: Add Plan to Order.
-allOf:
-  -
-    $ref: "#/components/schemas/ChangeOrderItem"
-  -
-    type: "object"
-    required:
-      - planId
-    properties:
-      planId:
-        description: Plan identifier string
-        allOf:
-          - $ref: "#/components/schemas/ResourceId"
-      quantity:
-        description: Number of units of the product on the given plan
-        type: integer
+type: object
+required:
+  - planId
+properties:
+  planId:
+    description: Plan identifier string
+    allOf:
+      - $ref: "#/components/schemas/ResourceId"
+  quantity:
+    description: Number of units of the product on the given plan
+    type: integer
+  effectiveTime:
+    description: Change order effective time. Set to null for next renewal time.
+    type: string
+    format: date-time
+    nullable: true
+  proration:
+    description: Defines if this change will be prorated.
+    type: boolean
+  createdTime:
+    description: The change order item creation time.
+    allOf:
+      - $ref: "#/components/schemas/ServerTimestamp"

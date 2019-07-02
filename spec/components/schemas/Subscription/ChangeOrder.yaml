@@ -24,7 +24,12 @@ properties:
     description: Change order items
     type: array
     items:
-      $ref: "#/components/schemas/ChangeOrderItem"
+      oneOf:
+        - $ref: "#/components/schemas/ChangeOrderItemRemove"
+        - $ref: "#/components/schemas/ChangeOrderPlanAdd"
+        - $ref: "#/components/schemas/ChangeOrderRenewalTime"
+        - $ref: "#/components/schemas/ChangeOrderServiceAnchorDate"
+        - $ref: "#/components/schemas/ChangeOrderBillingAnchorShift"
   changedBy:
     description: The author of Change Order.
     type: string

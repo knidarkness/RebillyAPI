@@ -1,13 +1,21 @@
 description: Change Order Service Anchor Date.
-allOf:
-  -
-    $ref: "#/components/schemas/ChangeOrderItem"
-  -
-    type: "object"
-    required:
-      - serviceAnchor
-    properties:
-      serviceAnchor:
-        description: Changed Service Anchor Date
-        allOf:
-          - $ref: "#/components/schemas/BillingScheduleInstruction"
+type: object
+required:
+  - serviceAnchor
+properties:
+  serviceAnchor:
+    description: Changed Service Anchor Date
+    allOf:
+      - $ref: "#/components/schemas/BillingScheduleInstruction"
+  effectiveTime:
+    description: Change order effective time. Set to null for next renewal time.
+    type: string
+    format: date-time
+    nullable: true
+  proration:
+    description: Defines if this change will be prorated.
+    type: boolean
+  createdTime:
+    description: The change order item creation time.
+    allOf:
+      - $ref: "#/components/schemas/ServerTimestamp"
