@@ -17188,7 +17188,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "description": "Change ID",
+            "description": "Change order ID",
             "readOnly": true,
             "allOf": [
               {
@@ -17197,11 +17197,11 @@
             ]
           },
           "orderId": {
-            "description": "Change Order ID.",
+            "description": "Order (Subscription) ID.",
             "type": "string"
           },
           "status": {
-            "description": "Change status",
+            "description": "Change order status",
             "type": "string",
             "readOnly": true,
             "enum": [
@@ -17210,16 +17210,32 @@
               "canceled"
             ]
           },
-          "changeNumber": {
+          "changeOrderNumber": {
             "description": "An auto-incrementing number based on the sequence of changes for any particular order.",
             "type": "integer",
             "readOnly": true
           },
           "changes": {
-            "description": "Change items",
+            "description": "Change order items",
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ChangeOrderItem"
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/ChangeOrderItemRemove"
+                },
+                {
+                  "$ref": "#/components/schemas/ChangeOrderPlanAdd"
+                },
+                {
+                  "$ref": "#/components/schemas/ChangeOrderRenewalTime"
+                },
+                {
+                  "$ref": "#/components/schemas/ChangeOrderServiceAnchorDate"
+                },
+                {
+                  "$ref": "#/components/schemas/ChangeOrderBillingAnchorShift"
+                }
+              ]
             }
           },
           "changedBy": {
@@ -17228,7 +17244,7 @@
             "readOnly": true
           },
           "createdTime": {
-            "description": "The change created time",
+            "description": "The change order created time",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ServerTimestamp"
@@ -17236,7 +17252,7 @@
             ]
           },
           "updatedTime": {
-            "description": "The change updated time",
+            "description": "The change orderup dated time",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ServerTimestamp"
@@ -17244,7 +17260,7 @@
             ]
           },
           "appliedTime": {
-            "description": "The change applied time",
+            "description": "The change order applied time",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ServerTimestamp"
@@ -17255,161 +17271,23 @@
       },
       "ChangeOrderBillingAnchorShift": {
         "description": "Change Order Billing Anchor Shift.",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ChangeOrderItem"
-          },
-          {
-            "type": "object",
-            "required": [
-              "billingAnchor"
-            ],
-            "properties": {
-              "billingAnchor": {
-                "description": "Changed Billing Anchor Shift",
-                "nullable": true,
-                "example": null,
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/PlanBillingAnchor"
-                  }
-                ]
-              }
-            }
-          }
-        ]
-      },
-      "ChangeOrderItemRemove": {
-        "description": "Remove Item from Order.",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ChangeOrderItem"
-          },
-          {
-            "type": "object",
-            "required": [
-              "invoiceItemId"
-            ],
-            "properties": {
-              "invoiceItemId": {
-                "description": "Upcoming Invoice's Item identifier string",
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ResourceId"
-                  }
-                ]
-              }
-            }
-          }
-        ]
-      },
-      "ChangeOrderPlanAdd": {
-        "description": "Add Plan to Order.",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ChangeOrderItem"
-          },
-          {
-            "type": "object",
-            "required": [
-              "planId"
-            ],
-            "properties": {
-              "planId": {
-                "description": "Plan identifier string",
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ResourceId"
-                  }
-                ]
-              },
-              "quantity": {
-                "description": "Number of units of the product on the given plan",
-                "type": "integer"
-              }
-            }
-          }
-        ]
-      },
-      "ChangeOrderRenewalTime": {
-        "description": "Change Order Renewal Time.",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ChangeOrderItem"
-          },
-          {
-            "type": "object",
-            "required": [
-              "renewalTime"
-            ],
-            "properties": {
-              "renewalTime": {
-                "description": "Changed renewal time",
-                "type": "string",
-                "format": "date-time"
-              }
-            }
-          }
-        ]
-      },
-      "ChangeOrderServiceAnchorDate": {
-        "description": "Change Order Service Anchor Date.",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ChangeOrderItem"
-          },
-          {
-            "type": "object",
-            "required": [
-              "serviceAnchor"
-            ],
-            "properties": {
-              "serviceAnchor": {
-                "description": "Changed Service Anchor Date",
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/BillingScheduleInstruction"
-                  }
-                ]
-              }
-            }
-          }
-        ]
-      },
-      "ChangeOrderItem": {
         "type": "object",
-        "discriminator": {
-          "propertyName": "changeType",
-          "mapping": {
-            "item-remove": "#/components/schemas/ChangeOrderItemRemove",
-            "plan-add": "#/components/schemas/ChangeOrderPlanAdd",
-            "renewal-time": "#/components/schemas/ChangeOrderRenewalTime",
-            "service-anchor-date": "#/components/schemas/ChangeOrderServiceAnchorDate",
-            "billing-anchor-shift": "#/components/schemas/ChangeOrderBillingAnchorShift"
-          }
-        },
+        "required": [
+          "billingAnchor"
+        ],
         "properties": {
-          "id": {
-            "description": "Change Order Item ID.",
+          "billingAnchor": {
+            "description": "Changed Billing Anchor Shift",
+            "nullable": true,
+            "example": null,
             "allOf": [
               {
-                "$ref": "#/components/schemas/ResourceId"
+                "$ref": "#/components/schemas/PlanBillingAnchor"
               }
-            ]
-          },
-          "changeType": {
-            "description": "Change Type.",
-            "type": "string",
-            "enum": [
-              "item-remove",
-              "plan-add",
-              "renewal-time",
-              "service-anchor-date",
-              "billing-anchor-shift"
             ]
           },
           "effectiveTime": {
-            "description": "Change effective time. Set to null for next renewal time.",
+            "description": "Change order effective time. Set to null for next renewal time.",
             "type": "string",
             "format": "date-time",
             "nullable": true
@@ -17419,7 +17297,148 @@
             "type": "boolean"
           },
           "createdTime": {
-            "description": "The change created time",
+            "description": "The change order item creation time.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          }
+        }
+      },
+      "ChangeOrderItemRemove": {
+        "description": "Remove Item from Order.",
+        "type": "object",
+        "required": [
+          "invoiceItemId"
+        ],
+        "properties": {
+          "invoiceItemId": {
+            "description": "Upcoming Invoice's Item identifier string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResourceId"
+              }
+            ]
+          },
+          "effectiveTime": {
+            "description": "Change order effective time. Set to null for next renewal time.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "proration": {
+            "description": "Defines if this change will be prorated.",
+            "type": "boolean"
+          },
+          "createdTime": {
+            "description": "The change order item creation time.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          }
+        }
+      },
+      "ChangeOrderPlanAdd": {
+        "description": "Add Plan to Order.",
+        "type": "object",
+        "required": [
+          "planId"
+        ],
+        "properties": {
+          "planId": {
+            "description": "Plan identifier string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResourceId"
+              }
+            ]
+          },
+          "quantity": {
+            "description": "Number of units of the product on the given plan",
+            "type": "integer"
+          },
+          "effectiveTime": {
+            "description": "Change order effective time. Set to null for next renewal time.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "proration": {
+            "description": "Defines if this change will be prorated.",
+            "type": "boolean"
+          },
+          "createdTime": {
+            "description": "The change order item creation time.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          }
+        }
+      },
+      "ChangeOrderRenewalTime": {
+        "description": "Change Order Renewal Time.",
+        "type": "object",
+        "required": [
+          "renewalTime"
+        ],
+        "properties": {
+          "renewalTime": {
+            "description": "Changed renewal time",
+            "type": "string",
+            "format": "date-time"
+          },
+          "effectiveTime": {
+            "description": "Change order effective time. Set to null for next renewal time.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "proration": {
+            "description": "Defines if this change will be prorated.",
+            "type": "boolean"
+          },
+          "createdTime": {
+            "description": "The change order item creation time.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          }
+        }
+      },
+      "ChangeOrderServiceAnchorDate": {
+        "description": "Change Order Service Anchor Date.",
+        "type": "object",
+        "required": [
+          "serviceAnchor"
+        ],
+        "properties": {
+          "serviceAnchor": {
+            "description": "Changed Service Anchor Date",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BillingScheduleInstruction"
+              }
+            ]
+          },
+          "effectiveTime": {
+            "description": "Change order effective time. Set to null for next renewal time.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "proration": {
+            "description": "Defines if this change will be prorated.",
+            "type": "boolean"
+          },
+          "createdTime": {
+            "description": "The change order item creation time.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ServerTimestamp"
