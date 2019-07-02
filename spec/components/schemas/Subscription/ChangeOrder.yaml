@@ -1,7 +1,7 @@
 type: object
 properties:
   id:
-    description: Change ID
+    description: Change order ID
     readOnly: true
     allOf:
       - $ref: "#/components/schemas/ResourceId"
@@ -9,19 +9,19 @@ properties:
     description: Change Order ID.
     type: string
   status:
-    description: Change status
+    description: Change order status
     type: string
     readOnly: true
     enum:
       - "pending"
       - "applied"
       - "canceled"
-  changeNumber:
+  changeOrderNumber:
     description: An auto-incrementing number based on the sequence of changes for any particular order.
     type: integer
     readOnly: true
   changes:
-    description: Change items
+    description: Change order items
     type: array
     items:
       $ref: "#/components/schemas/ChangeOrderItem"
@@ -30,14 +30,14 @@ properties:
     type: string
     readOnly: true
   createdTime:
-    description: The change created time
+    description: The change order created time
     allOf:
       - $ref: "#/components/schemas/ServerTimestamp"
   updatedTime:
-    description: The change updated time
+    description: The change orderup dated time
     allOf:
       - $ref: "#/components/schemas/ServerTimestamp"
   appliedTime:
-    description: The change applied time
+    description: The change order applied time
     allOf:
       - $ref: "#/components/schemas/ServerTimestamp"
