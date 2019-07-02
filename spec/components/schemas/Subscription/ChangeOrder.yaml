@@ -6,7 +6,7 @@ properties:
     allOf:
       - $ref: "#/components/schemas/ResourceId"
   orderId:
-    description: Change Order ID.
+    description: Order (Subscription) ID.
     type: string
   status:
     description: Change order status
