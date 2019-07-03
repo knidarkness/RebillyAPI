@@ -2,7 +2,13 @@ description: Change Order Renewal Time.
 type: object
 required:
   - renewalTime
+  - changeType
 properties:
+  changeType:
+    description: Change Order item type
+    type: string
+    enum:
+      - "renewalTime"
   renewalTime:
     description: Changed renewal time
     type: string

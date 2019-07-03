@@ -2,7 +2,13 @@ description: Add Plan to Order.
 type: object
 required:
   - planId
+  - changeType
 properties:
+  changeType:
+    description: Change Order item type
+    type: string
+    enum:
+      - "plan-add"
   planId:
     description: Plan identifier string
     allOf:

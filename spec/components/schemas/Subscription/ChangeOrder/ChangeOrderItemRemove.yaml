@@ -2,7 +2,13 @@ description: Remove Item from Order.
 type: object
 required:
   - invoiceItemId
+  - changeType
 properties:
+  changeType:
+    description: Change Order item type
+    type: string
+    enum:
+      - "item-remove"
   invoiceItemId:
     description: Upcoming Invoice's Item identifier string
     allOf:

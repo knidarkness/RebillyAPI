@@ -1,8 +1,14 @@
 description: Change Order Billing Anchor Shift.
 type: object
 required:
+  - changeType
   - billingAnchor
 properties:
+  changeType:
+    description: Change Order item type
+    type: string
+    enum:
+      - "billing-anchor-shift"
   billingAnchor:
     description: Changed Billing Anchor Shift
     nullable: true

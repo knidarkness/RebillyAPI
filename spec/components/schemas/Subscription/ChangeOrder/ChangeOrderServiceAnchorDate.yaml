@@ -2,7 +2,13 @@ description: Change Order Service Anchor Date.
 type: object
 required:
   - serviceAnchor
+  - changeType
 properties:
+  changeType:
+    description: Change Order item type
+    type: string
+    enum:
+      - "service-anchor-date"
   serviceAnchor:
     description: Changed Service Anchor Date
     allOf:
