@@ -20,7 +20,7 @@ properties:
     type: string
     format: date-time
     nullable: true
-  proration:
+  prorated:
     description: Defines if this change will be prorated.
     type: boolean
   createdTime:
