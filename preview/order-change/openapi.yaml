@@ -12427,8 +12427,14 @@ components:
       description: Change Order Billing Anchor Shift.
       type: object
       required:
+        - changeType
         - billingAnchor
       properties:
+        changeType:
+          description: Change Order item type
+          type: string
+          enum:
+            - billing-anchor-shift
         billingAnchor:
           description: Changed Billing Anchor Shift
           nullable: true
@@ -12452,7 +12458,13 @@ components:
       type: object
       required:
         - invoiceItemId
+        - changeType
       properties:
+        changeType:
+          description: Change Order item type
+          type: string
+          enum:
+            - item-remove
         invoiceItemId:
           description: Upcoming Invoice's Item identifier string
           allOf:
@@ -12474,7 +12486,13 @@ components:
       type: object
       required:
         - planId
+        - changeType
       properties:
+        changeType:
+          description: Change Order item type
+          type: string
+          enum:
+            - plan-add
         planId:
           description: Plan identifier string
           allOf:
@@ -12499,7 +12517,13 @@ components:
       type: object
       required:
         - renewalTime
+        - changeType
       properties:
+        changeType:
+          description: Change Order item type
+          type: string
+          enum:
+            - renewalTime
         renewalTime:
           description: Changed renewal time
           type: string
@@ -12521,7 +12545,13 @@ components:
       type: object
       required:
         - serviceAnchor
+        - changeType
       properties:
+        changeType:
+          description: Change Order item type
+          type: string
+          enum:
+            - service-anchor-date
         serviceAnchor:
           description: Changed Service Anchor Date
           allOf:

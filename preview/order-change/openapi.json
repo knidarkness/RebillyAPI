@@ -17273,9 +17273,17 @@
         "description": "Change Order Billing Anchor Shift.",
         "type": "object",
         "required": [
+          "changeType",
           "billingAnchor"
         ],
         "properties": {
+          "changeType": {
+            "description": "Change Order item type",
+            "type": "string",
+            "enum": [
+              "billing-anchor-shift"
+            ]
+          },
           "billingAnchor": {
             "description": "Changed Billing Anchor Shift",
             "nullable": true,
@@ -17310,9 +17318,17 @@
         "description": "Remove Item from Order.",
         "type": "object",
         "required": [
-          "invoiceItemId"
+          "invoiceItemId",
+          "changeType"
         ],
         "properties": {
+          "changeType": {
+            "description": "Change Order item type",
+            "type": "string",
+            "enum": [
+              "item-remove"
+            ]
+          },
           "invoiceItemId": {
             "description": "Upcoming Invoice's Item identifier string",
             "allOf": [
@@ -17345,9 +17361,17 @@
         "description": "Add Plan to Order.",
         "type": "object",
         "required": [
-          "planId"
+          "planId",
+          "changeType"
         ],
         "properties": {
+          "changeType": {
+            "description": "Change Order item type",
+            "type": "string",
+            "enum": [
+              "plan-add"
+            ]
+          },
           "planId": {
             "description": "Plan identifier string",
             "allOf": [
@@ -17384,9 +17408,17 @@
         "description": "Change Order Renewal Time.",
         "type": "object",
         "required": [
-          "renewalTime"
+          "renewalTime",
+          "changeType"
         ],
         "properties": {
+          "changeType": {
+            "description": "Change Order item type",
+            "type": "string",
+            "enum": [
+              "renewalTime"
+            ]
+          },
           "renewalTime": {
             "description": "Changed renewal time",
             "type": "string",
@@ -17416,9 +17448,17 @@
         "description": "Change Order Service Anchor Date.",
         "type": "object",
         "required": [
-          "serviceAnchor"
+          "serviceAnchor",
+          "changeType"
         ],
         "properties": {
+          "changeType": {
+            "description": "Change Order item type",
+            "type": "string",
+            "enum": [
+              "service-anchor-date"
+            ]
+          },
           "serviceAnchor": {
             "description": "Changed Service Anchor Date",
             "allOf": [
