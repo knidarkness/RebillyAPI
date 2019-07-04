@@ -11502,6 +11502,14 @@
               }
             ]
           },
+          "websiteId": {
+            "description": "The website's ID",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResourceId"
+              }
+            ]
+          },
           "paymentToken": {
             "type": "string",
             "writeOnly": true,
@@ -11582,6 +11590,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/LeadSourceLink"
+                },
+                {
+                  "$ref": "#/components/schemas/WebsiteLink"
                 }
               ]
             }
@@ -15284,6 +15295,14 @@
           "id": {
             "description": "The token identifier string",
             "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResourceId"
+              }
+            ]
+          },
+          "websiteId": {
+            "description": "The website's ID",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ResourceId"

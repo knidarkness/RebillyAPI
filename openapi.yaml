@@ -8486,6 +8486,10 @@ components:
           readOnly: true
           allOf:
             - $ref: '#/components/schemas/ResourceId'
+        websiteId:
+          description: The website's ID
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
         paymentToken:
           type: string
           writeOnly: true
@@ -8542,6 +8546,7 @@ components:
               - $ref: '#/components/schemas/NotesLink'
               - $ref: '#/components/schemas/DefaultPaymentInstrumentLink'
               - $ref: '#/components/schemas/LeadSourceLink'
+              - $ref: '#/components/schemas/WebsiteLink'
         _embedded:
           type: array
           description: Any embedded objects available that are requested by the `expand` querystring parameter.
@@ -11003,6 +11008,10 @@ components:
         id:
           description: The token identifier string
           readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+        websiteId:
+          description: The website's ID
           allOf:
             - $ref: '#/components/schemas/ResourceId'
         isUsed:
