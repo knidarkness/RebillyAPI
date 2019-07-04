@@ -2732,7 +2732,9 @@
           "description": "The custom field's identifier string",
           "required": true,
           "schema": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 60,
+            "pattern": "^[\\w-]+$"
           }
         }
       ],
@@ -19367,6 +19369,7 @@
         "required": true,
         "schema": {
           "type": "string",
+          "maxLength": 50,
           "pattern": "^[@~\\-\\.\\w\\d]+$"
         }
       },
@@ -19418,7 +19421,9 @@
         "description": "The resource identifier string",
         "required": true,
         "schema": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 50,
+          "pattern": "^[@~\\-\\.\\w\\d]+$"
         }
       },
       "subscriptionExpand": {

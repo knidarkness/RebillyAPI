@@ -2133,6 +2133,8 @@ paths:
         required: true
         schema:
           type: string
+          maxLength: 60
+          pattern: '^[\w-]+$'
     get:
       tags:
         - Custom Fields
@@ -13922,6 +13924,7 @@ components:
       required: true
       schema:
         type: string
+        maxLength: 50
         pattern: '^[@~\-\.\w\d]+$'
     customFieldResource:
       name: resource
@@ -13964,6 +13967,8 @@ components:
       required: true
       schema:
         type: string
+        maxLength: 50
+        pattern: '^[@~\-\.\w\d]+$'
     subscriptionExpand:
       name: expand
       in: query
