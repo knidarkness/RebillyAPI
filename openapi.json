@@ -11630,6 +11630,10 @@
           "resetTokenTtl": {
             "description": "The default lifetime of the reset-token in seconds",
             "type": "integer"
+          },
+          "otpRequired": {
+            "description": "Should OTP be required to exchange token",
+            "type": "boolean"
           }
         }
       },
@@ -11653,6 +11657,10 @@
             ],
             "writeOnly": true,
             "default": "password"
+          },
+          "otpRequired": {
+            "description": "Should OTP be required to exchange this token",
+            "type": "boolean"
           },
           "credentialId": {
             "description": "The credential's ID",
@@ -11709,6 +11717,20 @@
             "type": "string",
             "readOnly": true
           },
+          "invalidate": {
+            "description": "Whether to invalidate token after exchange or not",
+            "type": "boolean",
+            "default": true,
+            "example": true,
+            "writeOnly": true
+          },
+          "oneTimePassword": {
+            "description": "The one time password sent via an email. Should contain digits only.",
+            "type": "string",
+            "pattern": "^[0-9]{6}$",
+            "example": "123456",
+            "writeOnly": true
+          },
           "customerId": {
             "description": "The customer's ID",
             "readOnly": true,
@@ -11717,13 +11739,6 @@
                 "$ref": "#/components/schemas/ResourceId"
               }
             ]
-          },
-          "invalidate": {
-            "description": "Whether to invalidate token after exchange or not",
-            "type": "boolean",
-            "default": true,
-            "example": true,
-            "writeOnly": true
           },
           "createdTime": {
             "description": "Session created time",
