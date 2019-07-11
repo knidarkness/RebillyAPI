@@ -11376,8 +11376,7 @@
             "properties": {
               "value": {
                 "description": "Discount percent",
-                "type": "number",
-                "format": "integer",
+                "type": "integer",
                 "minimum": 1,
                 "maximum": 100
               }
