@@ -9515,6 +9515,7 @@ components:
             - delinquent
             - abandoned
             - voided
+            - partially-refunded
             - refunded
             - disputed
         delinquentCollectionPeriod:
@@ -12831,6 +12832,7 @@ components:
             - invoice-partially-paid
             - invoice-disputed
             - invoice-refunded
+            - invoice-partially-refunded
             - order-created
             - order-renewed
             - order-activated
@@ -12940,6 +12942,7 @@ components:
             - invoice-partially-paid
             - invoice-disputed
             - invoice-refunded
+            - invoice-partially-refunded
             - invoice-renewal-payment-declined
             - email-message-sent
         triggeredBy:
@@ -13007,6 +13010,7 @@ components:
             - invoice-partially-paid
             - invoice-disputed
             - invoice-refunded
+            - invoice-partially-refunded
             - invoice-renewal-payment-declined
         triggeredBy:
           description: Shows who or what triggered the Timeline message

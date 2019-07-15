@@ -12907,6 +12907,7 @@
               "delinquent",
               "abandoned",
               "voided",
+              "partially-refunded",
               "refunded",
               "disputed"
             ]
@@ -17844,6 +17845,7 @@
               "invoice-partially-paid",
               "invoice-disputed",
               "invoice-refunded",
+              "invoice-partially-refunded",
               "order-created",
               "order-renewed",
               "order-activated",
@@ -17992,6 +17994,7 @@
               "invoice-partially-paid",
               "invoice-disputed",
               "invoice-refunded",
+              "invoice-partially-refunded",
               "invoice-renewal-payment-declined",
               "email-message-sent"
             ]
@@ -18077,6 +18080,7 @@
               "invoice-partially-paid",
               "invoice-disputed",
               "invoice-refunded",
+              "invoice-partially-refunded",
               "invoice-renewal-payment-declined"
             ]
           },
