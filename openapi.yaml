@@ -8390,6 +8390,8 @@ components:
               description: Discount amount
               type: number
               format: double
+              minimum: 0
+              exclusiveMinimum: true
             currency:
               description: Discount currency
               type: string
@@ -8405,6 +8407,9 @@ components:
               description: Discount percent
               type: number
               format: double
+              minimum: 0
+              exclusiveMinimum: true
+              maximum: 100
     InvoiceDiscount:
       type: object
       readOnly: true
