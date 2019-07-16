@@ -3124,7 +3124,9 @@
           "description": "The custom field's identifier string",
           "required": true,
           "schema": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 60,
+            "pattern": "^[\\w-]+$"
           }
         }
       ],
@@ -3253,6 +3255,222 @@
             "source": "$customFieldForm = new Rebilly\\Entities\\CustomField();\n$customFieldForm->setType($customFieldForm::TYPE_BOOLEAN);\n\ntry {\n    $customField = $client->customFields()->update('customers', 'testFieldName', $customFieldForm);\n} catch (UnprocessableEntityException $e) {\n    echo $e->getMessage();\n}\n"
           }
         ]
+      }
+    },
+    "/customer-timeline-custom-events": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Retrieve a list of customer timeline custom event types",
+        "operationId": "getCustomerTimelineCustomEventTypes",
+        "description": "Retrieve a list of customer timeline custom event types\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/collectionLimit"
+          },
+          {
+            "$ref": "#/components/parameters/collectionOffset"
+          },
+          {
+            "$ref": "#/components/parameters/collectionFilter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of customer timeline custom event types was retrieved successfully",
+            "headers": {
+              "Rate-Limit-Limit": {
+                "$ref": "#/components/headers/Rate-Limit-Limit"
+              },
+              "Rate-Limit-Remaining": {
+                "$ref": "#/components/headers/Rate-Limit-Remaining"
+              },
+              "Rate-Limit-Reset": {
+                "$ref": "#/components/headers/Rate-Limit-Reset"
+              },
+              "Pagination-Total": {
+                "$ref": "#/components/headers/Pagination-Total"
+              },
+              "Pagination-Limit": {
+                "$ref": "#/components/headers/Pagination-Limit"
+              },
+              "Pagination-Offset": {
+                "$ref": "#/components/headers/Pagination-Offset"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CustomerTimelineCustomEvent"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/AccessForbidden"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Create Customer Timeline custom event type",
+        "operationId": "postCustomerTimelineCustomEventType",
+        "description": "Create Customer Timeline custom event type\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerTimelineCustomEvent"
+              }
+            }
+          },
+          "description": "Customer Timeline Custom Event Type resource",
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Customer Timeline Custom Event Type was created",
+            "headers": {
+              "Rate-Limit-Limit": {
+                "$ref": "#/components/headers/Rate-Limit-Limit"
+              },
+              "Rate-Limit-Remaining": {
+                "$ref": "#/components/headers/Rate-Limit-Remaining"
+              },
+              "Rate-Limit-Reset": {
+                "$ref": "#/components/headers/Rate-Limit-Reset"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerTimelineCustomEvent"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/AccessForbidden"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidDataError"
+          }
+        }
+      }
+    },
+    "/customer-timeline-custom-events/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/resourceId"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Retrieve customer timeline custom event type with specified identifier string",
+        "operationId": "getCustomerTimelineCustomEventType",
+        "description": "Retrieve customer timeline custom event type\n",
+        "responses": {
+          "200": {
+            "description": "Customer Timeline custom event type was retrieved successfully",
+            "headers": {
+              "Rate-Limit-Limit": {
+                "$ref": "#/components/headers/Rate-Limit-Limit"
+              },
+              "Rate-Limit-Remaining": {
+                "$ref": "#/components/headers/Rate-Limit-Remaining"
+              },
+              "Rate-Limit-Reset": {
+                "$ref": "#/components/headers/Rate-Limit-Reset"
+              },
+              "Pagination-Total": {
+                "$ref": "#/components/headers/Pagination-Total"
+              },
+              "Pagination-Limit": {
+                "$ref": "#/components/headers/Pagination-Limit"
+              },
+              "Pagination-Offset": {
+                "$ref": "#/components/headers/Pagination-Offset"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerTimelineCustomEvent"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/AccessForbidden"
+          }
+        }
+      }
+    },
+    "/customer-timeline-events": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Retrieve a list of customer timeline messages for all customers",
+        "operationId": "getCustomerTimelineAllCustomers",
+        "description": "Retrieve a list of customer timeline messages for all customers\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/collectionLimit"
+          },
+          {
+            "$ref": "#/components/parameters/collectionOffset"
+          },
+          {
+            "$ref": "#/components/parameters/collectionFilter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of customer timeline messages was retrieved successfully",
+            "headers": {
+              "Rate-Limit-Limit": {
+                "$ref": "#/components/headers/Rate-Limit-Limit"
+              },
+              "Rate-Limit-Remaining": {
+                "$ref": "#/components/headers/Rate-Limit-Remaining"
+              },
+              "Rate-Limit-Reset": {
+                "$ref": "#/components/headers/Rate-Limit-Reset"
+              },
+              "Pagination-Total": {
+                "$ref": "#/components/headers/Pagination-Total"
+              },
+              "Pagination-Limit": {
+                "$ref": "#/components/headers/Pagination-Limit"
+              },
+              "Pagination-Offset": {
+                "$ref": "#/components/headers/Pagination-Offset"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CustomerTimeline"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/AccessForbidden"
+          }
+        }
       }
     },
     "/customers": {
@@ -3741,8 +3959,8 @@
         "tags": [
           "Customers"
         ],
-        "summary": "Create a customer Timeline comment",
-        "description": "Create a customer Timeline comment\n",
+        "summary": "Create a customer Timeline comment or custom defined event",
+        "description": "Create a customer Timeline comment or custom defined event\n",
         "requestBody": {
           "content": {
             "application/json": {
@@ -3756,7 +3974,7 @@
         },
         "responses": {
           "201": {
-            "description": "Customer Timeline comment was created",
+            "description": "Customer Timeline comment or custom defined event was created",
             "headers": {
               "Rate-Limit-Limit": {
                 "$ref": "#/components/headers/Rate-Limit-Limit"
@@ -8854,7 +9072,7 @@
           "Subscriptions"
         ],
         "summary": "Change a subscription's plan",
-        "description": "Change a subscription's plan and designate when and if there should be pro rata credits given.\n",
+        "description": "Change a subscription's plan and designate when and if there should be pro rata credits given.\nOnly active subscriptions with a single plan can be changed.\nEdit pending unpaid subscriptions directly regardless the number of plans.\n",
         "requestBody": {
           "content": {
             "application/json": {
@@ -11676,6 +11894,14 @@
               }
             ]
           },
+          "websiteId": {
+            "description": "The website's ID",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResourceId"
+              }
+            ]
+          },
           "paymentToken": {
             "type": "string",
             "writeOnly": true,
@@ -11756,6 +11982,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/LeadSourceLink"
+                },
+                {
+                  "$ref": "#/components/schemas/WebsiteLink"
                 }
               ]
             }
@@ -11793,6 +12022,10 @@
           "resetTokenTtl": {
             "description": "The default lifetime of the reset-token in seconds",
             "type": "integer"
+          },
+          "otpRequired": {
+            "description": "Should OTP be required to exchange token",
+            "type": "boolean"
           }
         }
       },
@@ -11816,6 +12049,10 @@
             ],
             "writeOnly": true,
             "default": "password"
+          },
+          "otpRequired": {
+            "description": "Should OTP be required to exchange this token",
+            "type": "boolean"
           },
           "credentialId": {
             "description": "The credential's ID",
@@ -11872,6 +12109,20 @@
             "type": "string",
             "readOnly": true
           },
+          "invalidate": {
+            "description": "Whether to invalidate token after exchange or not",
+            "type": "boolean",
+            "default": true,
+            "example": true,
+            "writeOnly": true
+          },
+          "oneTimePassword": {
+            "description": "The one time password sent via an email. Should contain digits only.",
+            "type": "string",
+            "pattern": "^[0-9]{6}$",
+            "example": "123456",
+            "writeOnly": true
+          },
           "customerId": {
             "description": "The customer's ID",
             "readOnly": true,
@@ -11880,13 +12131,6 @@
                 "$ref": "#/components/schemas/ResourceId"
               }
             ]
-          },
-          "invalidate": {
-            "description": "Whether to invalidate token after exchange or not",
-            "type": "boolean",
-            "default": true,
-            "example": true,
-            "writeOnly": true
           },
           "createdTime": {
             "description": "Session created time",
@@ -13038,6 +13282,11 @@
               "afterRetryEndPolicies"
             ]
           },
+          "revision": {
+            "description": "The number of times the invoice data has been modified.  The revision is useful when analyzing webhook data to determine if the change takes precedence over the current representation.",
+            "type": "integer",
+            "readOnly": true
+          },
           "status": {
             "type": "string",
             "description": "Invoice status.",
@@ -13050,6 +13299,7 @@
               "delinquent",
               "abandoned",
               "voided",
+              "partially-refunded",
               "refunded",
               "disputed"
             ]
@@ -13706,6 +13956,26 @@
           "rel"
         ]
       },
+      "ChangeOrderPreviewLink": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Link"
+          }
+        ],
+        "properties": {
+          "rel": {
+            "description": "The link type",
+            "type": "string",
+            "enum": [
+              "preview"
+            ]
+          }
+        },
+        "required": [
+          "rel"
+        ]
+      },
       "CustomerLink": {
         "type": "object",
         "allOf": [
@@ -14233,6 +14503,7 @@
           "instant-bank-transfer",
           "Interac-online",
           "Interac-eTransfer",
+          "Interac-express-connect",
           "Interac",
           "invoice",
           "Jeton",
@@ -15453,6 +15724,14 @@
           "id": {
             "description": "The token identifier string",
             "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResourceId"
+              }
+            ]
+          },
+          "websiteId": {
+            "description": "The website's ID",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ResourceId"
@@ -17234,6 +17513,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/ChangeOrderBillingAnchorShift"
+                },
+                {
+                  "$ref": "#/components/schemas/ChangeOrderTrial"
                 }
               ]
             }
@@ -17266,6 +17548,25 @@
                 "$ref": "#/components/schemas/ServerTimestamp"
               }
             ]
+          },
+          "_links": {
+            "type": "array",
+            "description": "The links related to resource",
+            "readOnly": true,
+            "minItems": 3,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/SelfLink"
+                },
+                {
+                  "$ref": "#/components/schemas/SubscriptionLink"
+                },
+                {
+                  "$ref": "#/components/schemas/ChangeOrderPreviewLink"
+                }
+              ]
+            }
           }
         }
       },
@@ -17469,6 +17770,46 @@
           },
           "effectiveTime": {
             "description": "Change order effective time. Set to null for next renewal time.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "prorated": {
+            "description": "Defines if this change will be prorated.",
+            "type": "boolean"
+          },
+          "createdTime": {
+            "description": "The change order item creation time.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          }
+        }
+      },
+      "ChangeOrderTrial": {
+        "description": "Change Order trial period.",
+        "type": "object",
+        "required": [
+          "trialEndTime"
+        ],
+        "properties": {
+          "changeType": {
+            "description": "Change Order item type",
+            "type": "string",
+            "enum": [
+              "trial"
+            ]
+          },
+          "trialEndTime": {
+            "description": "Trial period end time. Set to null to end trial now.",
+            "nullable": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          "effectiveTime": {
+            "description": "Change Order effective time. Set to null for next renewal time.",
             "type": "string",
             "format": "date-time",
             "nullable": true
@@ -18349,8 +18690,8 @@
           "type": {
             "description": "Timeline message type",
             "type": "string",
-            "readOnly": true,
             "enum": [
+              "customer-comment-created",
               "customer-created",
               "primary-address-changed",
               "default-payment-instrument-changed",
@@ -18377,6 +18718,7 @@
               "invoice-partially-paid",
               "invoice-disputed",
               "invoice-refunded",
+              "invoice-partially-refunded",
               "order-created",
               "order-renewed",
               "order-activated",
@@ -18394,8 +18736,25 @@
               "transaction-discrepancy-found",
               "transaction-amount-discrepancy-found",
               "email-message-sent",
-              "custom-event-processed"
+              "custom-event-processed",
+              "custom-event"
             ]
+          },
+          "customEventType": {
+            "description": "Timeline custom event type. Used with `custom-event` type. Must be defined using [Customer Timeline custom event API](#operation/postCustomerTimelineCustomEventType)",
+            "type": "string",
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "customData": {
+            "description": "Timeline custom event data. Used with `custom-event` type. Will be transformed to `extraData` two-column table in response",
+            "type": "object",
+            "writeOnly": true,
+            "example": {
+              "customAttribute": "customValue",
+              "otherAttribute": "otherValue"
+            }
           },
           "triggeredBy": {
             "description": "Shows who or what triggered the Timeline message",
@@ -18416,7 +18775,54 @@
           },
           "occurredTime": {
             "description": "Timeline message time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          },
+          "_links": {
+            "type": "array",
+            "description": "The links related to resource",
             "readOnly": true,
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/SelfLink"
+            }
+          }
+        }
+      },
+      "CustomerTimelineCustomEvent": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "description": "Customer Timeline Custom Event identifier string",
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResourceId"
+              }
+            ]
+          },
+          "name": {
+            "description": "Customer Timeline Custom Event type name. It must not be similar to any Rebilly system event.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "createdTime": {
+            "description": "Customer Timeline Custom event created time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          },
+          "updatedTime": {
+            "description": "Customer Timeline Custom event updated time",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ServerTimestamp"
@@ -18461,6 +18867,7 @@
               "invoice-partially-paid",
               "invoice-disputed",
               "invoice-refunded",
+              "invoice-partially-refunded",
               "invoice-renewal-payment-declined",
               "email-message-sent"
             ]
@@ -18546,6 +18953,7 @@
               "invoice-partially-paid",
               "invoice-disputed",
               "invoice-refunded",
+              "invoice-partially-refunded",
               "invoice-renewal-payment-declined"
             ]
           },
@@ -19873,6 +20281,7 @@
         "required": true,
         "schema": {
           "type": "string",
+          "maxLength": 50,
           "pattern": "^[@~\\-\\.\\w\\d]+$"
         }
       },
@@ -19924,7 +20333,9 @@
         "description": "The resource identifier string",
         "required": true,
         "schema": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 50,
+          "pattern": "^[@~\\-\\.\\w\\d]+$"
         }
       },
       "subscriptionExpand": {

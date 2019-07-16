@@ -2385,6 +2385,8 @@ paths:
         required: true
         schema:
           type: string
+          maxLength: 60
+          pattern: '^[\w-]+$'
     get:
       tags:
         - Custom Fields
@@ -2475,6 +2477,142 @@ paths:
             } catch (UnprocessableEntityException $e) {
                 echo $e->getMessage();
             }
+  /customer-timeline-custom-events:
+    get:
+      tags:
+        - Customers
+      summary: Retrieve a list of customer timeline custom event types
+      operationId: getCustomerTimelineCustomEventTypes
+      description: |
+        Retrieve a list of customer timeline custom event types
+      parameters:
+        - $ref: '#/components/parameters/collectionLimit'
+        - $ref: '#/components/parameters/collectionOffset'
+        - $ref: '#/components/parameters/collectionFilter'
+      responses:
+        '200':
+          description: A list of customer timeline custom event types was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              $ref: '#/components/headers/Rate-Limit-Limit'
+            Rate-Limit-Remaining:
+              $ref: '#/components/headers/Rate-Limit-Remaining'
+            Rate-Limit-Reset:
+              $ref: '#/components/headers/Rate-Limit-Reset'
+            Pagination-Total:
+              $ref: '#/components/headers/Pagination-Total'
+            Pagination-Limit:
+              $ref: '#/components/headers/Pagination-Limit'
+            Pagination-Offset:
+              $ref: '#/components/headers/Pagination-Offset'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerTimelineCustomEvent'
+        '401':
+          $ref: '#/components/responses/AccessForbidden'
+    post:
+      tags:
+        - Customers
+      summary: Create Customer Timeline custom event type
+      operationId: postCustomerTimelineCustomEventType
+      description: |
+        Create Customer Timeline custom event type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerTimelineCustomEvent'
+        description: Customer Timeline Custom Event Type resource
+        required: true
+      responses:
+        '201':
+          description: Customer Timeline Custom Event Type was created
+          headers:
+            Rate-Limit-Limit:
+              $ref: '#/components/headers/Rate-Limit-Limit'
+            Rate-Limit-Remaining:
+              $ref: '#/components/headers/Rate-Limit-Remaining'
+            Rate-Limit-Reset:
+              $ref: '#/components/headers/Rate-Limit-Reset'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerTimelineCustomEvent'
+        '401':
+          $ref: '#/components/responses/AccessForbidden'
+        '422':
+          $ref: '#/components/responses/InvalidDataError'
+  '/customer-timeline-custom-events/{id}':
+    parameters:
+      - $ref: '#/components/parameters/resourceId'
+    get:
+      tags:
+        - Customers
+      summary: Retrieve customer timeline custom event type with specified identifier string
+      operationId: getCustomerTimelineCustomEventType
+      description: |
+        Retrieve customer timeline custom event type
+      responses:
+        '200':
+          description: Customer Timeline custom event type was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              $ref: '#/components/headers/Rate-Limit-Limit'
+            Rate-Limit-Remaining:
+              $ref: '#/components/headers/Rate-Limit-Remaining'
+            Rate-Limit-Reset:
+              $ref: '#/components/headers/Rate-Limit-Reset'
+            Pagination-Total:
+              $ref: '#/components/headers/Pagination-Total'
+            Pagination-Limit:
+              $ref: '#/components/headers/Pagination-Limit'
+            Pagination-Offset:
+              $ref: '#/components/headers/Pagination-Offset'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerTimelineCustomEvent'
+        '401':
+          $ref: '#/components/responses/AccessForbidden'
+  /customer-timeline-events:
+    get:
+      tags:
+        - Customers
+      summary: Retrieve a list of customer timeline messages for all customers
+      operationId: getCustomerTimelineAllCustomers
+      description: |
+        Retrieve a list of customer timeline messages for all customers
+      parameters:
+        - $ref: '#/components/parameters/collectionLimit'
+        - $ref: '#/components/parameters/collectionOffset'
+        - $ref: '#/components/parameters/collectionFilter'
+      responses:
+        '200':
+          description: A list of customer timeline messages was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              $ref: '#/components/headers/Rate-Limit-Limit'
+            Rate-Limit-Remaining:
+              $ref: '#/components/headers/Rate-Limit-Remaining'
+            Rate-Limit-Reset:
+              $ref: '#/components/headers/Rate-Limit-Reset'
+            Pagination-Total:
+              $ref: '#/components/headers/Pagination-Total'
+            Pagination-Limit:
+              $ref: '#/components/headers/Pagination-Limit'
+            Pagination-Offset:
+              $ref: '#/components/headers/Pagination-Offset'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerTimeline'
+        '401':
+          $ref: '#/components/responses/AccessForbidden'
   /customers:
     get:
       tags:
@@ -2895,9 +3033,9 @@ paths:
     post:
       tags:
         - Customers
-      summary: Create a customer Timeline comment
+      summary: Create a customer Timeline comment or custom defined event
       description: |
-        Create a customer Timeline comment
+        Create a customer Timeline comment or custom defined event
       requestBody:
         content:
           application/json:
@@ -2907,7 +3045,7 @@ paths:
         required: true
       responses:
         '201':
-          description: Customer Timeline comment was created
+          description: Customer Timeline comment or custom defined event was created
           headers:
             Rate-Limit-Limit:
               $ref: '#/components/headers/Rate-Limit-Limit'
@@ -6684,6 +6822,8 @@ paths:
       summary: Change a subscription's plan
       description: |
         Change a subscription's plan and designate when and if there should be pro rata credits given.
+        Only active subscriptions with a single plan can be changed.
+        Edit pending unpaid subscriptions directly regardless the number of plans.
       requestBody:
         content:
           application/json:
@@ -8598,6 +8738,10 @@ components:
           readOnly: true
           allOf:
             - $ref: '#/components/schemas/ResourceId'
+        websiteId:
+          description: The website's ID
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
         paymentToken:
           type: string
           writeOnly: true
@@ -8654,6 +8798,7 @@ components:
               - $ref: '#/components/schemas/NotesLink'
               - $ref: '#/components/schemas/DefaultPaymentInstrumentLink'
               - $ref: '#/components/schemas/LeadSourceLink'
+              - $ref: '#/components/schemas/WebsiteLink'
         _embedded:
           type: array
           description: Any embedded objects available that are requested by the `expand` querystring parameter.
@@ -8677,6 +8822,9 @@ components:
         resetTokenTtl:
           description: The default lifetime of the reset-token in seconds
           type: integer
+        otpRequired:
+          description: Should OTP be required to exchange token
+          type: boolean
     AuthenticationToken:
       type: object
       discriminator:
@@ -8694,6 +8842,9 @@ components:
             - passwordless
           writeOnly: true
           default: password
+        otpRequired:
+          description: Should OTP be required to exchange this token
+          type: boolean
         credentialId:
           description: The credential's ID
           readOnly: true
@@ -8731,17 +8882,23 @@ components:
           description: The session's token used for authentication
           type: string
           readOnly: true
-        customerId:
-          description: The customer's ID
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
         invalidate:
           description: Whether to invalidate token after exchange or not
           type: boolean
           default: true
           example: true
           writeOnly: true
+        oneTimePassword:
+          description: The one time password sent via an email. Should contain digits only.
+          type: string
+          pattern: '^[0-9]{6}$'
+          example: '123456'
+          writeOnly: true
+        customerId:
+          description: The customer's ID
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
         createdTime:
           description: Session created time
           type: string
@@ -9594,6 +9751,10 @@ components:
             - attempts
             - afterAttemptPolicies
             - afterRetryEndPolicies
+        revision:
+          description: The number of times the invoice data has been modified.  The revision is useful when analyzing webhook data to determine if the change takes precedence over the current representation.
+          type: integer
+          readOnly: true
         status:
           type: string
           description: Invoice status.
@@ -9606,6 +9767,7 @@ components:
             - delinquent
             - abandoned
             - voided
+            - partially-refunded
             - refunded
             - disputed
         delinquentCollectionPeriod:
@@ -10010,6 +10172,18 @@ components:
             - cancelUrl
       required:
         - rel
+    ChangeOrderPreviewLink:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Link'
+      properties:
+        rel:
+          description: The link type
+          type: string
+          enum:
+            - preview
+      required:
+        - rel
     CustomerLink:
       type: object
       allOf:
@@ -10341,6 +10515,7 @@ components:
         - instant-bank-transfer
         - Interac-online
         - Interac-eTransfer
+        - Interac-express-connect
         - Interac
         - invoice
         - Jeton
@@ -11111,6 +11286,10 @@ components:
         id:
           description: The token identifier string
           readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+        websiteId:
+          description: The website's ID
           allOf:
             - $ref: '#/components/schemas/ResourceId'
         isUsed:
@@ -12407,6 +12586,7 @@ components:
               - $ref: '#/components/schemas/ChangeOrderRenewalTime'
               - $ref: '#/components/schemas/ChangeOrderServiceAnchorDate'
               - $ref: '#/components/schemas/ChangeOrderBillingAnchorShift'
+              - $ref: '#/components/schemas/ChangeOrderTrial'
         changedBy:
           description: The author of Change Order.
           type: string
@@ -12423,6 +12603,16 @@ components:
           description: The change order applied time
           allOf:
             - $ref: '#/components/schemas/ServerTimestamp'
+        _links:
+          type: array
+          description: The links related to resource
+          readOnly: true
+          minItems: 3
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/SelfLink'
+              - $ref: '#/components/schemas/SubscriptionLink'
+              - $ref: '#/components/schemas/ChangeOrderPreviewLink'
     ChangeOrderBillingAnchorShift:
       description: Change Order Billing Anchor Shift.
       type: object
@@ -12558,6 +12748,34 @@ components:
             - $ref: '#/components/schemas/BillingScheduleInstruction'
         effectiveTime:
           description: Change order effective time. Set to null for next renewal time.
+          type: string
+          format: date-time
+          nullable: true
+        prorated:
+          description: Defines if this change will be prorated.
+          type: boolean
+        createdTime:
+          description: The change order item creation time.
+          allOf:
+            - $ref: '#/components/schemas/ServerTimestamp'
+    ChangeOrderTrial:
+      description: Change Order trial period.
+      type: object
+      required:
+        - trialEndTime
+      properties:
+        changeType:
+          description: Change Order item type
+          type: string
+          enum:
+            - trial
+        trialEndTime:
+          description: Trial period end time. Set to null to end trial now.
+          nullable: true
+          type: string
+          format: date-time
+        effectiveTime:
+          description: Change Order effective time. Set to null for next renewal time.
           type: string
           format: date-time
           nullable: true
@@ -13139,8 +13357,8 @@ components:
         type:
           description: Timeline message type
           type: string
-          readOnly: true
           enum:
+            - customer-comment-created
             - customer-created
             - primary-address-changed
             - default-payment-instrument-changed
@@ -13167,6 +13385,7 @@ components:
             - invoice-partially-paid
             - invoice-disputed
             - invoice-refunded
+            - invoice-partially-refunded
             - order-created
             - order-renewed
             - order-activated
@@ -13185,6 +13404,20 @@ components:
             - transaction-amount-discrepancy-found
             - email-message-sent
             - custom-event-processed
+            - custom-event
+        customEventType:
+          description: 'Timeline custom event type. Used with `custom-event` type. Must be defined using [Customer Timeline custom event API](#operation/postCustomerTimelineCustomEventType)'
+          type: string
+          nullable: true
+          minLength: 1
+          maxLength: 255
+        customData:
+          description: Timeline custom event data. Used with `custom-event` type. Will be transformed to `extraData` two-column table in response
+          type: object
+          writeOnly: true
+          example:
+            customAttribute: customValue
+            otherAttribute: otherValue
         triggeredBy:
           description: Shows who or what triggered the Timeline message
           type: string
@@ -13200,7 +13433,36 @@ components:
           $ref: '#/components/schemas/TimelineExtraData'
         occurredTime:
           description: Timeline message time
+          allOf:
+            - $ref: '#/components/schemas/ServerTimestamp'
+        _links:
+          type: array
+          description: The links related to resource
           readOnly: true
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/SelfLink'
+    CustomerTimelineCustomEvent:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          description: Customer Timeline Custom Event identifier string
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+        name:
+          description: Customer Timeline Custom Event type name. It must not be similar to any Rebilly system event.
+          type: string
+          minLength: 1
+          maxLength: 255
+        createdTime:
+          description: Customer Timeline Custom event created time
+          allOf:
+            - $ref: '#/components/schemas/ServerTimestamp'
+        updatedTime:
+          description: Customer Timeline Custom event updated time
           allOf:
             - $ref: '#/components/schemas/ServerTimestamp'
         _links:
@@ -13233,6 +13495,7 @@ components:
             - invoice-partially-paid
             - invoice-disputed
             - invoice-refunded
+            - invoice-partially-refunded
             - invoice-renewal-payment-declined
             - email-message-sent
         triggeredBy:
@@ -13300,6 +13563,7 @@ components:
             - invoice-partially-paid
             - invoice-disputed
             - invoice-refunded
+            - invoice-partially-refunded
             - invoice-renewal-payment-declined
         triggeredBy:
           description: Shows who or what triggered the Timeline message
@@ -14239,6 +14503,7 @@ components:
       required: true
       schema:
         type: string
+        maxLength: 50
         pattern: '^[@~\-\.\w\d]+$'
     customFieldResource:
       name: resource
@@ -14281,6 +14546,8 @@ components:
       required: true
       schema:
         type: string
+        maxLength: 50
+        pattern: '^[@~\-\.\w\d]+$'
     subscriptionExpand:
       name: expand
       in: query
