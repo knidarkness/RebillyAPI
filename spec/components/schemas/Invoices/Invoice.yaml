@@ -144,6 +144,10 @@ properties:
       - attempts
       - afterAttemptPolicies
       - afterRetryEndPolicies
+  revision:
+    description: The number of times the invoice data has been modified.  The revision is useful when analyzing webhook data to determine if the change takes precedence over the current representation.
+    type: integer
+    readOnly: true
   status:
     type: string
     description: Invoice status.
@@ -156,6 +160,7 @@ properties:
      - "delinquent"
      - "abandoned"
      - "voided"
+     - "partially-refunded"
      - "refunded"
      - "disputed"
   delinquentCollectionPeriod:
