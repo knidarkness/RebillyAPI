@@ -55,5 +55,5 @@ properties:
     items:
       anyOf:
         - $ref: "#/components/schemas/SelfLink"
-        - $ref: "#/components/schemas/SubscriptionLink"
+        - $ref: "#/components/schemas/OrderLink"
         - $ref: "#/components/schemas/ChangeOrderPreviewLink"

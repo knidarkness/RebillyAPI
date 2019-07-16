@@ -13,11 +13,6 @@ properties:
     nullable: true
     type: string
     format: date-time
-  effectiveTime:
-    description: Change Order effective time. Set to null for next renewal time.
-    type: string
-    format: date-time
-    nullable: true
   prorated:
     description: Defines if this change will be prorated.
     type: boolean
