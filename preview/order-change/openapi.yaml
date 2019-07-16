@@ -10312,6 +10312,18 @@ components:
             - notes
       required:
         - rel
+    OrderLink:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Link'
+      properties:
+        rel:
+          description: The link type
+          type: string
+          enum:
+            - order
+      required:
+        - rel
     OrganizationLink:
       type: object
       allOf:
@@ -12611,7 +12623,7 @@ components:
           items:
             anyOf:
               - $ref: '#/components/schemas/SelfLink'
-              - $ref: '#/components/schemas/SubscriptionLink'
+              - $ref: '#/components/schemas/OrderLink'
               - $ref: '#/components/schemas/ChangeOrderPreviewLink'
     ChangeOrderBillingAnchorShift:
       description: Change Order Billing Anchor Shift.
@@ -12774,11 +12786,6 @@ components:
           nullable: true
           type: string
           format: date-time
-        effectiveTime:
-          description: Change Order effective time. Set to null for next renewal time.
-          type: string
-          format: date-time
-          nullable: true
         prorated:
           description: Defines if this change will be prorated.
           type: boolean
