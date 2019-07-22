@@ -9406,7 +9406,7 @@ components:
           format: double
           readOnly: true
         amountDue:
-          description: The Invoice's amount due
+          description: The Invoice's due amount
           type: number
           format: double
           readOnly: true
