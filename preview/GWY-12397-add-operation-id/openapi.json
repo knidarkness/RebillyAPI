@@ -658,7 +658,7 @@
           "Customer Authentication"
         ],
         "summary": "Read current authentication options",
-        "operationId": "GetAuthenticationOptionCollection",
+        "operationId": "GetAuthenticationOption",
         "description": "Read current authentication options\n",
         "responses": {
           "200": {
