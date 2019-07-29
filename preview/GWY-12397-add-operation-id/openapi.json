@@ -9273,7 +9273,7 @@
           "Tags"
         ],
         "summary": "Tag a list of customers",
-        "operationId": "PostTagCustomerCollectionRequest",
+        "operationId": "PostTagCustomerCollection",
         "description": "Tag a list of customers.\nIf the customer from the list is already tagged it will be ignored.\nIt's an asynchronous operation.\n",
         "requestBody": {
           "required": true,
