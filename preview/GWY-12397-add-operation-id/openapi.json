@@ -1009,7 +1009,7 @@
           "Customer Authentication"
         ],
         "summary": "Exchange",
-        "operationId": "PostAuthenticationTokenExchangeRequest",
+        "operationId": "PostAuthenticationTokenExchange",
         "description": "Exchange Authentication Token for JWT\n\nIt will also invalidate an Authentication Token by default (so it can only be exchanged once).\n",
         "security": [
           {
@@ -1408,7 +1408,7 @@
           "Bank Accounts"
         ],
         "summary": "Deactivate a Bank Account",
-        "operationId": "PostBankAccountDeactivationRequest",
+        "operationId": "PostBankAccountDeactivation",
         "description": "Deactivate a Bank Account\n",
         "responses": {
           "201": {
@@ -2113,7 +2113,7 @@
           "Coupons"
         ],
         "summary": "Cancel a coupon redemption",
-        "operationId": "PostCouponRedemptionCancellationRequest",
+        "operationId": "PostCouponRedemptionCancellation",
         "responses": {
           "201": {
             "description": "Cancel a coupon redemption"
@@ -2396,7 +2396,7 @@
           "Coupons"
         ],
         "summary": "Set a coupon's expiration time.",
-        "operationId": "PostCouponExpirationTimeSetRequest",
+        "operationId": "PostCouponExpiration",
         "description": "Set a coupon's expiry time with the specified redemption code.\nThe expiredTime of a coupon must be greater than its issuedTime.\nThis cannot be performed on expired coupons.\n",
         "requestBody": {
           "content": {
@@ -3567,7 +3567,7 @@
           "Customers"
         ],
         "summary": "Retrieve a list of customer timeline messages",
-        "operationId": "GetCustomerTimelineMessageCollection",
+        "operationId": "GetCustomerTimelineCollection",
         "description": "Retrieve a list of customer timeline messages\n",
         "parameters": [
           {
@@ -3624,7 +3624,7 @@
           "Customers"
         ],
         "summary": "Create a customer Timeline comment or custom defined event",
-        "operationId": "PostCustomerTimelineMessage",
+        "operationId": "PostCustomerTimeline",
         "description": "Create a customer Timeline comment or custom defined event\n",
         "requestBody": {
           "content": {
@@ -3688,7 +3688,7 @@
           "Customers"
         ],
         "summary": "Retrieve a customer Timeline message",
-        "operationId": "GetCustomerTimelineMessage",
+        "operationId": "GetCustomerTimeline",
         "description": "Retrieve a customer message with specified identifier string\n",
         "responses": {
           "200": {
@@ -3725,7 +3725,7 @@
           "Customers"
         ],
         "summary": "Delete a Customer Timeline message",
-        "operationId": "DeleteCustomerTimelineMessage",
+        "operationId": "DeleteCustomerTimeline",
         "description": "Delete a Customer Timeline message with predefined identifier string\n",
         "responses": {
           "204": {
@@ -4793,7 +4793,7 @@
           "Invoices"
         ],
         "summary": "Abandon an invoice",
-        "operationId": "PostInvoiceAbandonRequest",
+        "operationId": "PostInvoiceAbandonment",
         "description": "Abandon an invoice with specified identifier string\n",
         "responses": {
           "201": {
@@ -4843,7 +4843,7 @@
           "Invoices"
         ],
         "summary": "Issue an invoice",
-        "operationId": "PostInvoiceIssueRequest",
+        "operationId": "PostInvoiceIssuance",
         "description": "Issue an invoice with specified identifier string\n",
         "requestBody": {
           "content": {
@@ -5264,7 +5264,7 @@
           "Invoices"
         ],
         "summary": "Void an invoice",
-        "operationId": "PostInvoiceVoidRequest",
+        "operationId": "PostInvoiceVoiding",
         "description": "Void an invoice with specified identifier string\n",
         "responses": {
           "201": {
@@ -5584,7 +5584,7 @@
           "KYC Documents"
         ],
         "summary": "Accept a KYC document",
-        "operationId": "PostKycDocumentAcceptanceRequest",
+        "operationId": "PostKycDocumentAcceptance",
         "description": "Manually override automated status and accept the document\n",
         "responses": {
           "201": {
@@ -5628,7 +5628,7 @@
           "KYC Documents"
         ],
         "summary": "Reject a KYC document",
-        "operationId": "PostKycDocumentRejectionRequest",
+        "operationId": "PostKycDocumentRejection",
         "description": "Manually override automated status and reject the document\n",
         "requestBody": {
           "content": {
@@ -6234,7 +6234,7 @@
           "Payment Cards"
         ],
         "summary": "Authorize a Payment Card",
-        "operationId": "PostPaymentCardAuthorizationRequest",
+        "operationId": "PostPaymentCardAuthorization",
         "description": "Authorize a Payment Card\n",
         "requestBody": {
           "content": {
@@ -6322,7 +6322,7 @@
           "Payment Cards"
         ],
         "summary": "Deactivate a Payment Card",
-        "operationId": "PostPaymentCardDeactivationRequest",
+        "operationId": "PostPaymentCardDeactivation",
         "description": "Deactivate a Payment Card\n",
         "responses": {
           "201": {
@@ -6451,7 +6451,7 @@
           "Payment Instrument Validation"
         ],
         "summary": "Validate a payment instrument",
-        "operationId": "PostPaymentInstrumentValidationRequest",
+        "operationId": "PostPaymentInstrumentValidation",
         "description": "Validate a payment instrument\n",
         "requestBody": {
           "content": {
@@ -7036,7 +7036,7 @@
           "PayPal Accounts"
         ],
         "summary": "Activate a PayPal Account",
-        "operationId": "PostPayPalAccountActivationRequest",
+        "operationId": "PostPayPalAccountActivation",
         "description": "Activate a PayPal Account\n",
         "requestBody": {
           "content": {
@@ -7125,7 +7125,7 @@
           "PayPal Accounts"
         ],
         "summary": "Deactivate a PayPal Account",
-        "operationId": "PostPayPalAccountDeactivationRequest",
+        "operationId": "PostPayPalAccountDeactivation",
         "description": "Deactivate a PayPal Account\n",
         "responses": {
           "201": {
@@ -8039,7 +8039,7 @@
           "Subscriptions"
         ],
         "summary": "Cancel a subscription",
-        "operationId": "PostSubscriptionCancellationRequest",
+        "operationId": "PostSubscriptionCancellation",
         "description": "Cancel a subscription or preview the cancellation parameters before that",
         "requestBody": {
           "$ref": "#/components/requestBodies/SubscriptionCancellation"
@@ -8645,7 +8645,7 @@
           "Subscriptions"
         ],
         "summary": "Change a subscription's plan",
-        "operationId": "PostSubscriptionChangePlanRequest",
+        "operationId": "PostSubscriptionPlanChange",
         "description": "Change a subscription's plan and designate when and if there should be pro rata credits given.\nOnly active subscriptions with a single plan can be changed.\nEdit pending unpaid subscriptions directly regardless the number of plans.\n",
         "requestBody": {
           "content": {
@@ -8706,7 +8706,7 @@
           "Subscriptions"
         ],
         "summary": "Issue an interim invoice for a subscription",
-        "operationId": "PostSubscriptionInterimInvoiceRequest",
+        "operationId": "PostSubscriptionInterimInvoice",
         "description": "Issue an interim invoice for a subscription, typically used in conjunction with plan changes and pro rata adjustments.\nThis process creates an invoice, adds the subscription's line items to the invoice, and issues the invoice, and applies\npayment to it if a transaction id is supplied.\n",
         "requestBody": {
           "content": {
@@ -9799,7 +9799,7 @@
           "Transactions"
         ],
         "summary": "Cancel a pending or suspended transaction",
-        "operationId": "PostTransactionCancelRequest",
+        "operationId": "PostTransactionCancellation",
         "description": "Cancel a scheduled transaction. Once handled a transaction cannot be canceled",
         "responses": {
           "201": {
@@ -9929,7 +9929,7 @@
           "Transactions"
         ],
         "summary": "Refund a Transaction",
-        "operationId": "PostTransactionRefundRequest",
+        "operationId": "PostTransactionRefund",
         "description": "Refund a Transaction with specified identifier string.\nNote that the refund will be in the same currency as the original transaction.\n",
         "requestBody": {
           "content": {
