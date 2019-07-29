@@ -543,7 +543,7 @@ paths:
       tags:
         - Customer Authentication
       summary: Change authentication options
-      operationId: PutAuthenticationOptionCollection
+      operationId: PutAuthenticationOption
       description: |
         Change options
       requestBody:
@@ -1590,7 +1590,7 @@ paths:
       tags:
         - Coupons
       summary: Redeem a coupon
-      operationId: PostCouponRedemptionRequest
+      operationId: PostCouponRedemption
       description: |
         Redeem a coupon
       requestBody:

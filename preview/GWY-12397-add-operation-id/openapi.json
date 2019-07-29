@@ -701,7 +701,7 @@
           "Customer Authentication"
         ],
         "summary": "Change authentication options",
-        "operationId": "PutAuthenticationOptionCollection",
+        "operationId": "PutAuthenticationOption",
         "description": "Change options\n",
         "requestBody": {
           "content": {
@@ -2014,7 +2014,7 @@
           "Coupons"
         ],
         "summary": "Redeem a coupon",
-        "operationId": "PostCouponRedemptionRequest",
+        "operationId": "PostCouponRedemption",
         "description": "Redeem a coupon\n",
         "requestBody": {
           "content": {
