@@ -200,6 +200,7 @@
           "3D Secure"
         ],
         "summary": "Retrieve a list of ThreeDSecure entries",
+        "operationId": "Get3DSecureCollection",
         "parameters": [
           {
             "$ref": "#/components/parameters/collectionLimit"
@@ -252,6 +253,7 @@
           "3D Secure"
         ],
         "summary": "Create a ThreeDSecure entry",
+        "operationId": "Post3DSecure",
         "description": "Create a ThreeDSecure entry\n",
         "requestBody": {
           "content": {
@@ -306,6 +308,7 @@
           "3D Secure"
         ],
         "summary": "Retrieve a ThreeDSecure entry",
+        "operationId": "Get3DSecure",
         "description": "Retrieve a ThreeDSecure entry with specified identifier string\n",
         "responses": {
           "200": {
@@ -344,6 +347,7 @@
           "Files"
         ],
         "summary": "Retrieve a list of Attachments",
+        "operationId": "GetAttachmentCollection",
         "description": "Retrieve a list of Attachments\n",
         "parameters": [
           {
@@ -444,6 +448,7 @@
           "Files"
         ],
         "summary": "Create an Attachment",
+        "operationId": "PostAttachment",
         "description": "Create an Attachment\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Attachment"
@@ -499,6 +504,7 @@
           "Files"
         ],
         "summary": "Retrieve an Attachment",
+        "operationId": "GetAttachment",
         "description": "Retrieve a Attachment with specified identifier string\n",
         "responses": {
           "200": {
@@ -541,6 +547,7 @@
           "Files"
         ],
         "summary": "Update the Attachment with predefined ID",
+        "operationId": "PutAttachment",
         "description": "Update the Attachment with predefined ID\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Attachment"
@@ -613,6 +620,7 @@
           "Files"
         ],
         "summary": "Delete an Attachment",
+        "operationId": "DeleteAttachment",
         "description": "Delete the Attachment with predefined identifier string\n",
         "responses": {
           "204": {
@@ -650,6 +658,7 @@
           "Customer Authentication"
         ],
         "summary": "Read current authentication options",
+        "operationId": "GetAuthenticationOption",
         "description": "Read current authentication options\n",
         "responses": {
           "200": {
@@ -692,6 +701,7 @@
           "Customer Authentication"
         ],
         "summary": "Change authentication options",
+        "operationId": "PutAuthenticationOption",
         "description": "Change options\n",
         "requestBody": {
           "content": {
@@ -747,6 +757,7 @@
           "Customer Authentication"
         ],
         "summary": "Retrieve a list of auth tokens",
+        "operationId": "GetAuthenticationTokenCollection",
         "description": "Retrieve a list of auth tokens\n",
         "parameters": [
           {
@@ -806,6 +817,7 @@
           "Customer Authentication"
         ],
         "summary": "Login",
+        "operationId": "PostAuthenticationToken",
         "description": "Login a customer\n",
         "security": [
           {
@@ -883,6 +895,7 @@
           "Customer Authentication"
         ],
         "summary": "Verify",
+        "operationId": "GetAuthenticationTokenVerification",
         "description": "Verify an authentication token\n",
         "security": [
           {
@@ -936,6 +949,7 @@
           "Customer Authentication"
         ],
         "summary": "Logout a customer",
+        "operationId": "DeleteAuthenticationToken",
         "description": "Logout a customer\n",
         "security": [
           {
@@ -995,6 +1009,7 @@
           "Customer Authentication"
         ],
         "summary": "Exchange",
+        "operationId": "PostAuthenticationTokenExchange",
         "description": "Exchange Authentication Token for JWT\n\nIt will also invalidate an Authentication Token by default (so it can only be exchanged once).\n",
         "security": [
           {
@@ -1054,6 +1069,7 @@
           "Bank Accounts"
         ],
         "summary": "Create a Bank Account",
+        "operationId": "PostBankAccount",
         "description": "Create a Bank Account\n",
         "requestBody": {
           "content": {
@@ -1114,6 +1130,7 @@
           "Bank Accounts"
         ],
         "summary": "Retrieve a list of bank accounts",
+        "operationId": "GetBankAccountCollection",
         "description": "Retrieve a list of Bank Accounts\n",
         "parameters": [
           {
@@ -1180,6 +1197,7 @@
           "Bank Accounts"
         ],
         "summary": "Retrieve a Bank Account",
+        "operationId": "GetBankAccount",
         "description": "Retrieve a Bank Account with specified identifier string\n",
         "responses": {
           "200": {
@@ -1222,6 +1240,7 @@
           "Bank Accounts"
         ],
         "summary": "Update a bank account's values",
+        "operationId": "PatchBankAccount",
         "description": "Update bank account's values except for the account number and routing number\n",
         "requestBody": {
           "content": {
@@ -1297,6 +1316,7 @@
           "Bank Accounts"
         ],
         "summary": "Create a BankAccount with predefined ID",
+        "operationId": "PutBankAccount",
         "description": "Create or update a BankAccount with predefined identifier string\n",
         "requestBody": {
           "content": {
@@ -1388,6 +1408,7 @@
           "Bank Accounts"
         ],
         "summary": "Deactivate a Bank Account",
+        "operationId": "PostBankAccountDeactivation",
         "description": "Deactivate a Bank Account\n",
         "responses": {
           "201": {
@@ -1432,6 +1453,7 @@
           "Blacklists"
         ],
         "summary": "Retrieve a list of blacklists",
+        "operationId": "GetBlacklistCollection",
         "description": "Retrieve a list of blacklists\n",
         "parameters": [
           {
@@ -1491,6 +1513,7 @@
           "Blacklists"
         ],
         "summary": "Create a blacklist",
+        "operationId": "PostBlacklist",
         "description": "Create a blacklist\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Blacklist"
@@ -1543,6 +1566,7 @@
           "Blacklists"
         ],
         "summary": "Retrieve a blacklist",
+        "operationId": "GetBlacklist",
         "description": "Retrieve a blacklist with specified identifier string\n",
         "responses": {
           "200": {
@@ -1585,6 +1609,7 @@
           "Blacklists"
         ],
         "summary": "Create a blacklist with predefined ID",
+        "operationId": "PutBlacklist",
         "description": "Create a blacklist with predefined identifier string\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Blacklist"
@@ -1640,6 +1665,7 @@
           "Blacklists"
         ],
         "summary": "Delete a blacklist",
+        "operationId": "DeleteBlacklist",
         "description": "Delete a blacklist with predefined identifier string\n",
         "responses": {
           "204": {
@@ -1677,6 +1703,7 @@
           "Contacts"
         ],
         "summary": "Retrieve a list of contacts",
+        "operationId": "GetContactCollection",
         "description": "Retrieve a list of contacts.  This may be useful\nwhen giving the customer a choice between previous\naddresses they've used before.\n",
         "parameters": [
           {
@@ -1736,6 +1763,7 @@
           "Contacts"
         ],
         "summary": "Create a contact",
+        "operationId": "PostContact",
         "description": "Contacts are created automatically by data passed to the \ncontact-related hashes within the customer, invoice,\npayment instrument (like payment card), subscriptions,\nand more.    \n<div class=\"alert alert-warning\">\n  Note: This method should almost never be used.\n  Please check with us on your use case before using it.\n</div>  \n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Contact"
@@ -1788,6 +1816,7 @@
           "Contacts"
         ],
         "summary": "Retrieve a contact",
+        "operationId": "GetContact",
         "description": "Retrieve a contact with specified identifier string\n",
         "responses": {
           "200": {
@@ -1830,6 +1859,7 @@
           "Contacts"
         ],
         "summary": "Create or update a contact with predefined ID",
+        "operationId": "PutContact",
         "description": "Create or update a contact with predefined identifier string\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Contact"
@@ -1881,6 +1911,7 @@
           "Contacts"
         ],
         "summary": "Delete a contact",
+        "operationId": "DeleteContact",
         "description": "Delete a contact with predefined identifier string\n",
         "responses": {
           "204": {
@@ -1915,6 +1946,7 @@
           "Coupons"
         ],
         "summary": "Retrieve a list of coupon redemptions",
+        "operationId": "GetCouponRedemptionCollection",
         "parameters": [
           {
             "$ref": "#/components/parameters/collectionLimit"
@@ -1982,6 +2014,7 @@
           "Coupons"
         ],
         "summary": "Redeem a coupon",
+        "operationId": "PostCouponRedemption",
         "description": "Redeem a coupon\n",
         "requestBody": {
           "content": {
@@ -2042,6 +2075,7 @@
           "Coupons"
         ],
         "summary": "Retrieve a coupon redemption with specified identifier string",
+        "operationId": "GetCouponRedemption",
         "responses": {
           "200": {
             "description": "Retrieve a coupon redemption with specified identifier string",
@@ -2079,6 +2113,7 @@
           "Coupons"
         ],
         "summary": "Cancel a coupon redemption",
+        "operationId": "PostCouponRedemptionCancellation",
         "responses": {
           "201": {
             "description": "Cancel a coupon redemption"
@@ -2104,6 +2139,7 @@
           "Coupons"
         ],
         "summary": "Retrieve a list of coupons",
+        "operationId": "GetCouponCollection",
         "description": "Retrieve a list of coupons\n",
         "parameters": [
           {
@@ -2172,6 +2208,7 @@
           "Coupons"
         ],
         "summary": "Create a coupon",
+        "operationId": "PostCoupon",
         "description": "Create a coupon\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Coupon"
@@ -2230,6 +2267,7 @@
           "Coupons"
         ],
         "summary": "Retrieve a coupon",
+        "operationId": "GetCoupon",
         "description": "Retrieve a coupon with specified redemption code string\n",
         "responses": {
           "200": {
@@ -2272,6 +2310,7 @@
           "Coupons"
         ],
         "summary": "Create or update a coupon with predefined redemption code",
+        "operationId": "PutCoupon",
         "description": "Create or update a coupon with predefined redemption code\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Coupon"
@@ -2357,6 +2396,7 @@
           "Coupons"
         ],
         "summary": "Set a coupon's expiration time.",
+        "operationId": "PostCouponExpiration",
         "description": "Set a coupon's expiry time with the specified redemption code.\nThe expiredTime of a coupon must be greater than its issuedTime.\nThis cannot be performed on expired coupons.\n",
         "requestBody": {
           "content": {
@@ -2418,6 +2458,7 @@
           "Customer Authentication"
         ],
         "summary": "Retrieve a list of credentials",
+        "operationId": "GetCredentialCollection",
         "description": "Retrieve a list of credentials\n",
         "parameters": [
           {
@@ -2477,6 +2518,7 @@
           "Customer Authentication"
         ],
         "summary": "Create a credential",
+        "operationId": "PostCredential",
         "description": "Create a credential\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Credential"
@@ -2529,6 +2571,7 @@
           "Customer Authentication"
         ],
         "summary": "Retrieve a credential",
+        "operationId": "GetCredential",
         "description": "Retrieve a credential with specified identifier string\n",
         "responses": {
           "200": {
@@ -2571,6 +2614,7 @@
           "Customer Authentication"
         ],
         "summary": "Create or update a credential with predefined ID",
+        "operationId": "PutCredential",
         "description": "Create or update a credential with predefined identifier string\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Credential"
@@ -2640,6 +2684,7 @@
           "Customer Authentication"
         ],
         "summary": "Delete a credential",
+        "operationId": "DeleteCredential",
         "description": "Delete a credential with predefined identifier string\n",
         "responses": {
           "204": {
@@ -2682,6 +2727,7 @@
           "Custom Fields"
         ],
         "summary": "Retrieve Custom Fields",
+        "operationId": "GetCustomFieldCollection",
         "description": "Retrieve a schema of Custom Fields for the given resource type\n",
         "responses": {
           "200": {
@@ -2743,6 +2789,7 @@
           "Custom Fields"
         ],
         "summary": "Retrieve a Custom Field",
+        "operationId": "GetCustomField",
         "description": "Retrieve a schema of the given Custom Field for the given resource type\n",
         "responses": {
           "200": {
@@ -2785,6 +2832,7 @@
           "Custom Fields"
         ],
         "summary": "Create or alter a Custom Field",
+        "operationId": "PutCustomField",
         "description": "Create or alter a schema of the given Custom Field for the given resource type.\n",
         "requestBody": {
           "content": {
@@ -2871,7 +2919,7 @@
           "Customers"
         ],
         "summary": "Retrieve a list of customer timeline custom event types",
-        "operationId": "getCustomerTimelineCustomEventTypes",
+        "operationId": "GetCustomerTimelineCustomEventTypeCollection",
         "description": "Retrieve a list of customer timeline custom event types\n",
         "parameters": [
           {
@@ -2928,7 +2976,7 @@
           "Customers"
         ],
         "summary": "Create Customer Timeline custom event type",
-        "operationId": "postCustomerTimelineCustomEventType",
+        "operationId": "PostCustomerTimelineCustomEventType",
         "description": "Create Customer Timeline custom event type\n",
         "requestBody": {
           "content": {
@@ -2983,7 +3031,7 @@
           "Customers"
         ],
         "summary": "Retrieve customer timeline custom event type with specified identifier string",
-        "operationId": "getCustomerTimelineCustomEventType",
+        "operationId": "GetCustomerTimelineCustomEventType",
         "description": "Retrieve customer timeline custom event type\n",
         "responses": {
           "200": {
@@ -3028,7 +3076,7 @@
           "Customers"
         ],
         "summary": "Retrieve a list of customer timeline messages for all customers",
-        "operationId": "getCustomerTimelineAllCustomers",
+        "operationId": "GetCustomerTimelineEventCollection",
         "description": "Retrieve a list of customer timeline messages for all customers\n",
         "parameters": [
           {
@@ -3087,6 +3135,7 @@
           "Customers"
         ],
         "summary": "Retrieve a list of customers",
+        "operationId": "GetCustomerCollection",
         "description": "Retrieve a list of customers\n",
         "parameters": [
           {
@@ -3212,6 +3261,7 @@
           "Customers"
         ],
         "summary": "Create a customer (without an ID)",
+        "operationId": "PostCustomer",
         "description": "Create a customer without a predefined ID.  \nThe customer's primary address\nwill be used as the default address for payment\ninstruments, subscriptions and invoices if none\nare provided.\n\nIf you wish to create the customer with a predefined\nID (which we recommend to prevent duplication), you \nmay use our `PUT` request described below.\n\nRead our guide to [preventing duplicates](https://api-guides.rebilly.com/core-concepts/preventing-duplicates)\nto understand more.\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Customer"
@@ -3249,6 +3299,7 @@
           "Customers"
         ],
         "summary": "Retrieve a customer",
+        "operationId": "GetCustomer",
         "description": "Retrieve a customer with specified identifier string\n",
         "responses": {
           "200": {
@@ -3291,7 +3342,7 @@
           "Customers"
         ],
         "summary": "Upsert a customer with predefined ID",
-        "operationId": "putCustomer",
+        "operationId": "PutCustomer",
         "description": "Create or update (upsert) a customer with predefined identifier string.\nRead our guide to [preventing duplicates](https://api-guides.rebilly.com/core-concepts/preventing-duplicates)\nto understand more.\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Customer"
@@ -3336,6 +3387,7 @@
           "Customers"
         ],
         "summary": "Merge and delete a customer",
+        "operationId": "DeleteCustomer",
         "description": "Merge one duplicate customer to another target customer and delete the former.",
         "responses": {
           "204": {
@@ -3372,6 +3424,7 @@
           "Customers"
         ],
         "summary": "Retrieve a customer's Lead Source",
+        "operationId": "GetCustomerLeadSource",
         "description": "Retrieve a Lead Source of given customer\n",
         "responses": {
           "200": {
@@ -3414,6 +3467,7 @@
           "Customers"
         ],
         "summary": "Create a Lead Source for a customer",
+        "operationId": "PostCustomerLeadSource",
         "description": "Create a Lead Source for a customer\n",
         "requestBody": {
           "content": {
@@ -3467,6 +3521,7 @@
           "Customers"
         ],
         "summary": "Delete a Lead Source for a customer",
+        "operationId": "DeleteCustomerLeadSource",
         "description": "Delete a Lead Source that belongs to a certain customer\n",
         "responses": {
           "204": {
@@ -3512,6 +3567,7 @@
           "Customers"
         ],
         "summary": "Retrieve a list of customer timeline messages",
+        "operationId": "GetCustomerTimelineCollection",
         "description": "Retrieve a list of customer timeline messages\n",
         "parameters": [
           {
@@ -3568,6 +3624,7 @@
           "Customers"
         ],
         "summary": "Create a customer Timeline comment or custom defined event",
+        "operationId": "PostCustomerTimeline",
         "description": "Create a customer Timeline comment or custom defined event\n",
         "requestBody": {
           "content": {
@@ -3631,6 +3688,7 @@
           "Customers"
         ],
         "summary": "Retrieve a customer Timeline message",
+        "operationId": "GetCustomerTimeline",
         "description": "Retrieve a customer message with specified identifier string\n",
         "responses": {
           "200": {
@@ -3667,6 +3725,7 @@
           "Customers"
         ],
         "summary": "Delete a Customer Timeline message",
+        "operationId": "DeleteCustomerTimeline",
         "description": "Delete a Customer Timeline message with predefined identifier string\n",
         "responses": {
           "204": {
@@ -3706,6 +3765,7 @@
           "Invoices"
         ],
         "summary": "Retrieve customer's upcoming invoices",
+        "operationId": "GetCustomerUpcomingInvoiceCollection",
         "description": "Retrieve a list of upcoming invoices from the subscriptions which belong to the given customer.\nThe endpoint is temporary before upcoming invoices get a complete integration.\n",
         "parameters": [
           {
@@ -3752,6 +3812,7 @@
           "Disputes"
         ],
         "summary": "Retrieve a list of disputes",
+        "operationId": "GetDisputeCollection",
         "description": "Retrieve a list of disputes\n",
         "parameters": [
           {
@@ -3811,6 +3872,7 @@
           "Disputes"
         ],
         "summary": "Create a dispute",
+        "operationId": "PostDispute",
         "description": "Create a dispute\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Dispute"
@@ -3863,6 +3925,7 @@
           "Disputes"
         ],
         "summary": "Retrieve a dispute",
+        "operationId": "GetDispute",
         "description": "Retrieve a dispute with specified identifier string\n",
         "responses": {
           "200": {
@@ -3905,6 +3968,7 @@
           "Disputes"
         ],
         "summary": "Create or update a Dispute with predefined ID",
+        "operationId": "PutDispute",
         "description": "Create or update a Dispute with predefined identifier string\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Dispute"
@@ -3978,6 +4042,7 @@
           "Disputes"
         ],
         "summary": "Get matched rules for the dispute",
+        "operationId": "GetDisputeMatchedRuleCollection",
         "description": "Get matched rules for the dispute",
         "responses": {
           "200": {
@@ -4019,6 +4084,7 @@
           "Files"
         ],
         "summary": "Retrieve a list of files",
+        "operationId": "GetFileCollection",
         "description": "Retrieve a list of files\n",
         "parameters": [
           {
@@ -4121,7 +4187,7 @@
           "Files"
         ],
         "summary": "Create a file",
-        "operationId": "fileCreation",
+        "operationId": "PostFile",
         "security": [
           {
             "SecretApiKey": []
@@ -4199,6 +4265,7 @@
           "Files"
         ],
         "summary": "Retrieve a File Record",
+        "operationId": "GetFile",
         "description": "Retrieve a File with specified identifier string\n",
         "responses": {
           "200": {
@@ -4241,6 +4308,7 @@
           "Files"
         ],
         "summary": "Update the File with predefined ID",
+        "operationId": "PutFile",
         "description": "Update the File with predefined ID. Note that file can be uploaded with POST only.\n",
         "requestBody": {
           "content": {
@@ -4297,6 +4365,7 @@
           "Files"
         ],
         "summary": "Delete a File",
+        "operationId": "DeleteFile",
         "description": "Delete the File with predefined identifier string\n",
         "responses": {
           "204": {
@@ -4339,6 +4408,7 @@
           "Files"
         ],
         "summary": "Download a file",
+        "operationId": "GetFileDownload",
         "description": "Download a file\n",
         "responses": {
           "200": {
@@ -4403,6 +4473,7 @@
           "Files"
         ],
         "summary": "Download image in specific format",
+        "operationId": "GetFileDownloadExtension",
         "description": "Download image in specific format. Images are converted server-side\n",
         "responses": {
           "200": {
@@ -4448,6 +4519,7 @@
           "Invoices"
         ],
         "summary": "Retrieve a list of invoices",
+        "operationId": "GetInvoiceCollection",
         "description": "Retrieve a list of invoices\n",
         "parameters": [
           {
@@ -4528,6 +4600,7 @@
           "Invoices"
         ],
         "summary": "Create an invoice",
+        "operationId": "PostInvoice",
         "description": "Create an invoice\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Invoice"
@@ -4580,6 +4653,7 @@
           "Invoices"
         ],
         "summary": "Retrieve an invoice",
+        "operationId": "GetInvoice",
         "description": "Retrieve an invoice with specified identifier string\n",
         "parameters": [
           {
@@ -4642,6 +4716,7 @@
           "Invoices"
         ],
         "summary": "Create or update an invoice with predefined ID",
+        "operationId": "PutInvoice",
         "description": "Create or update an invoice with predefined identifier string\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Invoice"
@@ -4718,6 +4793,7 @@
           "Invoices"
         ],
         "summary": "Abandon an invoice",
+        "operationId": "PostInvoiceAbandonment",
         "description": "Abandon an invoice with specified identifier string\n",
         "responses": {
           "201": {
@@ -4767,6 +4843,7 @@
           "Invoices"
         ],
         "summary": "Issue an invoice",
+        "operationId": "PostInvoiceIssuance",
         "description": "Issue an invoice with specified identifier string\n",
         "requestBody": {
           "content": {
@@ -4827,6 +4904,7 @@
           "Invoices"
         ],
         "summary": "Retrieve invoice items",
+        "operationId": "GetInvoiceItemCollection",
         "description": "Retrieve an invoice items with specified invoice identifier string\n",
         "parameters": [
           {
@@ -4880,6 +4958,7 @@
           "Invoices"
         ],
         "summary": "Create an invoice item",
+        "operationId": "PostInvoiceItem",
         "description": "Create an invoice item\n",
         "requestBody": {
           "content": {
@@ -4940,6 +5019,7 @@
           "Invoices"
         ],
         "summary": "Get matched rules for the invoice",
+        "operationId": "GetInvoiceMatchedRuleCollection",
         "description": "Get matched rules for the invoice",
         "responses": {
           "200": {
@@ -4986,6 +5066,7 @@
           "Invoices"
         ],
         "summary": "Retrieve a list of invoice timeline messages",
+        "operationId": "GetInvoiceTimelineCollection",
         "description": "Retrieve a list of invoice timeline messages\n",
         "parameters": [
           {
@@ -5042,6 +5123,7 @@
           "Invoices"
         ],
         "summary": "Create an invoice Timeline comment",
+        "operationId": "PostInvoiceTimeline",
         "description": "Create an invoice Timeline comment\n",
         "requestBody": {
           "content": {
@@ -5105,6 +5187,7 @@
           "Invoices"
         ],
         "summary": "Retrieve an Invoice Timeline message",
+        "operationId": "GetInvoiceTimeline",
         "description": "Retrieve a invoice message with specified identifier string\n",
         "responses": {
           "200": {
@@ -5141,6 +5224,7 @@
           "Invoices"
         ],
         "summary": "Delete an Invoice Timeline message",
+        "operationId": "DeleteInvoiceTimeline",
         "description": "Delete an Invoice Timeline message with predefined identifier string\n",
         "responses": {
           "204": {
@@ -5180,6 +5264,7 @@
           "Invoices"
         ],
         "summary": "Void an invoice",
+        "operationId": "PostInvoiceVoid",
         "description": "Void an invoice with specified identifier string\n",
         "responses": {
           "201": {
@@ -5224,6 +5309,7 @@
           "KYC Documents"
         ],
         "summary": "Retrieve a list of KYC documents",
+        "operationId": "GetKycDocumentCollection",
         "description": "Retrieve a list of KYC documents\n",
         "parameters": [
           {
@@ -5313,6 +5399,7 @@
           "KYC Documents"
         ],
         "summary": "Create a KYC Document",
+        "operationId": "PostKycDocument",
         "description": "Create a KYC Document\n",
         "requestBody": {
           "content": {
@@ -5367,6 +5454,7 @@
           "KYC Documents"
         ],
         "summary": "Retrieve a KYC Document",
+        "operationId": "GetKycDocument",
         "description": "Retrieve a KYC document with specified identifier string\n",
         "parameters": [
           {
@@ -5417,6 +5505,7 @@
           "KYC Documents"
         ],
         "summary": "Create or update a KYC document with predefined ID",
+        "operationId": "PutKycDocument",
         "description": "Create or update a KYC document with predefined identifier string\n",
         "requestBody": {
           "content": {
@@ -5495,6 +5584,7 @@
           "KYC Documents"
         ],
         "summary": "Accept a KYC document",
+        "operationId": "PostKycDocumentAcceptance",
         "description": "Manually override automated status and accept the document\n",
         "responses": {
           "201": {
@@ -5538,6 +5628,7 @@
           "KYC Documents"
         ],
         "summary": "Reject a KYC document",
+        "operationId": "PostKycDocumentRejection",
         "description": "Manually override automated status and reject the document\n",
         "requestBody": {
           "content": {
@@ -5590,6 +5681,7 @@
           "Customer Authentication"
         ],
         "summary": "Retrieve a list of tokens",
+        "operationId": "GetPasswordTokenCollection",
         "description": "Retrieve a list of tokens\n",
         "parameters": [
           {
@@ -5643,6 +5735,7 @@
           "Customer Authentication"
         ],
         "summary": "Create a Reset Password Token",
+        "operationId": "PostPasswordToken",
         "description": "Create a Reset Password Token\n",
         "requestBody": {
           "content": {
@@ -5697,6 +5790,7 @@
           "Customer Authentication"
         ],
         "summary": "Retrieve a Reset Password Token",
+        "operationId": "GetPasswordToken",
         "description": "Retrieve a Reset Password Token with specified identifier string\n",
         "responses": {
           "200": {
@@ -5733,6 +5827,7 @@
           "Customer Authentication"
         ],
         "summary": "Delete a Reset Password Token",
+        "operationId": "DeletePasswordToken",
         "description": "Delete a Reset Password Token with predefined identifier string\n",
         "responses": {
           "204": {
@@ -5767,6 +5862,7 @@
           "Payment Cards"
         ],
         "summary": "Retrieve a list of Payment Cards",
+        "operationId": "GetPaymentCardCollection",
         "description": "Retrieve a list of Payments Cards\n",
         "parameters": [
           {
@@ -5826,6 +5922,7 @@
           "Payment Cards"
         ],
         "summary": "Create a Payment Card",
+        "operationId": "PostPaymentCard",
         "description": "Create a Payment Card\n",
         "requestBody": {
           "content": {
@@ -5914,6 +6011,7 @@
           "Payment Cards"
         ],
         "summary": "Retrieve a Payment Card",
+        "operationId": "GetPaymentCard",
         "description": "Retrieve a Payment Card with specified identifier string\n",
         "responses": {
           "200": {
@@ -5956,6 +6054,7 @@
           "Payment Cards"
         ],
         "summary": "Update a payment card's values",
+        "operationId": "PatchPaymentCard",
         "description": "Update any of the payment card's values except for the pan\n",
         "requestBody": {
           "content": {
@@ -6038,6 +6137,7 @@
           "Payment Cards"
         ],
         "summary": "Create a payment card with predefined ID",
+        "operationId": "PutPaymentCard",
         "requestBody": {
           "content": {
             "application/json": {
@@ -6134,6 +6234,7 @@
           "Payment Cards"
         ],
         "summary": "Authorize a Payment Card",
+        "operationId": "PostPaymentCardAuthorization",
         "description": "Authorize a Payment Card\n",
         "requestBody": {
           "content": {
@@ -6221,6 +6322,7 @@
           "Payment Cards"
         ],
         "summary": "Deactivate a Payment Card",
+        "operationId": "PostPaymentCardDeactivation",
         "description": "Deactivate a Payment Card\n",
         "responses": {
           "201": {
@@ -6270,6 +6372,7 @@
           "Payment Cards"
         ],
         "summary": "Get matched rules for the payment card",
+        "operationId": "GetPaymentCardMatchedRuleCollection",
         "description": "Get matched rules for the payment card",
         "responses": {
           "200": {
@@ -6311,6 +6414,7 @@
           "Payment Instrument Validation"
         ],
         "summary": "Retrieve a Payment Instrument validation",
+        "operationId": "GetPaymentInstrumentValidationCollection",
         "description": "Retrieve a Payment Instrument validation with specified identifier string\n",
         "responses": {
           "200": {
@@ -6347,6 +6451,7 @@
           "Payment Instrument Validation"
         ],
         "summary": "Validate a payment instrument",
+        "operationId": "PostPaymentInstrumentValidation",
         "description": "Validate a payment instrument\n",
         "requestBody": {
           "content": {
@@ -6414,6 +6519,7 @@
           "Payment Instrument Validation"
         ],
         "summary": "Retrieve a list of validated payment instruments",
+        "operationId": "GetPaymentInstrumentValidation",
         "description": "Retrieve a list of validated payment instruments\n",
         "parameters": [
           {
@@ -6466,6 +6572,7 @@
           "Payments"
         ],
         "summary": "Retrieve a payment list",
+        "operationId": "GetPaymentCollection",
         "deprecated": true,
         "description": "Retrieve a payment list\n",
         "parameters": [
@@ -6551,6 +6658,7 @@
           "Payments"
         ],
         "summary": "Create a payment",
+        "operationId": "PostPayment",
         "description": "Create a payment (deprecated).  Use create a transaction instead.\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Payment"
@@ -6609,6 +6717,7 @@
           "Payments"
         ],
         "summary": "Retrieve a payment",
+        "operationId": "GetPayment",
         "description": "Retrieve a payment with specified identifier string\n",
         "responses": {
           "200": {
@@ -6652,6 +6761,7 @@
           "Payments"
         ],
         "summary": "Create a payment with predefined ID",
+        "operationId": "PutPayment",
         "description": "Make a payment with predefined identifier string\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Payment"
@@ -6723,6 +6833,7 @@
           "PayPal Accounts"
         ],
         "summary": "Retrieve a list of PayPal accounts",
+        "operationId": "GetPayPalAccountCollection",
         "description": "Retrieve a list of PayPal Accounts\n",
         "parameters": [
           {
@@ -6762,6 +6873,7 @@
           "PayPal Accounts"
         ],
         "summary": "Create a PayPal Account",
+        "operationId": "PostPayPalAccount",
         "description": "Create a PayPal Account\n",
         "requestBody": {
           "content": {
@@ -6811,6 +6923,7 @@
           "PayPal Accounts"
         ],
         "summary": "Retrieve a PayPal Account",
+        "operationId": "GetPayPalAccount",
         "description": "Retrieve a PayPal Account with specified identifier string\n",
         "responses": {
           "200": {
@@ -6853,6 +6966,7 @@
           "PayPal Accounts"
         ],
         "summary": "Create a PayPal account with predefined ID",
+        "operationId": "PutPayPalAccount",
         "requestBody": {
           "content": {
             "application/json": {
@@ -6922,6 +7036,7 @@
           "PayPal Accounts"
         ],
         "summary": "Activate a PayPal Account",
+        "operationId": "PostPayPalAccountActivation",
         "description": "Activate a PayPal Account\n",
         "requestBody": {
           "content": {
@@ -7010,6 +7125,7 @@
           "PayPal Accounts"
         ],
         "summary": "Deactivate a PayPal Account",
+        "operationId": "PostPayPalAccountDeactivation",
         "description": "Deactivate a PayPal Account\n",
         "responses": {
           "201": {
@@ -7054,6 +7170,7 @@
           "Plans"
         ],
         "summary": "Retrieve a list of plans",
+        "operationId": "GetPlanCollection",
         "description": "Retrieve a list of plans\n",
         "parameters": [
           {
@@ -7113,6 +7230,7 @@
           "Plans"
         ],
         "summary": "Create a plan",
+        "operationId": "PostPlan",
         "description": "Create a plan\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Plan"
@@ -7154,6 +7272,7 @@
           "Plans"
         ],
         "summary": "Retrieve a plan",
+        "operationId": "GetPlan",
         "description": "Retrieve a plan with specified identifier string\n",
         "responses": {
           "200": {
@@ -7196,6 +7315,7 @@
           "Plans"
         ],
         "summary": "Create or update a Plan with predefined ID",
+        "operationId": "PutPlan",
         "description": "Create or update a Plan with predefined identifier string\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Plan"
@@ -7265,6 +7385,7 @@
           "Plans"
         ],
         "summary": "Delete a Plan",
+        "operationId": "DeletePlan",
         "description": "Delete a Plan with predefined identifier string\n",
         "responses": {
           "204": {
@@ -7305,6 +7426,7 @@
           "Products"
         ],
         "summary": "Retrieve a list of products",
+        "operationId": "GetProductCollection",
         "description": "Retrieve a list of products\n",
         "parameters": [
           {
@@ -7358,6 +7480,7 @@
           "Products"
         ],
         "summary": "Create a Product",
+        "operationId": "PostProduct",
         "description": "Create a Product\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Product"
@@ -7404,6 +7527,7 @@
           "Products"
         ],
         "summary": "Retrieve a product",
+        "operationId": "GetProduct",
         "description": "Retrieve a product with specified identifier string\n",
         "responses": {
           "200": {
@@ -7440,6 +7564,7 @@
           "Products"
         ],
         "summary": "Create a product with predefined ID",
+        "operationId": "PutProduct",
         "description": "Create a product with predefined identifier string\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Product"
@@ -7500,6 +7625,7 @@
           "Products"
         ],
         "summary": "Delete a product",
+        "operationId": "DeleteProduct",
         "description": "Delete a product with predefined identifier string\n",
         "responses": {
           "204": {
@@ -7531,6 +7657,7 @@
           "Search"
         ],
         "summary": "Search merchant data",
+        "operationId": "GetSearch",
         "description": "Search merchant's data to return resources such as customers, invoices, orders, transactions\n",
         "parameters": [
           {
@@ -7611,6 +7738,7 @@
           "Shipping Zones"
         ],
         "summary": "Retrieve a list of shipping zones",
+        "operationId": "GetShippingZoneCollection",
         "description": "Retrieve a list of shipping zones\n",
         "parameters": [
           {
@@ -7664,6 +7792,7 @@
           "Shipping Zones"
         ],
         "summary": "Create a Shipping Zone",
+        "operationId": "PostShippingZone",
         "description": "Create a Shipping Zone\n",
         "requestBody": {
           "content": {
@@ -7718,6 +7847,7 @@
           "Shipping Zones"
         ],
         "summary": "Retrieve a shipping zone",
+        "operationId": "GetShippingZone",
         "description": "Retrieve a shipping zone with specified identifier string\n",
         "responses": {
           "200": {
@@ -7754,6 +7884,7 @@
           "Shipping Zones"
         ],
         "summary": "Create a shipping zone with predefined ID",
+        "operationId": "PutShippingZone",
         "description": "Create a shipping zone with predefined identifier string\n",
         "responses": {
           "200": {
@@ -7822,6 +7953,7 @@
           "Shipping Zones"
         ],
         "summary": "Delete a shipping zone",
+        "operationId": "DeleteShippingZone",
         "description": "Delete a shipping zone with predefined identifier string\n",
         "responses": {
           "204": {
@@ -7853,6 +7985,7 @@
           "Subscriptions"
         ],
         "summary": "Retrieve a list of cancellations",
+        "operationId": "GetSubscriptionCancellationCollection",
         "description": "Retrieve a list of cancellations for all subscriptions",
         "parameters": [
           {
@@ -7906,6 +8039,7 @@
           "Subscriptions"
         ],
         "summary": "Cancel a subscription",
+        "operationId": "PostSubscriptionCancellation",
         "description": "Cancel a subscription or preview the cancellation parameters before that",
         "requestBody": {
           "$ref": "#/components/requestBodies/SubscriptionCancellation"
@@ -7958,6 +8092,7 @@
           "Subscriptions"
         ],
         "summary": "Retrieve a subscription сancellation",
+        "operationId": "GetSubscriptionCancellation",
         "description": "Retrieve a subscription сancellation with specified identifier string",
         "responses": {
           "200": {
@@ -7994,6 +8129,7 @@
           "Subscriptions"
         ],
         "summary": "Cancel a subscription",
+        "operationId": "PutSubscriptionCancellation",
         "description": "Cancel a subscription",
         "requestBody": {
           "$ref": "#/components/requestBodies/SubscriptionCancellation"
@@ -8054,6 +8190,7 @@
           "Subscriptions"
         ],
         "summary": "Delete a cancellation",
+        "operationId": "DeleteSubscriptionCancellation",
         "description": "Delete a subscription's cancellation. Only draft can be deleted.",
         "responses": {
           "204": {
@@ -8088,6 +8225,7 @@
           "Subscriptions"
         ],
         "summary": "Retrieve a list of reactivations",
+        "operationId": "GetSubscriptionReactivationCollection",
         "description": "Retrieve a list of reactivations for all subscriptions",
         "parameters": [
           {
@@ -8141,6 +8279,7 @@
           "Subscriptions"
         ],
         "summary": "Reactivate a subscription",
+        "operationId": "PostSubscriptionReactivation",
         "description": "Reactivate a subscription",
         "requestBody": {
           "content": {
@@ -8195,6 +8334,7 @@
           "Subscriptions"
         ],
         "summary": "Retrieve a subscription reactivation",
+        "operationId": "GetSubscriptionReactivation",
         "description": "Retrieve a subscription reactivation with specified identifier string",
         "responses": {
           "200": {
@@ -8233,6 +8373,7 @@
           "Subscriptions"
         ],
         "summary": "Retrieve a list of subscriptions",
+        "operationId": "GetSubscriptionCollection",
         "description": "Retrieve a list of subscriptions\n",
         "parameters": [
           {
@@ -8316,6 +8457,7 @@
           "Subscriptions"
         ],
         "summary": "Create a subscription",
+        "operationId": "PostSubscription",
         "description": "Create a subscription. Consider using the upsert\noperation to accomplish this task.\n",
         "parameters": [
           {
@@ -8373,6 +8515,7 @@
           "Subscriptions"
         ],
         "summary": "Retrieve a subscription",
+        "operationId": "GetSubscription",
         "parameters": [
           {
             "$ref": "#/components/parameters/subscriptionExpand"
@@ -8420,7 +8563,7 @@
           "Subscriptions"
         ],
         "summary": "Upsert a subscription with predefined ID",
-        "operationId": "putSubscription",
+        "operationId": "PutSubscription",
         "description": "Create or update a subscription with predefined identifier string\n",
         "parameters": [
           {
@@ -8502,6 +8645,7 @@
           "Subscriptions"
         ],
         "summary": "Change a subscription's plan",
+        "operationId": "PostSubscriptionPlanChange",
         "description": "Change a subscription's plan and designate when and if there should be pro rata credits given.\nOnly active subscriptions with a single plan can be changed.\nEdit pending unpaid subscriptions directly regardless the number of plans.\n",
         "requestBody": {
           "content": {
@@ -8562,6 +8706,7 @@
           "Subscriptions"
         ],
         "summary": "Issue an interim invoice for a subscription",
+        "operationId": "PostSubscriptionInterimInvoice",
         "description": "Issue an interim invoice for a subscription, typically used in conjunction with plan changes and pro rata adjustments.\nThis process creates an invoice, adds the subscription's line items to the invoice, and issues the invoice, and applies\npayment to it if a transaction id is supplied.\n",
         "requestBody": {
           "content": {
@@ -8616,6 +8761,7 @@
           "Subscriptions"
         ],
         "summary": "Get matched rules for the subscription",
+        "operationId": "GetSubscriptionMatchedRuleCollection",
         "description": "Get matched rules for the subscription",
         "responses": {
           "200": {
@@ -8662,6 +8808,7 @@
           "Subscriptions"
         ],
         "summary": "Retrieve a list of order timeline messages",
+        "operationId": "GetSubscriptionTimelineCollection",
         "description": "Retrieve a list of order timeline messages\n",
         "parameters": [
           {
@@ -8718,6 +8865,7 @@
           "Subscriptions"
         ],
         "summary": "Create an order Timeline comment",
+        "operationId": "PostSubscriptionTimeline",
         "description": "Create an order Timeline comment\n",
         "requestBody": {
           "content": {
@@ -8781,6 +8929,7 @@
           "Subscriptions"
         ],
         "summary": "Retrieve an Order Timeline message",
+        "operationId": "GetSubscriptionTimeline",
         "description": "Retrieve a order message with specified identifier string\n",
         "responses": {
           "200": {
@@ -8817,6 +8966,7 @@
           "Subscriptions"
         ],
         "summary": "Delete an Order Timeline message",
+        "operationId": "DeleteSubscriptionTimeline",
         "description": "Delete an Order Timeline message with predefined identifier string\n",
         "responses": {
           "204": {
@@ -8856,6 +9006,7 @@
           "Invoices"
         ],
         "summary": "Retrieve subscription's upcoming invoice",
+        "operationId": "GetSubscriptionUpcomingInvoiceCollection",
         "description": "Retrieve an upcoming invoice from the specified subscription.\nThe endpoint is temporary before upcoming invoices get a complete integration.\n",
         "parameters": [
           {
@@ -8902,6 +9053,7 @@
           "Tags"
         ],
         "summary": "Retrieve a list of tags",
+        "operationId": "GetTagCollection",
         "description": "Retrieve a list of tags\n",
         "parameters": [
           {
@@ -8984,6 +9136,7 @@
           "Tags"
         ],
         "summary": "Create a tag",
+        "operationId": "PostTag",
         "description": "Create a tag\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Tag"
@@ -9033,6 +9186,7 @@
           "Tags"
         ],
         "summary": "Retrieve a tag",
+        "operationId": "GetTag",
         "description": "Retrieve a tag\n",
         "responses": {
           "200": {
@@ -9058,6 +9212,7 @@
           "Tags"
         ],
         "summary": "Update a tag",
+        "operationId": "PatchTag",
         "description": "Update a tag\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Tag"
@@ -9092,6 +9247,7 @@
           "Tags"
         ],
         "summary": "Delete a tag",
+        "operationId": "DeleteTag",
         "description": "Delete a tag.\nIt's an asynchronous operation.\n",
         "responses": {
           "204": {
@@ -9117,6 +9273,7 @@
           "Tags"
         ],
         "summary": "Tag a list of customers",
+        "operationId": "PostTagCustomerCollection",
         "description": "Tag a list of customers.\nIf the customer from the list is already tagged it will be ignored.\nIt's an asynchronous operation.\n",
         "requestBody": {
           "required": true,
@@ -9159,6 +9316,7 @@
           "Tags"
         ],
         "summary": "Untag a list of customers",
+        "operationId": "DeleteTagCustomerCollection",
         "description": "Untag a list of customers.\nIf the customer from the list is already untagged it will be ignored.\nIt's an asynchronous operation.\n",
         "requestBody": {
           "required": true,
@@ -9211,6 +9369,7 @@
           "Tags"
         ],
         "summary": "Tag a customer",
+        "operationId": "PostTagCustomer",
         "description": "Tag a customer\n",
         "responses": {
           "204": {
@@ -9229,6 +9388,7 @@
           "Tags"
         ],
         "summary": "Untag a customer",
+        "operationId": "DeleteTagCustomer",
         "description": "Untag a customer\n",
         "responses": {
           "204": {
@@ -9249,7 +9409,7 @@
           "Payment Tokens"
         ],
         "summary": "Create a payment token",
-        "operationId": "paymentTokenCreation",
+        "operationId": "PostToken",
         "description": "[FramePay](https://rebilly.github.io/framepay-docs/)\nis the recommended way to \ncreate a payment token because it minimizes\nPCI DSS compliance.  Once a payment token \nis created, it can only be used once.\n\nA payment token expires upon first use\nor within 30 minutes of the token creation\n(whichever comes first).\n",
         "requestBody": {
           "content": {
@@ -9334,6 +9494,7 @@
           "Payment Tokens"
         ],
         "summary": "Retrieve a list of tokens",
+        "operationId": "GetTokenCollection",
         "description": "Retrieve a list of tokens\n",
         "parameters": [
           {
@@ -9406,6 +9567,7 @@
           "Payment Tokens"
         ],
         "summary": "Retrieve a token",
+        "operationId": "GetToken",
         "description": "Retrieve a token with specified identifier string\n",
         "security": [
           {
@@ -9455,7 +9617,7 @@
           "Transactions"
         ],
         "summary": "Create a transaction",
-        "operationId": "createTransaction",
+        "operationId": "PostTransaction",
         "description": "Create a transactions of type `sale`, `authorize`, or `credit`.\nThis endpoint supports two main styles of transactions:\n  1. A real-time decision and response.\n  2. User approval/interaction is required.\n\nA real-time decision is very familiar.  You send a request, and\ninspect the `result` of the response for `approved` or `declined`.\n\nHowever, many transactions, especially those for alternative\nmethods, require the user to interact with a 3rd party.  You\nmay be able to envision PayPal, for example, the user must\ngive permission to complete the payment (or accept the \nbilling agreement).  \n\nEven payment cards may require user approval in the case of\n3D secure authentication.  In the event that approval is \nrequired, you will receive a response back and notice\nthat the `result` is `unknown`.  You will find that the\n`status` is `waiting-approval`. And you will find in the\n`_links` section of the response a link for the `approvalUrl`.\n\nIn this case you would either open the `approvalUrl` in an \niframe or in a pop (better workflow for mobile).  \n",
         "requestBody": {
           "$ref": "#/components/requestBodies/TransactionRequest"
@@ -9487,6 +9649,7 @@
           "Transactions"
         ],
         "summary": "Retrieve a list of transactions",
+        "operationId": "GetTransactionCollection",
         "description": "Retrieve a list of transactions\n",
         "parameters": [
           {
@@ -9586,6 +9749,7 @@
           "Transactions"
         ],
         "summary": "Retrieve a Transaction",
+        "operationId": "GetTransaction",
         "description": "Retrieve a Transaction with specified identifier string\n",
         "responses": {
           "200": {
@@ -9635,6 +9799,7 @@
           "Transactions"
         ],
         "summary": "Cancel a pending or suspended transaction",
+        "operationId": "PostTransactionCancellation",
         "description": "Cancel a scheduled transaction. Once handled a transaction cannot be canceled",
         "responses": {
           "201": {
@@ -9684,6 +9849,7 @@
           "Transactions"
         ],
         "summary": "Retrieve a Transaction Gateway Logs",
+        "operationId": "GetTransactionGatewayLogCollection",
         "description": "Retrieve Gateway communication Logs for Transaction with specified identifier string",
         "responses": {
           "200": {
@@ -9716,6 +9882,7 @@
           "Transactions"
         ],
         "summary": "Get matched rules for the transaction",
+        "operationId": "GetTransactionMatchedRuleCollection",
         "description": "Get matched rules for the transaction",
         "responses": {
           "200": {
@@ -9762,6 +9929,7 @@
           "Transactions"
         ],
         "summary": "Refund a Transaction",
+        "operationId": "PostTransactionRefund",
         "description": "Refund a Transaction with specified identifier string.\nNote that the refund will be in the same currency as the original transaction.\n",
         "requestBody": {
           "content": {
@@ -9822,6 +9990,7 @@
           "Transactions"
         ],
         "summary": "Retrieve a list of transaction timeline messages",
+        "operationId": "GetTransactionTimelineCollection",
         "description": "Retrieve a list of transaction timeline messages\n",
         "parameters": [
           {
@@ -9878,6 +10047,7 @@
           "Transactions"
         ],
         "summary": "Create a transaction Timeline comment",
+        "operationId": "PostTransactionTimeline",
         "description": "Create a transaction Timeline comment\n",
         "requestBody": {
           "content": {
@@ -9941,6 +10111,7 @@
           "Transactions"
         ],
         "summary": "Retrieve a transaction Timeline message",
+        "operationId": "GetTransactionTimeline",
         "description": "Retrieve a timeline message with specified identifier string\n",
         "responses": {
           "200": {
@@ -9977,6 +10148,7 @@
           "Transactions"
         ],
         "summary": "Delete a Transaction Timeline message",
+        "operationId": "DeleteTransactionTimeline",
         "description": "Delete a Transaction Timeline message with predefined identifier string\n",
         "responses": {
           "204": {
@@ -17706,7 +17878,7 @@
             ]
           },
           "customEventType": {
-            "description": "Timeline custom event type. Used with `custom-event` type. Must be defined using [Customer Timeline custom event API](#operation/postCustomerTimelineCustomEventType)",
+            "description": "Timeline custom event type. Used with `custom-event` type. Must be defined using [Customer Timeline custom event API](#operation/PostCustomerTimelineCustomEventType)",
             "type": "string",
             "nullable": true,
             "minLength": 1,
