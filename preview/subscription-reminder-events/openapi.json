@@ -17006,7 +17006,7 @@
             "example": "PO123456",
             "type": "string"
           },
-          "renewalScheduleTime": {
+          "renewalReminderTime": {
             "description": "Time renewal reminder event will be triggered",
             "nullable": true,
             "allOf": [
@@ -17015,12 +17015,12 @@
               }
             ]
           },
-          "renewalScheduleNumber": {
+          "renewalReminderNumber": {
             "description": "Number of renewal reminder events triggered",
             "type": "integer",
             "readOnly": true
           },
-          "trialScheduleTime": {
+          "trialReminderTime": {
             "description": "Time renewal reminder event will be triggered",
             "nullable": true,
             "allOf": [
@@ -17029,7 +17029,7 @@
               }
             ]
           },
-          "trialScheduleNumber": {
+          "trialReminderNumber": {
             "description": "Number of renewal reminder events triggered",
             "type": "integer",
             "readOnly": true
