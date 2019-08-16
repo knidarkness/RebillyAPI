@@ -12340,7 +12340,7 @@ components:
           type: string
         revision:
           description: |
-            The number of times the transaction data has been modified.
+            The number of times the subscription data has been modified.
             The revision is useful when analyzing webhook data to determine if the change takes precedence over the current representation.
           type: integer
           readOnly: true
