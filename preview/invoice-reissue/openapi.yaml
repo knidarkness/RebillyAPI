@@ -3929,6 +3929,13 @@ paths:
       operationId: PostInvoiceReissuance
       description: |
         Reissue an invoice with specified identifier string. It must be issued (status must be `unpaid` or `past-due`).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvoiceReissue'
+        description: InvoiceReissue resource
+        required: true
       responses:
         '201':
           description: Invoice was reissued successfully
@@ -9773,6 +9780,12 @@ components:
             anyOf:
               - $ref: '#/components/schemas/ProductEmbed'
               - $ref: '#/components/schemas/PlanEmbed'
+    InvoiceReissue:
+      type: object
+      properties:
+        dueTime:
+          type: string
+          format: date-time
     InvoiceTax:
       type: object
       readOnly: true
