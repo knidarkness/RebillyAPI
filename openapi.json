@@ -17006,6 +17006,11 @@
             "example": "PO123456",
             "type": "string"
           },
+          "revision": {
+            "description": "The number of times the subscription data has been modified.\nThe revision is useful when analyzing webhook data to determine if the change takes precedence over the current representation.\n",
+            "type": "integer",
+            "readOnly": true
+          },
           "customFields": {
             "$ref": "#/components/schemas/ResourceCustomFields"
           },
