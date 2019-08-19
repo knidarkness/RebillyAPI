@@ -3774,7 +3774,7 @@ paths:
       summary: Issue an invoice
       operationId: PostInvoiceIssuance
       description: |
-        Issue an invoice with specified identifier string
+        Issue an invoice with specified identifier string. It must be in `draft` status.
       requestBody:
         content:
           application/json:
@@ -3800,6 +3800,8 @@ paths:
           $ref: '#/components/responses/AccessForbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
       x-code-samples:
         - lang: PHP
           source: |
@@ -3917,6 +3919,43 @@ paths:
           $ref: '#/components/responses/AccessForbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+  '/invoices/{id}/reissue':
+    parameters:
+      - $ref: '#/components/parameters/resourceId'
+    post:
+      tags:
+        - Invoices
+      summary: Reissue an invoice
+      operationId: PostInvoiceReissuance
+      description: |
+        Reissue an invoice with specified identifier string. It must be issued (status must be `unpaid` or `past-due`).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvoiceReissue'
+        description: InvoiceReissue resource
+        required: true
+      responses:
+        '201':
+          description: Invoice was reissued successfully
+          headers:
+            Rate-Limit-Limit:
+              $ref: '#/components/headers/Rate-Limit-Limit'
+            Rate-Limit-Remaining:
+              $ref: '#/components/headers/Rate-Limit-Remaining'
+            Rate-Limit-Reset:
+              $ref: '#/components/headers/Rate-Limit-Reset'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+        '401':
+          $ref: '#/components/responses/AccessForbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
   '/invoices/{id}/timeline':
     parameters:
       - $ref: '#/components/parameters/resourceId'
@@ -9658,6 +9697,9 @@ components:
         issuedTime:
           type: string
           format: date-time
+        dueTime:
+          type: string
+          format: date-time
     InvoiceItem:
       type: object
       required:
@@ -9741,6 +9783,12 @@ components:
             anyOf:
               - $ref: '#/components/schemas/ProductEmbed'
               - $ref: '#/components/schemas/PlanEmbed'
+    InvoiceReissue:
+      type: object
+      properties:
+        dueTime:
+          type: string
+          format: date-time
     InvoiceTax:
       type: object
       readOnly: true
