@@ -9695,11 +9695,15 @@ components:
       type: object
       properties:
         issuedTime:
+          description: Invoice issued time. Will be issued immediately if `null` or omitted.
           type: string
           format: date-time
+          nullable: true
         dueTime:
+          description: Invoice due time. Will be set same as `issuedTime` if `null` or omitted.
           type: string
           format: date-time
+          nullable: true
     InvoiceItem:
       type: object
       required:
@@ -9787,8 +9791,10 @@ components:
       type: object
       properties:
         dueTime:
+          description: Invoice due time. Will be set as current date-time if `null` or omitted.
           type: string
           format: date-time
+          nullable: true
     InvoiceTax:
       type: object
       readOnly: true
