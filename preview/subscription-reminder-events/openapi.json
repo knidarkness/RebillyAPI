@@ -17110,7 +17110,9 @@
             ]
           },
           "trialReminderNumber": {
-            "description": "Number of renewal reminder events triggered"
+            "description": "Number of renewal reminder events triggered",
+            "type": "integer",
+            "readOnly": true
           },
           "revision": {
             "description": "The number of times the subscription data has been modified.\nThe revision is useful when analyzing webhook data to determine if the change takes precedence over the current representation.\n",
