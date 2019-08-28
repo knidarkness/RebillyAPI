@@ -4844,7 +4844,7 @@
         ],
         "summary": "Issue an invoice",
         "operationId": "PostInvoiceIssuance",
-        "description": "Issue an invoice with specified identifier string\n",
+        "description": "Issue an invoice with specified identifier string. It must be in `draft` status.\n",
         "requestBody": {
           "content": {
             "application/json": {
@@ -4883,6 +4883,9 @@
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
           }
         },
         "x-code-samples": [
@@ -5051,6 +5054,64 @@
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/invoices/{id}/reissue": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/resourceId"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Invoices"
+        ],
+        "summary": "Reissue an invoice",
+        "operationId": "PostInvoiceReissuance",
+        "description": "Reissue an invoice with specified identifier string. It must be issued (status must be `unpaid` or `past-due`).\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvoiceReissue"
+              }
+            }
+          },
+          "description": "InvoiceReissue resource",
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Invoice was reissued successfully",
+            "headers": {
+              "Rate-Limit-Limit": {
+                "$ref": "#/components/headers/Rate-Limit-Limit"
+              },
+              "Rate-Limit-Remaining": {
+                "$ref": "#/components/headers/Rate-Limit-Remaining"
+              },
+              "Rate-Limit-Reset": {
+                "$ref": "#/components/headers/Rate-Limit-Reset"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Invoice"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/AccessForbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
           }
         }
       }
@@ -13041,8 +13102,16 @@
         "type": "object",
         "properties": {
           "issuedTime": {
+            "description": "Invoice issued time. Will be issued immediately if `null` or omitted.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
+          },
+          "dueTime": {
+            "description": "Invoice due time. Will be set same as `issuedTime` if `null` or omitted.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         }
       },
@@ -13175,6 +13244,17 @@
                 }
               ]
             }
+          }
+        }
+      },
+      "InvoiceReissue": {
+        "type": "object",
+        "properties": {
+          "dueTime": {
+            "description": "Invoice due time. Will be set as current date-time if `null` or omitted.",
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         }
       },
@@ -17030,7 +17110,10 @@
             ]
           },
           "trialReminderNumber": {
-            "description": "Number of renewal reminder events triggered",
+            "description": "Number of renewal reminder events triggered"
+          },
+          "revision": {
+            "description": "The number of times the subscription data has been modified.\nThe revision is useful when analyzing webhook data to determine if the change takes precedence over the current representation.\n",
             "type": "integer",
             "readOnly": true
           },
@@ -18606,6 +18689,28 @@
           },
           "currency": {
             "description": "The transactions's currency",
+            "type": "string",
+            "readOnly": true
+          },
+          "purchaseAmount": {
+            "description": "The transactions's purchase amount",
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "purchaseCurrency": {
+            "description": "The transactions's purchase currency",
+            "type": "string",
+            "readOnly": true
+          },
+          "requestAmount": {
+            "description": "The transactions's amount received in the payment request",
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "requestCurrency": {
+            "description": "The transactions's currency received in the payment request",
             "type": "string",
             "readOnly": true
           },
