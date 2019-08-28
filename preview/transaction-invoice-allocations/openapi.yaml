@@ -7522,6 +7522,41 @@ paths:
           $ref: '#/components/responses/AccessForbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+  '/transactions/{id}/invoice-allocations':
+    parameters:
+      - $ref: '#/components/parameters/resourceId'
+    get:
+      tags:
+        - Transactions
+      summary: Get invoice allocations for a transaction
+      operationId: GetTransactionInvoiceAllocationCollection
+      description: Get detailed information about the exact amounts from a transaction allocated as invoice payments
+      responses:
+        '200':
+          description: List of invoice allocations was retrieved successfully.
+          headers:
+            Rate-Limit-Limit:
+              $ref: '#/components/headers/Rate-Limit-Limit'
+            Rate-Limit-Remaining:
+              $ref: '#/components/headers/Rate-Limit-Remaining'
+            Rate-Limit-Reset:
+              $ref: '#/components/headers/Rate-Limit-Reset'
+            Pagination-Total:
+              $ref: '#/components/headers/Pagination-Total'
+            Pagination-Limit:
+              $ref: '#/components/headers/Pagination-Limit'
+            Pagination-Offset:
+              $ref: '#/components/headers/Pagination-Offset'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InvoiceAllocation'
+        '401':
+          $ref: '#/components/responses/AccessForbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
   '/transactions/{id}/matched-rules':
     parameters:
       - $ref: '#/components/parameters/resourceId'
@@ -13391,6 +13426,17 @@ components:
           description: Refund amount
           type: number
           format: double
+    InvoiceAllocation:
+      type: object
+      properties:
+        invoiceId:
+          $ref: '#/components/schemas/ResourceId'
+        transactionId:
+          $ref: '#/components/schemas/ResourceId'
+        amount:
+          type: number
+        currency:
+          type: string
     RedirectUrls:
       type: object
       deprecated: true
@@ -13852,19 +13898,6 @@ components:
           type: string
         customFields:
           $ref: '#/components/schemas/ResourceCustomFields'
-        invoiceAllocations:
-          description: The exact amounts from the transaction allocated to particular invoices
-          readOnly: true
-          type: array
-          items:
-            type: object
-            properties:
-              invoiceId:
-                $ref: '#/components/schemas/ResourceId'
-              amount:
-                type: number
-              currency:
-                type: string
         scheduledTime:
           type: string
           description: The time the transaction is scheduled for collection
