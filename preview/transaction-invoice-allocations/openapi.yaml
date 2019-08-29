@@ -4814,8 +4814,8 @@ paths:
                   description: The Website ID
                   type: string
                 currency:
-                  description: Currency (three letter code)
-                  type: string
+                  allOf:
+                    - $ref: '#/components/schemas/CurrencyCode'
                 gatewayAccountId:
                   description: The Gateway account ID
                   type: string
@@ -5465,8 +5465,8 @@ paths:
                   description: The Website ID
                   type: string
                 currency:
-                  description: Currency (three letter code)
-                  type: string
+                  allOf:
+                    - $ref: '#/components/schemas/CurrencyCode'
                 amount:
                   description: The amount to authorize
                   type: number
@@ -8415,8 +8415,8 @@ components:
               type: integer
               description: Minimum order quantity
             currency:
-              type: string
-              description: Minimum order currency
+              allOf:
+                - $ref: '#/components/schemas/CurrencyCode'
     redemptions-per-customer:
       description: Quantity per Customer restrictions
       allOf:
@@ -8524,8 +8524,8 @@ components:
               minimum: 0
               exclusiveMinimum: true
             currency:
-              description: Discount currency
-              type: string
+              allOf:
+                - $ref: '#/components/schemas/CurrencyCode'
     percent:
       description: Coupon percent discount
       allOf:
@@ -8614,6 +8614,12 @@ components:
             anyOf:
               - $ref: '#/components/schemas/SelfLink'
               - $ref: '#/components/schemas/CustomerLink'
+    CurrencyCode:
+      type: string
+      description: ISO 4217 alphabetic currency code
+      minLength: 3
+      maxLength: 3
+      example: USD
     Customer:
       type: object
       properties:
@@ -8847,7 +8853,8 @@ components:
       properties:
         currency:
           description: Merchant's reporting currency
-          type: string
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
         amount:
           description: Average approved payment amount in Merchant's reporting currency
           type: number
@@ -8862,7 +8869,8 @@ components:
       properties:
         currency:
           description: Merchant's reporting currency
-          type: string
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
         amount:
           description: Revenue amount in Merchant's reporting currency
           type: number
@@ -8943,8 +8951,8 @@ components:
           description: The dispute's transaction ID
           type: string
         currency:
-          description: The dispute currency ISO Alpha code
-          type: string
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
         amount:
           description: The dispute amount
           type: number
@@ -9529,8 +9537,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceId'
         currency:
-          description: The currency three letter code
-          type: string
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
         amount:
           description: The Invoice's amount
           type: number
@@ -10009,8 +10017,8 @@ components:
           description: Lead Source's path uri (eg www.example.com/some/landing/path)
           type: string
         currency:
-          description: 'Currency (three letter ISO 4217 alpha code) (eg USD, EUR)'
-          type: string
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
         amount:
           description: The amount that the lead cost
           type: number
@@ -10465,8 +10473,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceId'
         currency:
-          description: The payment currency ISO Alpha code
-          type: string
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
         amount:
           description: The payment amount
           type: number
@@ -11590,8 +11598,8 @@ components:
             color: red
             size: xxl
         currency:
-          description: Currency (three letter ISO 4217 code)
-          type: string
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
         currencySign:
           description: Currency sign
           readOnly: true
@@ -11752,8 +11760,8 @@ components:
           type: number
           format: double
         currency:
-          description: Currency (three letter ISO 4217 code)
-          type: string
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
         _links:
           type: array
           description: The links related to resource
@@ -12427,6 +12435,24 @@ components:
           nullable: true
           example: PO123456
           type: string
+        renewalReminderTime:
+          description: Time renewal reminder event will be triggered
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/ServerTimestamp'
+        renewalReminderNumber:
+          description: Number of renewal reminder events triggered
+          type: integer
+          readOnly: true
+        trialReminderTime:
+          description: Time renewal reminder event will be triggered
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/ServerTimestamp'
+        trialReminderNumber:
+          description: Number of renewal reminder events triggered
+          type: integer
+          readOnly: true
         revision:
           description: |
             The number of times the subscription data has been modified.
@@ -12767,9 +12793,8 @@ components:
           format: double
           example: 49.95
         unitPriceCurrency:
-          description: Currency ISO code
-          type: string
-          example: USD
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
         quantity:
           description: Quantity of line item
           type: integer
@@ -12932,8 +12957,8 @@ components:
           type: number
           format: double
         currency:
-          description: The currency three letter code
-          type: string
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
         createdTime:
           description: The 3D Secure entry created time
           allOf:
@@ -13436,7 +13461,8 @@ components:
         amount:
           type: number
         currency:
-          type: string
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
     RedirectUrls:
       type: object
       deprecated: true
@@ -13542,27 +13568,27 @@ components:
           format: double
           readOnly: true
         currency:
-          description: The transactions's currency
-          type: string
           readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
         purchaseAmount:
           description: The transactions's purchase amount
           type: number
           format: double
           readOnly: true
         purchaseCurrency:
-          description: The transactions's purchase currency
-          type: string
           readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
         requestAmount:
           description: The transactions's amount received in the payment request
           type: number
           format: double
           readOnly: true
         requestCurrency:
-          description: The transactions's currency received in the payment request
-          type: string
           readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
         parentTransactionId:
           description: The transactions's parent ID
           allOf:
@@ -13741,7 +13767,8 @@ components:
                   type: number
                   format: double
                 currency:
-                  type: string
+                  allOf:
+                    - $ref: '#/components/schemas/CurrencyCode'
             quote:
               type: object
               description: Suggested amount and currency to convert to
@@ -13750,7 +13777,8 @@ components:
                   type: number
                   format: double
                 currency:
-                  type: string
+                  allOf:
+                    - $ref: '#/components/schemas/CurrencyCode'
             usdMarkup:
               description: The amount of markup translated to USD
               type: number
@@ -13779,7 +13807,8 @@ components:
                   type: number
                   format: double
                 currency:
-                  type: string
+                  allOf:
+                    - $ref: '#/components/schemas/CurrencyCode'
             bump:
               type: object
               description: Bump amount and currency
@@ -13788,7 +13817,8 @@ components:
                   type: number
                   format: double
                 currency:
-                  type: string
+                  allOf:
+                    - $ref: '#/components/schemas/CurrencyCode'
             bonus:
               type: object
               description: Bonus amount and currency
@@ -13797,7 +13827,8 @@ components:
                   type: number
                   format: double
                 currency:
-                  type: string
+                  allOf:
+                    - $ref: '#/components/schemas/CurrencyCode'
             usdOrder:
               description: The amount of initial amount translated to USD
               type: number
@@ -13973,9 +14004,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceId'
         currency:
-          description: The payment currency ISO-4217 Alpha 3 Code
-          type: string
-          example: USD
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
         type:
           description: |
             The type of transaction requested.
