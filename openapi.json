@@ -6312,8 +6312,11 @@
                     "type": "string"
                   },
                   "currency": {
-                    "description": "Currency (three letter code)",
-                    "type": "string"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/CurrencyCode"
+                      }
+                    ]
                   },
                   "gatewayAccountId": {
                     "description": "The Gateway account ID",
@@ -7114,8 +7117,11 @@
                     "type": "string"
                   },
                   "currency": {
-                    "description": "Currency (three letter code)",
-                    "type": "string"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/CurrencyCode"
+                      }
+                    ]
                   },
                   "amount": {
                     "description": "The amount to authorize",
@@ -11216,8 +11222,11 @@
                 "description": "Minimum order quantity"
               },
               "currency": {
-                "type": "string",
-                "description": "Minimum order currency"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CurrencyCode"
+                  }
+                ]
               }
             }
           }
@@ -11410,8 +11419,11 @@
                 "exclusiveMinimum": true
               },
               "currency": {
-                "description": "Discount currency",
-                "type": "string"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CurrencyCode"
+                  }
+                ]
               }
             }
           }
@@ -11549,6 +11561,13 @@
             }
           }
         }
+      },
+      "CurrencyCode": {
+        "type": "string",
+        "description": "ISO 4217 alphabetic currency code",
+        "minLength": 3,
+        "maxLength": 3,
+        "example": "USD"
       },
       "Customer": {
         "type": "object",
@@ -11903,7 +11922,11 @@
         "properties": {
           "currency": {
             "description": "Merchant's reporting currency",
-            "type": "string"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CurrencyCode"
+              }
+            ]
           },
           "amount": {
             "description": "Average approved payment amount in Merchant's reporting currency",
@@ -11923,7 +11946,11 @@
         "properties": {
           "currency": {
             "description": "Merchant's reporting currency",
-            "type": "string"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CurrencyCode"
+              }
+            ]
           },
           "amount": {
             "description": "Revenue amount in Merchant's reporting currency",
@@ -12010,8 +12037,11 @@
             "type": "string"
           },
           "currency": {
-            "description": "The dispute currency ISO Alpha code",
-            "type": "string"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CurrencyCode"
+              }
+            ]
           },
           "amount": {
             "description": "The dispute amount",
@@ -12797,8 +12827,11 @@
             ]
           },
           "currency": {
-            "description": "The currency three letter code",
-            "type": "string"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CurrencyCode"
+              }
+            ]
           },
           "amount": {
             "description": "The Invoice's amount",
@@ -13532,8 +13565,11 @@
             "type": "string"
           },
           "currency": {
-            "description": "Currency (three letter ISO 4217 alpha code) (eg USD, EUR)",
-            "type": "string"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CurrencyCode"
+              }
+            ]
           },
           "amount": {
             "description": "The amount that the lead cost",
@@ -14246,8 +14282,11 @@
             ]
           },
           "currency": {
-            "description": "The payment currency ISO Alpha code",
-            "type": "string"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CurrencyCode"
+              }
+            ]
           },
           "amount": {
             "description": "The payment amount",
@@ -15921,8 +15960,11 @@
             }
           },
           "currency": {
-            "description": "Currency (three letter ISO 4217 code)",
-            "type": "string"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CurrencyCode"
+              }
+            ]
           },
           "currencySign": {
             "description": "Currency sign",
@@ -16131,8 +16173,11 @@
             "format": "double"
           },
           "currency": {
-            "description": "Currency (three letter ISO 4217 code)",
-            "type": "string"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CurrencyCode"
+              }
+            ]
           },
           "_links": {
             "type": "array",
@@ -17618,9 +17663,11 @@
             "example": 49.95
           },
           "unitPriceCurrency": {
-            "description": "Currency ISO code",
-            "type": "string",
-            "example": "USD"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CurrencyCode"
+              }
+            ]
           },
           "quantity": {
             "description": "Quantity of line item",
@@ -17863,8 +17910,11 @@
             "format": "double"
           },
           "currency": {
-            "description": "The currency three letter code",
-            "type": "string"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CurrencyCode"
+              }
+            ]
           },
           "createdTime": {
             "description": "The 3D Secure entry created time",
@@ -18690,9 +18740,12 @@
             "readOnly": true
           },
           "currency": {
-            "description": "The transactions's currency",
-            "type": "string",
-            "readOnly": true
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CurrencyCode"
+              }
+            ]
           },
           "purchaseAmount": {
             "description": "The transactions's purchase amount",
@@ -18701,9 +18754,12 @@
             "readOnly": true
           },
           "purchaseCurrency": {
-            "description": "The transactions's purchase currency",
-            "type": "string",
-            "readOnly": true
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CurrencyCode"
+              }
+            ]
           },
           "requestAmount": {
             "description": "The transactions's amount received in the payment request",
@@ -18712,9 +18768,12 @@
             "readOnly": true
           },
           "requestCurrency": {
-            "description": "The transactions's currency received in the payment request",
-            "type": "string",
-            "readOnly": true
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CurrencyCode"
+              }
+            ]
           },
           "parentTransactionId": {
             "description": "The transactions's parent ID",
@@ -18973,7 +19032,11 @@
                     "format": "double"
                   },
                   "currency": {
-                    "type": "string"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/CurrencyCode"
+                      }
+                    ]
                   }
                 }
               },
@@ -18986,7 +19049,11 @@
                     "format": "double"
                   },
                   "currency": {
-                    "type": "string"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/CurrencyCode"
+                      }
+                    ]
                   }
                 }
               },
@@ -19025,7 +19092,11 @@
                     "format": "double"
                   },
                   "currency": {
-                    "type": "string"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/CurrencyCode"
+                      }
+                    ]
                   }
                 }
               },
@@ -19038,7 +19109,11 @@
                     "format": "double"
                   },
                   "currency": {
-                    "type": "string"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/CurrencyCode"
+                      }
+                    ]
                   }
                 }
               },
@@ -19051,7 +19126,11 @@
                     "format": "double"
                   },
                   "currency": {
-                    "type": "string"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/CurrencyCode"
+                      }
+                    ]
                   }
                 }
               },
@@ -19338,9 +19417,11 @@
             ]
           },
           "currency": {
-            "description": "The payment currency ISO-4217 Alpha 3 Code",
-            "type": "string",
-            "example": "USD"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CurrencyCode"
+              }
+            ]
           },
           "type": {
             "description": "The type of transaction requested.\nYou should always include the type within your API request.\nThis supports a limited subset of Transaction types.  To refund or void, use the refund endpoint.\nTo `capture` use the `sale` endpoint.  It will capture if there are any eligible\ntransactions of type `authorize` that can be captured.\n",
