@@ -13012,6 +13012,7 @@ components:
             - email-message-sent
             - custom-event-processed
             - custom-event
+            - transaction-waiting-gateway
         customEventType:
           description: 'Timeline custom event type. Used with `custom-event` type. Must be defined using [Customer Timeline custom event API](#operation/PostCustomerTimelineCustomEventType)'
           type: string
@@ -13333,6 +13334,7 @@ components:
             - transaction-rules-processed
             - transaction-capture-delayed
             - transaction-captured
+            - transaction-waiting-gateway
         triggeredBy:
           description: Shows who or what triggered the Timeline message
           type: string

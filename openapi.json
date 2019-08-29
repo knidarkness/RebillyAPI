@@ -18037,7 +18037,8 @@
               "transaction-amount-discrepancy-found",
               "email-message-sent",
               "custom-event-processed",
-              "custom-event"
+              "custom-event",
+              "transaction-waiting-gateway"
             ]
           },
           "customEventType": {
@@ -18479,7 +18480,8 @@
               "transaction-scheduled-time-changed",
               "transaction-rules-processed",
               "transaction-capture-delayed",
-              "transaction-captured"
+              "transaction-captured",
+              "transaction-waiting-gateway"
             ]
           },
           "triggeredBy": {
