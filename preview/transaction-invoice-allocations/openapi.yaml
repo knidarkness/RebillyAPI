@@ -9861,6 +9861,16 @@ components:
         currency:
           allOf:
             - $ref: '#/components/schemas/CurrencyCode'
+        _links:
+          type: array
+          description: The links related to resource
+          readOnly: true
+          minItems: 2
+          maxItems: 2
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/InvoiceLink'
+              - $ref: '#/components/schemas/TransactionLink'
     KycDocument:
       type: object
       required:
@@ -10186,6 +10196,18 @@ components:
           type: string
           enum:
             - initialInvoice
+      required:
+        - rel
+    InvoiceLink:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Link'
+      properties:
+        rel:
+          description: The link type
+          type: string
+          enum:
+            - invoice
       required:
         - rel
     InvoicesLink:
