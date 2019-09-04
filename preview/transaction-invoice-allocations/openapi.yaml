@@ -9723,6 +9723,7 @@ components:
               - $ref: '#/components/schemas/WebsiteLink'
               - $ref: '#/components/schemas/OrganizationLink'
               - $ref: '#/components/schemas/LeadSourceLink'
+              - $ref: '#/components/schemas/TransactionAllocationsLink'
         _embedded:
           type: array
           description: Any embedded objects available that are requested by the `expand` querystring parameter.
@@ -10396,6 +10397,18 @@ components:
           type: string
           enum:
             - subscription
+      required:
+        - rel
+    TransactionAllocationsLink:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Link'
+      properties:
+        rel:
+          description: The link type
+          type: string
+          enum:
+            - transactionAllocations
       required:
         - rel
     TransactionLink:

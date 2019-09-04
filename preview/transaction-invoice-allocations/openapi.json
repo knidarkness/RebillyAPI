@@ -13159,6 +13159,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/LeadSourceLink"
+                },
+                {
+                  "$ref": "#/components/schemas/TransactionAllocationsLink"
                 }
               ]
             }
@@ -14249,6 +14252,26 @@
             "type": "string",
             "enum": [
               "subscription"
+            ]
+          }
+        },
+        "required": [
+          "rel"
+        ]
+      },
+      "TransactionAllocationsLink": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Link"
+          }
+        ],
+        "properties": {
+          "rel": {
+            "description": "The link type",
+            "type": "string",
+            "enum": [
+              "transactionAllocations"
             ]
           }
         },
