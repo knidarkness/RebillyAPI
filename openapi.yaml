@@ -4083,6 +4083,41 @@ paths:
           $ref: '#/components/responses/NotFound'
         '409':
           $ref: '#/components/responses/Conflict'
+  '/invoices/{id}/transaction-allocations':
+    parameters:
+      - $ref: '#/components/parameters/resourceId'
+    get:
+      tags:
+        - Invoices
+      summary: Get transaction amounts allocated to an invoice
+      operationId: GetInvoiceTransactionAllocationCollection
+      description: Get the precise amounts from a transaction allocated as invoice payments
+      responses:
+        '200':
+          description: List of allocations was retrieved successfully.
+          headers:
+            Rate-Limit-Limit:
+              $ref: '#/components/headers/Rate-Limit-Limit'
+            Rate-Limit-Remaining:
+              $ref: '#/components/headers/Rate-Limit-Remaining'
+            Rate-Limit-Reset:
+              $ref: '#/components/headers/Rate-Limit-Reset'
+            Pagination-Total:
+              $ref: '#/components/headers/Pagination-Total'
+            Pagination-Limit:
+              $ref: '#/components/headers/Pagination-Limit'
+            Pagination-Offset:
+              $ref: '#/components/headers/Pagination-Offset'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InvoiceTransactionAllocation'
+        '401':
+          $ref: '#/components/responses/AccessForbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
   '/invoices/{id}/void':
     parameters:
       - $ref: '#/components/parameters/resourceId'
@@ -9688,6 +9723,7 @@ components:
               - $ref: '#/components/schemas/WebsiteLink'
               - $ref: '#/components/schemas/OrganizationLink'
               - $ref: '#/components/schemas/LeadSourceLink'
+              - $ref: '#/components/schemas/TransactionAllocationsLink'
         _embedded:
           type: array
           description: Any embedded objects available that are requested by the `expand` querystring parameter.
@@ -9814,6 +9850,28 @@ components:
         description:
           type: string
           description: Tax description
+    InvoiceTransactionAllocation:
+      type: object
+      properties:
+        invoiceId:
+          $ref: '#/components/schemas/ResourceId'
+        transactionId:
+          $ref: '#/components/schemas/ResourceId'
+        amount:
+          type: number
+        currency:
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
+        _links:
+          type: array
+          description: The links related to resource
+          readOnly: true
+          minItems: 2
+          maxItems: 2
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/InvoiceLink'
+              - $ref: '#/components/schemas/TransactionLink'
     KycDocument:
       type: object
       required:
@@ -10141,6 +10199,18 @@ components:
             - initialInvoice
       required:
         - rel
+    InvoiceLink:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Link'
+      properties:
+        rel:
+          description: The link type
+          type: string
+          enum:
+            - invoice
+      required:
+        - rel
     InvoicesLink:
       type: object
       allOf:
@@ -10327,6 +10397,18 @@ components:
           type: string
           enum:
             - subscription
+      required:
+        - rel
+    TransactionAllocationsLink:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Link'
+      properties:
+        rel:
+          description: The link type
+          type: string
+          enum:
+            - transactionAllocations
       required:
         - rel
     TransactionLink:
