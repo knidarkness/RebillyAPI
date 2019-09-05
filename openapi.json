@@ -13138,6 +13138,20 @@
               }
             ]
           },
+          "dueReminderTime": {
+            "description": "Time past due reminder event will be triggered",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          },
+          "dueReminderNumber": {
+            "description": "Number of past due reminder events triggered",
+            "type": "integer",
+            "readOnly": true
+          },
           "_links": {
             "type": "array",
             "description": "The links related to resource",
@@ -14688,6 +14702,20 @@
                 "$ref": "#/components/schemas/ServerTimestamp"
               }
             ]
+          },
+          "expirationReminderTime": {
+            "description": "Time expiration reminder event will be triggered",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
+            ]
+          },
+          "expirationReminderNumber": {
+            "description": "Number of expiration reminder events triggered",
+            "type": "integer",
+            "readOnly": true
           },
           "customFields": {
             "$ref": "#/components/schemas/ResourceCustomFields"
