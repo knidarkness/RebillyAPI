@@ -16986,7 +16986,7 @@
               "voided",
               "refunded",
               "disputed",
-              "abandoned"
+              "voided"
             ]
           },
           "customerId": {
