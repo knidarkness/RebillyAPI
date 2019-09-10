@@ -17135,7 +17135,8 @@
               "canceled",
               "churned",
               "suspended",
-              "paused"
+              "paused",
+              "abandoned"
             ]
           },
           "billingStatus": {
@@ -17150,7 +17151,7 @@
               "voided",
               "refunded",
               "disputed",
-              "abandoned"
+              "voided"
             ]
           },
           "customerId": {
