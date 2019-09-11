@@ -14105,7 +14105,7 @@ components:
           type: string
           nullable: true
           maxLength: 50
-          pattern: '^[\w\-]+$'
+          pattern: '^[\-\w]+$'
           example: 44433322-2c4y-483z-a0a9-158621f77a21
         description:
           nullable: true
