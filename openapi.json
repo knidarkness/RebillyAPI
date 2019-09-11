@@ -17939,7 +17939,7 @@
             "description": "The tag's unique name, which is case-insensitive.",
             "type": "string",
             "maxLength": 255,
-            "pattern": "^[@~\\-\\.\\w\\d\\s]+$",
+            "pattern": "^[@~\\-\\.\\w\\s]+$",
             "example": "New"
           },
           "createdTime": {
@@ -19631,6 +19631,7 @@
             "type": "string",
             "nullable": true,
             "maxLength": 50,
+            "pattern": "^[\\-\\w]+$",
             "example": "44433322-2c4y-483z-a0a9-158621f77a21"
           },
           "description": {
@@ -19803,7 +19804,7 @@
         "schema": {
           "type": "string",
           "maxLength": 50,
-          "pattern": "^[@~\\-\\.\\w\\d]+$"
+          "pattern": "^[@~\\-\\.\\w]+$"
         }
       },
       "customFieldResource": {
@@ -19856,7 +19857,7 @@
         "schema": {
           "type": "string",
           "maxLength": 50,
-          "pattern": "^[@~\\-\\.\\w\\d]+$"
+          "pattern": "^[@~\\-\\.\\w]+$"
         }
       },
       "subscriptionExpand": {
@@ -19874,7 +19875,7 @@
         "required": true,
         "schema": {
           "type": "string",
-          "pattern": "^[@~\\-\\.\\w\\d\\s]+$"
+          "pattern": "^[@~\\-\\.\\w\\s]+$"
         }
       }
     },

@@ -12934,7 +12934,7 @@ components:
           description: 'The tag''s unique name, which is case-insensitive.'
           type: string
           maxLength: 255
-          pattern: '^[@~\-\.\w\d\s]+$'
+          pattern: '^[@~\-\.\w\s]+$'
           example: New
         createdTime:
           description: The tag's created time
@@ -14105,6 +14105,7 @@ components:
           type: string
           nullable: true
           maxLength: 50
+          pattern: '^[\-\w]+$'
           example: 44433322-2c4y-483z-a0a9-158621f77a21
         description:
           nullable: true
@@ -14238,7 +14239,7 @@ components:
       schema:
         type: string
         maxLength: 50
-        pattern: '^[@~\-\.\w\d]+$'
+        pattern: '^[@~\-\.\w]+$'
     customFieldResource:
       name: resource
       in: path
@@ -14281,7 +14282,7 @@ components:
       schema:
         type: string
         maxLength: 50
-        pattern: '^[@~\-\.\w\d]+$'
+        pattern: '^[@~\-\.\w]+$'
     subscriptionExpand:
       name: expand
       in: query
@@ -14308,7 +14309,7 @@ components:
       required: true
       schema:
         type: string
-        pattern: '^[@~\-\.\w\d\s]+$'
+        pattern: '^[@~\-\.\w\s]+$'
   headers:
     Pagination-Limit:
       description: Items per page limit
