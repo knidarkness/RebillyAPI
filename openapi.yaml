@@ -9,7 +9,7 @@ info:
   license:
     name: Rebilly
     url: 'https://www.rebilly.com/api-license/'
-  termsOfService: 'https://www.rebilly.com/terms/'
+  termsOfService: 'https://www.rebilly.com/terms-of-use/'
   x-logo:
     url: 'https://rebilly.github.io/RebillyAPI/rb_apiLogo.svg'
     backgroundColor: '#0033A0'
