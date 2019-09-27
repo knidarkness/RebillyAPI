@@ -10484,6 +10484,8 @@ components:
         - invoice
         - Jeton
         - Klarna
+        - LPG-online
+        - LPG-payment-card
         - miscellaneous
         - Neteller
         - Nordea-Solo
