@@ -10842,6 +10842,7 @@ components:
           bitcoin: '#/components/schemas/bitcoinInstrument'
           Boleto: '#/components/schemas/BoletoInstrument'
           cash: '#/components/schemas/cashInstrument'
+          check: '#/components/schemas/checkInstrument'
           China UnionPay: '#/components/schemas/China-UnionPayInstrument'
           ePay.bg: '#/components/schemas/ePay-bgInstrument'
           EPS: '#/components/schemas/EPSInstrument'
@@ -10906,6 +10907,15 @@ components:
           properties:
             receivedBy:
               description: The receiver's name
+              type: string
+    checkInstrument:
+      description: Check payment instrument object
+      allOf:
+        - $ref: '#/components/schemas/PaymentInstrument'
+        - type: object
+          properties:
+            reference:
+              description: Reference data
               type: string
     China-UnionPayInstrument:
       description: China UnionPay payment instrument object
@@ -14173,6 +14183,14 @@ components:
           format: uri
         customFields:
           $ref: '#/components/schemas/ResourceCustomFields'
+        isProcessedOutside:
+          description: True if transaction was processed outside Rebilly
+          type: boolean
+          default: false
+        processedTime:
+          type: string
+          description: The time the transaction was processed. Can be specified only if transaction was processed outside Rebilly.
+          format: date-time
   responses:
     AccessForbidden:
       description: 'Access forbidden, invalid API-KEY was used'
