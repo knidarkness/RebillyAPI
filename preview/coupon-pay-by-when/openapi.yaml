@@ -8430,7 +8430,7 @@ components:
             - restrict-to-subscriptions
             - restrict-to-products
             - total-redemptions
-            - pay-by-when
+            - paid-by-time
       required:
         - type
     discounts-per-redemption:
@@ -8461,16 +8461,16 @@ components:
             currency:
               allOf:
                 - $ref: '#/components/schemas/CurrencyCode'
-    pay-by-when:
-      description: pay-by-when restrictions
+    paid-by-time:
+      description: paid-by-time restrictions
       allOf:
         - $ref: '#/components/schemas/CouponRestriction'
         - $ref: '#/components/schemas/RedemptionRestriction'
         - type: object
           required:
-            - byWhen
+            - byTime
           properties:
-            byWhen:
+            byTime:
               type: string
               format: date-time
     redemptions-per-customer:
@@ -8632,7 +8632,7 @@ components:
             - restrict-to-plans
             - restrict-to-subscriptions
             - restrict-to-products
-            - pay-by-when
+            - paid-by-time
       required:
         - type
     Credential:

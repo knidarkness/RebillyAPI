@@ -11294,7 +11294,7 @@
               "restrict-to-subscriptions",
               "restrict-to-products",
               "total-redemptions",
-              "pay-by-when"
+              "paid-by-time"
             ]
           }
         },
@@ -11356,8 +11356,8 @@
           }
         ]
       },
-      "pay-by-when": {
-        "description": "pay-by-when restrictions",
+      "paid-by-time": {
+        "description": "paid-by-time restrictions",
         "allOf": [
           {
             "$ref": "#/components/schemas/CouponRestriction"
@@ -11368,10 +11368,10 @@
           {
             "type": "object",
             "required": [
-              "byWhen"
+              "byTime"
             ],
             "properties": {
-              "byWhen": {
+              "byTime": {
                 "type": "string",
                 "format": "date-time"
               }
@@ -11648,7 +11648,7 @@
               "restrict-to-plans",
               "restrict-to-subscriptions",
               "restrict-to-products",
-              "pay-by-when"
+              "paid-by-time"
             ]
           }
         },
