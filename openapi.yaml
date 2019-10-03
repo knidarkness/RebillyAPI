@@ -9832,10 +9832,6 @@ components:
           type: number
           format: double
           readOnly: true
-        subscriptionId:
-          description: The subscription's ID
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
         productId:
           description: The product's ID
           allOf:
