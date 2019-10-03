@@ -13290,6 +13290,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/TransactionAllocationsLink"
+                },
+                {
+                  "$ref": "#/components/schemas/RecalculateInvoiceLink"
                 }
               ]
             }
@@ -14260,6 +14263,26 @@
             "type": "string",
             "enum": [
               "product"
+            ]
+          }
+        },
+        "required": [
+          "rel"
+        ]
+      },
+      "RecalculateInvoiceLink": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Link"
+          }
+        ],
+        "properties": {
+          "rel": {
+            "description": "The link type",
+            "type": "string",
+            "enum": [
+              "recalculateInvoice"
             ]
           }
         },
