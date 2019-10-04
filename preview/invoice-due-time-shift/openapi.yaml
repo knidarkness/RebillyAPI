@@ -9799,7 +9799,7 @@ components:
       properties:
         chronology:
           type: string
-          description: The chronology of the invoice due time relatively to the invoice issue time.
+          description: The chronology of the invoice due time relative to the invoice issue time.
           enum:
             - after
         invoiceDueTimeShiftInstruction:
@@ -12200,7 +12200,7 @@ components:
       type: object
       description: |
         The calculation instruction of invoice due time shift.
-        This is used in conjunction with the **billing anchor settings** to calculate the time the invoice gets paid.
+        This is used in conjunction with the **billing anchor settings** to calculate the invoice due time.
       discriminator:
         propertyName: method
       default:
@@ -12529,7 +12529,7 @@ components:
           description: |
             The time when invoice gets paid is by default +1 hour from issue time.
             With this setting you can shift this time.
-            Due time shift is relative to issue time that could be shifted by billing anchor settings.
+            Due time shift is relative to issued time that could be shifted by billing anchor settings.
           nullable: true
           example: null
           allOf:
