@@ -10491,6 +10491,7 @@ components:
         - ach
         - bank-account
         - cash
+        - check
         - paypal
         - Alipay
         - AstroPay Card
@@ -11380,6 +11381,7 @@ components:
       description: The token payment method
       enum:
         - cash
+        - check
         - paypal
         - Alipay
         - AstroPay Card
