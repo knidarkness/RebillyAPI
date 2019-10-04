@@ -13277,7 +13277,7 @@
         "properties": {
           "chronology": {
             "type": "string",
-            "description": "The chronology of the invoice due time relative to the invoice issue time.",
+            "description": "The chronology of the invoice due time relatively to the invoice issue time.",
             "enum": [
               "after"
             ]
@@ -17351,7 +17351,7 @@
             ]
           },
           "invoiceDueTimeShift": {
-            "description": "The time when invoice gets paid is by default +1 hour from issue time.\nWith this setting you can shift this time.\nDue time shift is relative to issued time that could be shifted by billing anchor settings.\n",
+            "description": "The time when invoice gets paid is by default +1 hour from issue time.\nWith this setting you can shift this time.\nDue time shift is relative to issue time that could be shifted by billing anchor settings.\n",
             "nullable": true,
             "example": null,
             "allOf": [
