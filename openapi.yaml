@@ -3919,6 +3919,37 @@ paths:
           $ref: '#/components/responses/AccessForbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+  '/invoices/{id}/recalculate':
+    parameters:
+      - $ref: '#/components/parameters/resourceId'
+    post:
+      tags:
+        - Invoices
+      summary: Recalculate an invoice
+      operationId: PostInvoiceRecalculation
+      description: |
+        Recalculate an invoice with specified identifier string.
+        It will recalculate shipping rates, taxes, discounts. It is useful when coupon was revoked or customer redeemed coupon after invoice was issued and you want to apply it to this invoice.
+      responses:
+        '201':
+          description: Invoice was recalculated successfully
+          headers:
+            Rate-Limit-Limit:
+              $ref: '#/components/headers/Rate-Limit-Limit'
+            Rate-Limit-Remaining:
+              $ref: '#/components/headers/Rate-Limit-Remaining'
+            Rate-Limit-Reset:
+              $ref: '#/components/headers/Rate-Limit-Reset'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+        '401':
+          $ref: '#/components/responses/AccessForbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
   '/invoices/{id}/reissue':
     parameters:
       - $ref: '#/components/parameters/resourceId'
@@ -9776,6 +9807,7 @@ components:
               - $ref: '#/components/schemas/OrganizationLink'
               - $ref: '#/components/schemas/LeadSourceLink'
               - $ref: '#/components/schemas/TransactionAllocationsLink'
+              - $ref: '#/components/schemas/RecalculateInvoiceLink'
         _embedded:
           type: array
           description: Any embedded objects available that are requested by the `expand` querystring parameter.
@@ -10373,6 +10405,18 @@ components:
           type: string
           enum:
             - product
+      required:
+        - rel
+    RecalculateInvoiceLink:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Link'
+      properties:
+        rel:
+          description: The link type
+          type: string
+          enum:
+            - recalculateInvoice
       required:
         - rel
     RecentInvoiceLink:
