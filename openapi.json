@@ -13181,6 +13181,7 @@
               "delinquent",
               "abandoned",
               "voided",
+              "partially-paid",
               "partially-refunded",
               "refunded",
               "disputed"
