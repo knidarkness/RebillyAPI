@@ -10569,7 +10569,6 @@ components:
         - invoice
         - Jeton
         - Klarna
-        - lottery
         - LPG-online
         - LPG-payment-card
         - miscellaneous
@@ -10578,6 +10577,7 @@ components:
         - OchaPay
         - online-bank-transfer
         - Onlineueberweisen
+        - Pagsmile-lottery
         - Paysafecard
         - Pay4Fun
         - PinPay
