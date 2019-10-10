@@ -13271,22 +13271,6 @@
           }
         }
       },
-      "InvoiceDueTimeShift": {
-        "type": "object",
-        "description": "The `due time shift` in conjunction with `billing anchor` settings allows to setup different billing use cases such as:\n\n- Issue invoice immediately when the service period _starts_ and bill it immediately\n- Issue invoice immediately when the service period _starts_ and bill it after _interval of time_\n- Issue invoice _interval of time_ before the service period _starts_ and bill it after _interval of time_\n- Issue invoice _interval of time_ after the service period _starts_ and bill it after _interval of time_\n",
-        "properties": {
-          "chronology": {
-            "type": "string",
-            "description": "The chronology of the invoice due time relative to the invoice issue time.",
-            "enum": [
-              "after"
-            ]
-          },
-          "invoiceDueTimeShiftInstruction": {
-            "$ref": "#/components/schemas/InvoiceDueTimeScheduleInstruction"
-          }
-        }
-      },
       "InvoiceIssue": {
         "type": "object",
         "properties": {
@@ -16292,7 +16276,7 @@
             }
           },
           "billingAnchor": {
-            "description": "The billing anchor settings for this plan.",
+            "description": "You can shift issue time and due time of invoices for this plan.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/PlanBillingAnchor"
@@ -16348,6 +16332,9 @@
           },
           "billingAnchorInstruction": {
             "$ref": "#/components/schemas/BillingScheduleInstruction"
+          },
+          "dueTimeShiftInstruction": {
+            "$ref": "#/components/schemas/DueTimeShiftInstruction"
           }
         }
       },
@@ -16836,30 +16823,34 @@
           "method"
         ]
       },
-      "InvoiceDueTimeScheduleInstruction": {
+      "DueTimeShiftInstruction": {
         "type": "object",
-        "description": "The calculation instruction of invoice due time shift.\nThis is used in conjunction with the **billing anchor settings** to calculate the invoice due time.\n",
-        "discriminator": {
-          "propertyName": "method"
-        },
+        "description": "The calculation instruction of due time.\nThis is used in conjunction with the **billing anchor** to calculate due time of invoice.\nThe chronology of due time shift is always **after**.\n",
         "default": {
-          "method": "date-interval",
           "duration": 1,
           "unit": "hour"
         },
-        "required": [
-          "method"
-        ],
         "properties": {
-          "method": {
-            "type": "string",
-            "default": "date-interval",
-            "enum": [
-              "immediately",
-              "date-interval"
+          "duration": {
+            "type": "integer",
+            "description": "The number of the units",
+            "minimum": 1
+          },
+          "unit": {
+            "oneOf": [
+              {
+                "$ref": "https://rebilly.github.io/api-standards/schema/json-schema-draft-04/date-time/time-unit.json"
+              },
+              {
+                "$ref": "https://rebilly.github.io/api-standards/schema/json-schema-draft-04/date-time/time-plural-unit.json"
+              }
             ]
           }
-        }
+        },
+        "required": [
+          "duration",
+          "unit"
+        ]
       },
       "InvoiceRetryScheduleInstruction": {
         "type": "object",
@@ -16900,9 +16891,6 @@
           },
           {
             "$ref": "#/components/schemas/BillingScheduleInstruction"
-          },
-          {
-            "$ref": "#/components/schemas/InvoiceDueTimeScheduleInstruction"
           },
           {
             "$ref": "#/components/schemas/InvoiceRetryScheduleInstruction"
@@ -17012,9 +17000,6 @@
           },
           {
             "$ref": "#/components/schemas/BillingScheduleInstruction"
-          },
-          {
-            "$ref": "#/components/schemas/InvoiceDueTimeScheduleInstruction"
           },
           {
             "$ref": "#/components/schemas/ServicePeriodAnchorInstruction"
@@ -17341,22 +17326,12 @@
             }
           },
           "billingAnchor": {
-            "description": "The billing anchor settings to override plan settings. To use plan settings, set `null`.\nTo use multiple plans in one subscription they all must have the same billing period,\nthis property allows to subscribe to different plans.\n",
+            "description": "You can shift issue time and due time of invoices for this subscription.\nThis setting overrides plan settings. To use plan settings, set `null`.\nTo use multiple plans in one subscription they all must have the same billing period,\nthis property allows to subscribe to different plans.\n",
             "nullable": true,
             "example": null,
             "allOf": [
               {
                 "$ref": "#/components/schemas/PlanBillingAnchor"
-              }
-            ]
-          },
-          "invoiceDueTimeShift": {
-            "description": "The time when invoice gets paid is by default +1 hour from issue time.\nWith this setting you can shift this time.\nDue time shift is relative to issued time that could be shifted by billing anchor settings.\n",
-            "nullable": true,
-            "example": null,
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/InvoiceDueTimeShift"
               }
             ]
           },
