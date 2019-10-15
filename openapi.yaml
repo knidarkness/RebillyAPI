@@ -10829,7 +10829,6 @@ components:
         - pan
         - expYear
         - expMonth
-        - cvv
         - billingAddress
       properties:
         customerId:

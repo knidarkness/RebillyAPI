@@ -14901,7 +14901,6 @@
           "pan",
           "expYear",
           "expMonth",
-          "cvv",
           "billingAddress"
         ],
         "properties": {
