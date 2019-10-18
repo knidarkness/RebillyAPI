@@ -11373,7 +11373,8 @@
             "properties": {
               "time": {
                 "type": "string",
-                "format": "date-time"
+                "format": "date-time",
+                "description": "The time when the coupon's redemption is no longer valid and removed from the invoice if applied."
               }
             }
           }
