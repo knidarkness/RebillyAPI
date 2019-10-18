@@ -8468,9 +8468,9 @@ components:
         - $ref: '#/components/schemas/RedemptionRestriction'
         - type: object
           required:
-            - byTime
+            - time
           properties:
-            byTime:
+            time:
               type: string
               format: date-time
     redemptions-per-customer:
