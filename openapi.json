@@ -16339,7 +16339,7 @@
             }
           },
           "billingAnchor": {
-            "description": "The billing anchor settings for this plan.",
+            "description": "You can shift issue time and due time of invoices for this plan.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/PlanBillingAnchor"
@@ -16395,6 +16395,9 @@
           },
           "billingAnchorInstruction": {
             "$ref": "#/components/schemas/BillingScheduleInstruction"
+          },
+          "dueTimeShift": {
+            "$ref": "#/components/schemas/DueTimeShiftInstruction"
           }
         }
       },
@@ -16883,6 +16886,35 @@
           "method"
         ]
       },
+      "DueTimeShiftInstruction": {
+        "type": "object",
+        "description": "The calculation instruction of due time.\nThis is used in conjunction with the **billing anchor** to calculate due time of invoice.\nThe chronology of due time shift is always **after**.\n",
+        "default": {
+          "duration": 1,
+          "unit": "hour"
+        },
+        "properties": {
+          "duration": {
+            "type": "integer",
+            "description": "The number of the units",
+            "minimum": 1
+          },
+          "unit": {
+            "oneOf": [
+              {
+                "$ref": "https://rebilly.github.io/api-standards/schema/json-schema-draft-04/date-time/time-unit.json"
+              },
+              {
+                "$ref": "https://rebilly.github.io/api-standards/schema/json-schema-draft-04/date-time/time-plural-unit.json"
+              }
+            ]
+          }
+        },
+        "required": [
+          "duration",
+          "unit"
+        ]
+      },
       "InvoiceRetryScheduleInstruction": {
         "type": "object",
         "description": "The calculation instruction of scheduled time",
@@ -17357,7 +17389,7 @@
             }
           },
           "billingAnchor": {
-            "description": "The billing anchor settings to override plan settings. To use plan settings, set `null`.\nTo use multiple plans in one subscription they all must have the same billing period,\nthis property allows to subscribe to different plans.\n",
+            "description": "You can shift issue time and due time of invoices for this subscription.\nThis setting overrides plan settings. To use plan settings, set `null`.\nTo use multiple plans in one subscription they all must have the same billing period,\nthis property allows to subscribe to different plans.\n",
             "nullable": true,
             "example": null,
             "allOf": [

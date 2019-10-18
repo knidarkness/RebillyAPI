@@ -11802,7 +11802,7 @@ components:
               type: number
               format: double
         billingAnchor:
-          description: The billing anchor settings for this plan.
+          description: You can shift issue time and due time of invoices for this plan.
           allOf:
             - $ref: '#/components/schemas/PlanBillingAnchor'
         subscriptionCount:
@@ -11846,6 +11846,8 @@ components:
             - after
         billingAnchorInstruction:
           $ref: '#/components/schemas/BillingScheduleInstruction'
+        dueTimeShift:
+          $ref: '#/components/schemas/DueTimeShiftInstruction'
     PlanBillingTiming:
       type: string
       default: prepaid
@@ -12220,6 +12222,27 @@ components:
             - day-of-week
       required:
         - method
+    DueTimeShiftInstruction:
+      type: object
+      description: |
+        The calculation instruction of due time.
+        This is used in conjunction with the **billing anchor** to calculate due time of invoice.
+        The chronology of due time shift is always **after**.
+      default:
+        duration: 1
+        unit: hour
+      properties:
+        duration:
+          type: integer
+          description: The number of the units
+          minimum: 1
+        unit:
+          oneOf:
+            - $ref: 'https://rebilly.github.io/api-standards/schema/json-schema-draft-04/date-time/time-unit.json'
+            - $ref: 'https://rebilly.github.io/api-standards/schema/json-schema-draft-04/date-time/time-plural-unit.json'
+      required:
+        - duration
+        - unit
     InvoiceRetryScheduleInstruction:
       type: object
       description: The calculation instruction of scheduled time
@@ -12520,7 +12543,8 @@ components:
                 type: integer
         billingAnchor:
           description: |
-            The billing anchor settings to override plan settings. To use plan settings, set `null`.
+            You can shift issue time and due time of invoices for this subscription.
+            This setting overrides plan settings. To use plan settings, set `null`.
             To use multiple plans in one subscription they all must have the same billing period,
             this property allows to subscribe to different plans.
           nullable: true
