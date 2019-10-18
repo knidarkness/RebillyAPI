@@ -16333,7 +16333,7 @@
           "billingAnchorInstruction": {
             "$ref": "#/components/schemas/BillingScheduleInstruction"
           },
-          "dueTimeShiftInstruction": {
+          "dueTimeShift": {
             "$ref": "#/components/schemas/DueTimeShiftInstruction"
           }
         }
