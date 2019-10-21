@@ -17468,13 +17468,6 @@
               }
             ]
           },
-          "startTime": {
-            "description": "Subscription start time.  When the value is sent as null, it will use the current time. This value can't be in past more than one service period.",
-            "nullable": true,
-            "example": null,
-            "type": "string",
-            "format": "date-time"
-          },
           "activationTime": {
             "description": "Subscription activation time",
             "allOf": [
@@ -17659,6 +17652,13 @@
                     "format": "date-time"
                   }
                 }
+              },
+              "startTime": {
+                "description": "Subscription start time.  When the value is sent as null, it will use the current time. This value can't be in past more than one service period.",
+                "nullable": true,
+                "example": null,
+                "type": "string",
+                "format": "date-time"
               },
               "endTime": {
                 "description": "Subscription end time",

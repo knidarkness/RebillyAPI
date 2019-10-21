@@ -12597,12 +12597,6 @@ components:
           description: 'Risk metadata. If null, the value would coalesce to the risk metadata captured when creating the payment token.'
           allOf:
             - $ref: '#/components/schemas/RiskMetadata'
-        startTime:
-          description: 'Subscription start time.  When the value is sent as null, it will use the current time. This value can''t be in past more than one service period.'
-          nullable: true
-          example: null
-          type: string
-          format: date-time
         activationTime:
           description: Subscription activation time
           allOf:
@@ -12731,6 +12725,12 @@ components:
                   description: The time the trial should end
                   type: string
                   format: date-time
+            startTime:
+              description: 'Subscription start time.  When the value is sent as null, it will use the current time. This value can''t be in past more than one service period.'
+              nullable: true
+              example: null
+              type: string
+              format: date-time
             endTime:
               description: Subscription end time
               allOf:
