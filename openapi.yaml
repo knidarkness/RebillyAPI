@@ -8461,6 +8461,7 @@ components:
             - restrict-to-subscriptions
             - restrict-to-products
             - total-redemptions
+            - paid-by-time
       required:
         - type
     discounts-per-redemption:
@@ -8491,6 +8492,19 @@ components:
             currency:
               allOf:
                 - $ref: '#/components/schemas/CurrencyCode'
+    paid-by-time:
+      description: paid-by-time restrictions
+      allOf:
+        - $ref: '#/components/schemas/CouponRestriction'
+        - $ref: '#/components/schemas/RedemptionRestriction'
+        - type: object
+          required:
+            - time
+          properties:
+            time:
+              type: string
+              format: date-time
+              description: The time when the coupon's redemption is no longer valid and removed from the invoice if applied.
     redemptions-per-customer:
       description: Quantity per Customer restrictions
       allOf:
@@ -8650,6 +8664,7 @@ components:
             - restrict-to-plans
             - restrict-to-subscriptions
             - restrict-to-products
+            - paid-by-time
       required:
         - type
     Credential:

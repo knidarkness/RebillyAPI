@@ -11340,7 +11340,8 @@
               "restrict-to-plans",
               "restrict-to-subscriptions",
               "restrict-to-products",
-              "total-redemptions"
+              "total-redemptions",
+              "paid-by-time"
             ]
           }
         },
@@ -11397,6 +11398,30 @@
                     "$ref": "#/components/schemas/CurrencyCode"
                   }
                 ]
+              }
+            }
+          }
+        ]
+      },
+      "paid-by-time": {
+        "description": "paid-by-time restrictions",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CouponRestriction"
+          },
+          {
+            "$ref": "#/components/schemas/RedemptionRestriction"
+          },
+          {
+            "type": "object",
+            "required": [
+              "time"
+            ],
+            "properties": {
+              "time": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The time when the coupon's redemption is no longer valid and removed from the invoice if applied."
               }
             }
           }
@@ -11670,7 +11695,8 @@
               "restrict-to-invoices",
               "restrict-to-plans",
               "restrict-to-subscriptions",
-              "restrict-to-products"
+              "restrict-to-products",
+              "paid-by-time"
             ]
           }
         },
