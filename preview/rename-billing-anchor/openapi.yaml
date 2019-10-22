@@ -12255,11 +12255,10 @@ components:
       description: |
         The calculation instruction of billing time.
         This is used in conjunction with the **service period anchor** to calculate the time the invoice is issued.
-      discriminator:
-        propertyName: method
       required:
         - chronology
-        - method
+        - duration
+        - unit
       properties:
         chronology:
           type: string
@@ -12267,11 +12266,14 @@ components:
           enum:
             - before
             - after
-        method:
-          type: string
-          enum:
-            - immediately
-            - date-interval
+        duration:
+          type: integer
+          description: The number of the units
+          minimum: 1
+        unit:
+          oneOf:
+            - $ref: 'https://rebilly.github.io/api-standards/schema/json-schema-draft-04/date-time/time-unit.json'
+            - $ref: 'https://rebilly.github.io/api-standards/schema/json-schema-draft-04/date-time/time-plural-unit.json'
     auto:
       allOf:
         - $ref: '#/components/schemas/CommonScheduleInstruction'
@@ -12279,7 +12281,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/CommonScheduleInstruction'
         - $ref: '#/components/schemas/CustomEventScheduleInstruction'
-        - $ref: '#/components/schemas/IssueTimeShiftInstruction'
         - $ref: '#/components/schemas/InvoiceRetryScheduleInstruction'
         - type: object
           properties:
@@ -12338,7 +12339,6 @@ components:
     immediately:
       allOf:
         - $ref: '#/components/schemas/CommonScheduleInstruction'
-        - $ref: '#/components/schemas/IssueTimeShiftInstruction'
         - $ref: '#/components/schemas/ServicePeriodAnchorInstruction'
         - $ref: '#/components/schemas/InvoiceRetryScheduleInstruction'
     intelligent:
