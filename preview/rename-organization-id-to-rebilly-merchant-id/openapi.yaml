@@ -193,7 +193,7 @@ security:
 paths:
   /3dsecure:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - 3D Secure
@@ -260,7 +260,7 @@ paths:
           $ref: '#/components/responses/InvalidDataError'
   '/3dsecure/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -289,7 +289,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   /attachments:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Files
@@ -402,7 +402,7 @@ paths:
             }
   '/attachments/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -517,7 +517,7 @@ paths:
             $client->attachments()->delete('attachmentId');
   /authentication-options:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Customer Authentication
@@ -593,7 +593,7 @@ paths:
             }
   /authentication-tokens:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Customer Authentication
@@ -684,7 +684,7 @@ paths:
             }
   '/authentication-tokens/{token}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - name: token
         in: path
         description: The token identifier string
@@ -755,7 +755,7 @@ paths:
             $client->authenticationTokens()->logout('token');
   '/authentication-tokens/{token}/exchange':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - name: token
         in: path
         description: The token identifier string
@@ -801,7 +801,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   /bank-accounts:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     post:
       tags:
         - Bank Accounts
@@ -925,7 +925,7 @@ paths:
             ]);
   '/bank-accounts/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -1104,7 +1104,7 @@ paths:
             }
   '/bank-accounts/{id}/deactivation':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     post:
       tags:
@@ -1137,7 +1137,7 @@ paths:
             $bankAccount = $client->bankAccounts()->deactivate('bankAccountId');
   /blacklists:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Blacklists
@@ -1220,7 +1220,7 @@ paths:
             }
   '/blacklists/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -1324,7 +1324,7 @@ paths:
             $client->blacklists()->delete('blacklistId');
   /contacts:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Contacts
@@ -1442,7 +1442,7 @@ paths:
             }
   '/contacts/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -1568,7 +1568,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   /coupons-redemptions:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Coupons
@@ -1667,7 +1667,7 @@ paths:
             }
   '/coupons-redemptions/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -1691,7 +1691,7 @@ paths:
             $couponRedemption = $client->couponsRedemptions()->load('redemptionCode');
   '/coupons-redemptions/{id}/cancel':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     post:
       tags:
@@ -1711,7 +1711,7 @@ paths:
             $client->couponsRedemptions()->cancel('id');
   /coupons:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Coupons
@@ -1812,7 +1812,7 @@ paths:
             }
   '/coupons/{redemptionCode}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - name: redemptionCode
         in: path
         description: The Coupon's redemption code
@@ -1924,7 +1924,7 @@ paths:
             }
   '/coupons/{redemptionCode}/expiration':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - name: redemptionCode
         in: path
         description: The coupon's redemption code
@@ -1974,7 +1974,7 @@ paths:
           $ref: '#/components/responses/InvalidDataError'
   /credentials:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Customer Authentication
@@ -2057,7 +2057,7 @@ paths:
             }
   '/credentials/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -2170,7 +2170,7 @@ paths:
             $client->customerCredentials()->delete('credentialId');
   '/custom-fields/{resource}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/customFieldResource'
     get:
       tags:
@@ -2206,7 +2206,7 @@ paths:
             ]);
   '/custom-fields/{resource}/{name}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/customFieldResource'
       - name: name
         in: path
@@ -2310,7 +2310,7 @@ paths:
             }
   /customer-timeline-custom-events:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Customers
@@ -2380,7 +2380,7 @@ paths:
           $ref: '#/components/responses/InvalidDataError'
   '/customer-timeline-custom-events/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -2420,7 +2420,7 @@ paths:
       description: |
         Retrieve a list of customer timeline messages for all customers
       parameters:
-        - $ref: '#/components/parameters/organizationId'
+        - $ref: '#/components/parameters/merchantId'
         - $ref: '#/components/parameters/collectionLimit'
         - $ref: '#/components/parameters/collectionOffset'
         - $ref: '#/components/parameters/collectionFilter'
@@ -2450,7 +2450,7 @@ paths:
           $ref: '#/components/responses/AccessForbidden'
   /customers:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Customers
@@ -2611,7 +2611,7 @@ paths:
             }
   '/customers/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -2736,7 +2736,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   '/customers/{id}/lead-source':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -2841,7 +2841,7 @@ paths:
             $customer = $client->customers()->deleteLeadSource('myCustomerId');
   '/customers/{id}/timeline':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -2912,7 +2912,7 @@ paths:
           $ref: '#/components/responses/InvalidDataError'
   '/customers/{id}/timeline/{messageId}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
       - name: messageId
         in: path
@@ -2970,7 +2970,7 @@ paths:
           $ref: '#/components/responses/Conflict'
   '/customers/{id}/upcoming-invoices':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -3004,7 +3004,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   /disputes:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Disputes
@@ -3091,7 +3091,7 @@ paths:
             }
   '/disputes/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -3181,7 +3181,7 @@ paths:
             }
   '/disputes/{id}/matched-rules':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -3211,7 +3211,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   /files:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Files
@@ -3346,7 +3346,7 @@ paths:
             }
   '/files/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -3449,7 +3449,7 @@ paths:
             $client->files()->delete('fileId');
   '/files/{id}/download':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -3483,7 +3483,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   '/files/{id}/download{extension}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
       - name: extension
         in: path
@@ -3527,7 +3527,7 @@ paths:
           $ref: '#/components/responses/InvalidDataError'
   /invoices:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Invoices
@@ -3658,7 +3658,7 @@ paths:
             }
   '/invoices/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -3793,7 +3793,7 @@ paths:
             }
   '/invoices/{id}/abandon':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     post:
       tags:
@@ -3826,7 +3826,7 @@ paths:
             $invoice = $client->invoices()->abandon('invoiceId');
   '/invoices/{id}/issue':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     post:
       tags:
@@ -3868,7 +3868,7 @@ paths:
             $invoice = $client->invoices()->issue('invoiceId', '2025-01-01 05:00:00');
   '/invoices/{id}/items':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -3953,7 +3953,7 @@ paths:
             }
   '/invoices/{id}/matched-rules':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -3983,7 +3983,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   '/invoices/{id}/recalculate':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     post:
       tags:
@@ -4015,7 +4015,7 @@ paths:
           $ref: '#/components/responses/Conflict'
   '/invoices/{id}/reissue':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     post:
       tags:
@@ -4053,7 +4053,7 @@ paths:
           $ref: '#/components/responses/Conflict'
   '/invoices/{id}/timeline':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -4124,7 +4124,7 @@ paths:
           $ref: '#/components/responses/InvalidDataError'
   '/invoices/{id}/timeline/{messageId}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
       - name: messageId
         in: path
@@ -4182,7 +4182,7 @@ paths:
           $ref: '#/components/responses/Conflict'
   '/invoices/{id}/transaction-allocations':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -4218,7 +4218,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   '/invoices/{id}/void':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     post:
       tags:
@@ -4251,7 +4251,7 @@ paths:
             $invoice = $client->invoices()->void('invoiceId');
   /kyc-documents:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - KYC Documents
@@ -4345,7 +4345,7 @@ paths:
           $ref: '#/components/responses/InvalidDataError'
   '/kyc-documents/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -4430,7 +4430,7 @@ paths:
           $ref: '#/components/responses/InvalidDataError'
   '/kyc-documents/{id}/acceptance':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     post:
       tags:
@@ -4459,7 +4459,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   '/kyc-documents/{id}/rejection':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     post:
       tags:
@@ -4497,7 +4497,7 @@ paths:
           $ref: '#/components/responses/InvalidDataError'
   /password-tokens:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Customer Authentication
@@ -4566,7 +4566,7 @@ paths:
           $ref: '#/components/responses/InvalidDataError'
   '/password-tokens/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -4618,7 +4618,7 @@ paths:
           $ref: '#/components/responses/Conflict'
   /payment-cards:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Payment Cards
@@ -4755,7 +4755,7 @@ paths:
             }
   '/payment-cards/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -4938,7 +4938,7 @@ paths:
             }
   '/payment-cards/{id}/authorization':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     post:
       tags:
@@ -5007,7 +5007,7 @@ paths:
             }
   '/payment-cards/{id}/deactivation':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     post:
       tags:
@@ -5040,7 +5040,7 @@ paths:
             $client->paymentCards()->deactivate('paymentCardId');
   '/payment-cards/{id}/matched-rules':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -5070,7 +5070,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   /payment-instrument-validation:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Payment Instrument Validation
@@ -5139,7 +5139,7 @@ paths:
           $ref: '#/components/responses/InvalidDataError'
   '/payment-instrument-validation/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -5175,7 +5175,7 @@ paths:
           $ref: '#/components/responses/AccessForbidden'
   /payments:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Payments
@@ -5289,7 +5289,7 @@ paths:
             }
   '/payments/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       deprecated: true
@@ -5389,7 +5389,7 @@ paths:
             }
   /paypal-accounts:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - PayPal Accounts
@@ -5488,7 +5488,7 @@ paths:
             }
   '/paypal-accounts/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -5601,7 +5601,7 @@ paths:
             }
   '/paypal-accounts/{id}/activation':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     post:
       tags:
@@ -5671,7 +5671,7 @@ paths:
             }
   '/paypal-accounts/{id}/deactivation':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     post:
       tags:
@@ -5704,7 +5704,7 @@ paths:
             $client->payPalAccounts()->deactivate('payPalAccountId');
   /plans:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Plans
@@ -5783,7 +5783,7 @@ paths:
             }
   '/plans/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -5900,7 +5900,7 @@ paths:
             $client->plans()->delete('planId');
   /products:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Products
@@ -5964,7 +5964,7 @@ paths:
           $ref: '#/components/responses/InvalidDataError'
   '/products/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -6061,7 +6061,7 @@ paths:
       description: |
         Search merchant's data to return resources such as customers, invoices, orders, transactions
       parameters:
-        - $ref: '#/components/parameters/organizationId'
+        - $ref: '#/components/parameters/merchantId'
         - name: q
           in: query
           description: |
@@ -6118,7 +6118,7 @@ paths:
           $ref: '#/components/responses/AccessForbidden'
   /shipping-zones:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Shipping Zones
@@ -6187,7 +6187,7 @@ paths:
           $ref: '#/components/responses/InvalidDataError'
   '/shipping-zones/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -6282,7 +6282,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   /subscription-cancellations:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Subscriptions
@@ -6355,7 +6355,7 @@ paths:
             }
   '/subscription-cancellations/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -6444,7 +6444,7 @@ paths:
           $ref: '#/components/responses/Conflict'
   /subscription-reactivations:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Subscriptions
@@ -6513,7 +6513,7 @@ paths:
           $ref: '#/components/responses/InvalidDataError'
   '/subscription-reactivations/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -6541,7 +6541,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   /subscriptions:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Subscriptions
@@ -6680,7 +6680,7 @@ paths:
             }
   '/subscriptions/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -6808,7 +6808,7 @@ paths:
             }
   '/subscriptions/{id}/change-plan':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     post:
       tags:
@@ -6862,7 +6862,7 @@ paths:
             }
   '/subscriptions/{id}/interim-invoice':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     post:
       tags:
@@ -6900,7 +6900,7 @@ paths:
           $ref: '#/components/responses/InvalidDataError'
   '/subscriptions/{id}/matched-rules':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -6930,7 +6930,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   '/subscriptions/{id}/timeline':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -7001,7 +7001,7 @@ paths:
           $ref: '#/components/responses/InvalidDataError'
   '/subscriptions/{id}/timeline/{messageId}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
       - name: messageId
         in: path
@@ -7059,7 +7059,7 @@ paths:
           $ref: '#/components/responses/Conflict'
   '/subscriptions/{id}/upcoming-invoices':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -7093,7 +7093,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   '/subscriptions/{id}/upcoming-invoices/{invoiceId}/issue':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
       - name: invoiceId
         in: path
@@ -7137,7 +7137,7 @@ paths:
           $ref: '#/components/responses/Conflict'
   /tags:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     get:
       tags:
         - Tags
@@ -7223,7 +7223,7 @@ paths:
           $ref: '#/components/responses/InvalidDataError'
   '/tags/{tag}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/tag'
     get:
       tags:
@@ -7284,7 +7284,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   '/tags/{tag}/customers':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/tag'
     post:
       tags:
@@ -7352,7 +7352,7 @@ paths:
           $ref: '#/components/schemas/InvalidError'
   '/tags/{tag}/customers/{customerId}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/tag'
       - $ref: '#/components/parameters/customerId'
     post:
@@ -7385,7 +7385,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   /tokens:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     post:
       tags:
         - Payment Tokens
@@ -7529,7 +7529,7 @@ paths:
             ]);
   '/tokens/{token}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - name: token
         in: path
         description: The token identifier string
@@ -7569,7 +7569,7 @@ paths:
             $paymentCardToken = $client->paymentCardTokens()->load('tokenId');
   /transactions:
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
     post:
       tags:
         - Transactions
@@ -7675,7 +7675,7 @@ paths:
             ]);
   '/transactions/{id}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -7708,7 +7708,7 @@ paths:
             $transaction = $client->transactions()->load('transactionId');
   '/transactions/{id}/cancel':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     post:
       tags:
@@ -7744,7 +7744,7 @@ paths:
             }
   '/transactions/{id}/gateway-logs':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -7765,7 +7765,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   '/transactions/{id}/matched-rules':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -7795,7 +7795,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   '/transactions/{id}/refund':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     post:
       tags:
@@ -7836,7 +7836,7 @@ paths:
             $transaction = $client->transactions()->refund('transactionId', 1.99);
   '/transactions/{id}/timeline':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
     get:
       tags:
@@ -7907,7 +7907,7 @@ paths:
           $ref: '#/components/responses/InvalidDataError'
   '/transactions/{id}/timeline/{messageId}':
     parameters:
-      - $ref: '#/components/parameters/organizationId'
+      - $ref: '#/components/parameters/merchantId'
       - $ref: '#/components/parameters/resourceId'
       - name: messageId
         in: path
@@ -14552,10 +14552,10 @@ components:
           - text/csv
           - application/pdf
         default: application/json
-    organizationId:
-      name: Organization-Id
+    merchantId:
+      name: Rebilly-Merchant-Id
       in: header
-      description: 'Organization ID (if not filled, the default organization will be used)'
+      description: 'MerchantId (if not filled, the default Merchant will be used)'
       schema:
         type: string
       required: false
