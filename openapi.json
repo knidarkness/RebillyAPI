@@ -13515,6 +13515,18 @@
           }
         }
       },
+      "InvoiceTimeShift": {
+        "type": "object",
+        "description": "The invoice time shift in conjunction with `billingTiming` allows to setup different billing use cases such as:\n\n- Bill immediately when the service period _starts_\n- Bill immediately after the service period _ends_\n- Bill _interval of time_ before the service period _starts_\n- Bill _interval of time_ after the service period _starts_\n- Bill _interval of time_ before the service period _ends_\n- Bill _interval of time_ after the service period _ends_\n",
+        "properties": {
+          "issueTimeShift": {
+            "$ref": "#/components/schemas/IssueTimeShiftInstruction"
+          },
+          "dueTimeShift": {
+            "$ref": "#/components/schemas/DueTimeShiftInstruction"
+          }
+        }
+      },
       "InvoiceTransactionAllocation": {
         "type": "object",
         "properties": {
@@ -16365,11 +16377,11 @@
               }
             }
           },
-          "billingAnchor": {
+          "invoiceTimeShift": {
             "description": "You can shift issue time and due time of invoices for this plan.",
             "allOf": [
               {
-                "$ref": "#/components/schemas/PlanBillingAnchor"
+                "$ref": "#/components/schemas/InvoiceTimeShift"
               }
             ]
           },
@@ -16405,26 +16417,6 @@
             "items": {
               "$ref": "#/components/schemas/SelfLink"
             }
-          }
-        }
-      },
-      "PlanBillingAnchor": {
-        "type": "object",
-        "description": "The billing anchor in conjunction with `billingTiming` allows to setup different billing use cases such as:\n\n- Bill immediately when the service period _starts_\n- Bill immediately after the service period _ends_\n- Bill _interval of time_ before the service period _starts_\n- Bill _interval of time_ after the service period _starts_\n- Bill _interval of time_ before the service period _ends_\n- Bill _interval of time_ after the service period _ends_\n",
-        "properties": {
-          "chronology": {
-            "type": "string",
-            "description": "The chronology of the billing time relatively to the service period start.",
-            "enum": [
-              "before",
-              "after"
-            ]
-          },
-          "billingAnchorInstruction": {
-            "$ref": "#/components/schemas/BillingScheduleInstruction"
-          },
-          "dueTimeShift": {
-            "$ref": "#/components/schemas/DueTimeShiftInstruction"
           }
         }
       },
@@ -16847,29 +16839,6 @@
           }
         }
       },
-      "BillingScheduleInstruction": {
-        "type": "object",
-        "description": "The calculation instruction of billing time.\nThis is used in conjunction with the **service period anchor** to calculate the time the invoice is issued.\n",
-        "discriminator": {
-          "propertyName": "method"
-        },
-        "default": {
-          "method": "immediately"
-        },
-        "required": [
-          "method"
-        ],
-        "properties": {
-          "method": {
-            "type": "string",
-            "default": "immediately",
-            "enum": [
-              "immediately",
-              "date-interval"
-            ]
-          }
-        }
-      },
       "CommonScheduleInstruction": {
         "type": "object",
         "description": "The calculation instruction of scheduled time",
@@ -16964,6 +16933,40 @@
           "method"
         ]
       },
+      "IssueTimeShiftInstruction": {
+        "type": "object",
+        "description": "The calculation instruction of billing time.\nThis is used in conjunction with the **service period anchor** to calculate the time the invoice is issued.\n",
+        "required": [
+          "chronology",
+          "duration",
+          "unit"
+        ],
+        "properties": {
+          "chronology": {
+            "type": "string",
+            "description": "The chronology of the billing time relatively to the service period start.",
+            "enum": [
+              "before",
+              "after"
+            ]
+          },
+          "duration": {
+            "type": "integer",
+            "description": "The number of the units",
+            "minimum": 1
+          },
+          "unit": {
+            "oneOf": [
+              {
+                "$ref": "https://rebilly.github.io/api-standards/schema/json-schema-draft-04/date-time/time-unit.json"
+              },
+              {
+                "$ref": "https://rebilly.github.io/api-standards/schema/json-schema-draft-04/date-time/time-plural-unit.json"
+              }
+            ]
+          }
+        }
+      },
       "auto": {
         "allOf": [
           {
@@ -16978,9 +16981,6 @@
           },
           {
             "$ref": "#/components/schemas/CustomEventScheduleInstruction"
-          },
-          {
-            "$ref": "#/components/schemas/BillingScheduleInstruction"
           },
           {
             "$ref": "#/components/schemas/InvoiceRetryScheduleInstruction"
@@ -17087,9 +17087,6 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/CommonScheduleInstruction"
-          },
-          {
-            "$ref": "#/components/schemas/BillingScheduleInstruction"
           },
           {
             "$ref": "#/components/schemas/ServicePeriodAnchorInstruction"
@@ -17415,13 +17412,13 @@
               }
             }
           },
-          "billingAnchor": {
+          "invoiceTimeShift": {
             "description": "You can shift issue time and due time of invoices for this subscription.\nThis setting overrides plan settings. To use plan settings, set `null`.\nTo use multiple plans in one subscription they all must have the same billing period,\nthis property allows to subscribe to different plans.\n",
             "nullable": true,
             "example": null,
             "allOf": [
               {
-                "$ref": "#/components/schemas/PlanBillingAnchor"
+                "$ref": "#/components/schemas/InvoiceTimeShift"
               }
             ]
           },

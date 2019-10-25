@@ -9946,6 +9946,22 @@ components:
         description:
           type: string
           description: Tax description
+    InvoiceTimeShift:
+      type: object
+      description: |
+        The invoice time shift in conjunction with `billingTiming` allows to setup different billing use cases such as:
+
+        - Bill immediately when the service period _starts_
+        - Bill immediately after the service period _ends_
+        - Bill _interval of time_ before the service period _starts_
+        - Bill _interval of time_ after the service period _starts_
+        - Bill _interval of time_ before the service period _ends_
+        - Bill _interval of time_ after the service period _ends_
+      properties:
+        issueTimeShift:
+          $ref: '#/components/schemas/IssueTimeShiftInstruction'
+        dueTimeShift:
+          $ref: '#/components/schemas/DueTimeShiftInstruction'
     InvoiceTransactionAllocation:
       type: object
       properties:
@@ -11817,10 +11833,10 @@ components:
               description: The price of a setup - 0 is a valid value (for free)
               type: number
               format: double
-        billingAnchor:
+        invoiceTimeShift:
           description: You can shift issue time and due time of invoices for this plan.
           allOf:
-            - $ref: '#/components/schemas/PlanBillingAnchor'
+            - $ref: '#/components/schemas/InvoiceTimeShift'
         subscriptionCount:
           type: integer
           readOnly: true
@@ -11842,28 +11858,6 @@ components:
           minItems: 1
           items:
             $ref: '#/components/schemas/SelfLink'
-    PlanBillingAnchor:
-      type: object
-      description: |
-        The billing anchor in conjunction with `billingTiming` allows to setup different billing use cases such as:
-
-        - Bill immediately when the service period _starts_
-        - Bill immediately after the service period _ends_
-        - Bill _interval of time_ before the service period _starts_
-        - Bill _interval of time_ after the service period _starts_
-        - Bill _interval of time_ before the service period _ends_
-        - Bill _interval of time_ after the service period _ends_
-      properties:
-        chronology:
-          type: string
-          description: The chronology of the billing time relatively to the service period start.
-          enum:
-            - before
-            - after
-        billingAnchorInstruction:
-          $ref: '#/components/schemas/BillingScheduleInstruction'
-        dueTimeShift:
-          $ref: '#/components/schemas/DueTimeShiftInstruction'
     PlanBillingTiming:
       type: string
       default: prepaid
@@ -12189,24 +12183,6 @@ components:
             result:
               type: string
               description: Rule result
-    BillingScheduleInstruction:
-      type: object
-      description: |
-        The calculation instruction of billing time.
-        This is used in conjunction with the **service period anchor** to calculate the time the invoice is issued.
-      discriminator:
-        propertyName: method
-      default:
-        method: immediately
-      required:
-        - method
-      properties:
-        method:
-          type: string
-          default: immediately
-          enum:
-            - immediately
-            - date-interval
     CommonScheduleInstruction:
       type: object
       description: The calculation instruction of scheduled time
@@ -12275,6 +12251,30 @@ components:
             - day-of-week
       required:
         - method
+    IssueTimeShiftInstruction:
+      type: object
+      description: |
+        The calculation instruction of billing time.
+        This is used in conjunction with the **service period anchor** to calculate the time the invoice is issued.
+      required:
+        - chronology
+        - duration
+        - unit
+      properties:
+        chronology:
+          type: string
+          description: The chronology of the billing time relatively to the service period start.
+          enum:
+            - before
+            - after
+        duration:
+          type: integer
+          description: The number of the units
+          minimum: 1
+        unit:
+          oneOf:
+            - $ref: 'https://rebilly.github.io/api-standards/schema/json-schema-draft-04/date-time/time-unit.json'
+            - $ref: 'https://rebilly.github.io/api-standards/schema/json-schema-draft-04/date-time/time-plural-unit.json'
     auto:
       allOf:
         - $ref: '#/components/schemas/CommonScheduleInstruction'
@@ -12282,7 +12282,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/CommonScheduleInstruction'
         - $ref: '#/components/schemas/CustomEventScheduleInstruction'
-        - $ref: '#/components/schemas/BillingScheduleInstruction'
         - $ref: '#/components/schemas/InvoiceRetryScheduleInstruction'
         - type: object
           properties:
@@ -12341,7 +12340,6 @@ components:
     immediately:
       allOf:
         - $ref: '#/components/schemas/CommonScheduleInstruction'
-        - $ref: '#/components/schemas/BillingScheduleInstruction'
         - $ref: '#/components/schemas/ServicePeriodAnchorInstruction'
         - $ref: '#/components/schemas/InvoiceRetryScheduleInstruction'
     intelligent:
@@ -12557,7 +12555,7 @@ components:
               quantity:
                 description: Number of units of the product on the given plan
                 type: integer
-        billingAnchor:
+        invoiceTimeShift:
           description: |
             You can shift issue time and due time of invoices for this subscription.
             This setting overrides plan settings. To use plan settings, set `null`.
@@ -12566,7 +12564,7 @@ components:
           nullable: true
           example: null
           allOf:
-            - $ref: '#/components/schemas/PlanBillingAnchor'
+            - $ref: '#/components/schemas/InvoiceTimeShift'
         recurringInterval:
           type: object
           description: |
