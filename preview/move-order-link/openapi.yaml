@@ -10520,7 +10520,7 @@ components:
           description: The link type
           type: string
           enum:
-            - order
+            - subscription
       required:
         - rel
     TransactionAllocationsLink:
