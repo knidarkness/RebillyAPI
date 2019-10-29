@@ -9824,6 +9824,7 @@ components:
               - $ref: '#/components/schemas/LeadSourceLink'
               - $ref: '#/components/schemas/TransactionAllocationsLink'
               - $ref: '#/components/schemas/RecalculateInvoiceLink'
+              - $ref: '#/components/schemas/SubscriptionLink'
         _embedded:
           type: array
           description: Any embedded objects available that are requested by the `expand` querystring parameter.
@@ -9916,7 +9917,6 @@ components:
           items:
             anyOf:
               - $ref: '#/components/schemas/SelfLink'
-              - $ref: '#/components/schemas/SubscriptionLink'
               - $ref: '#/components/schemas/ProductLink'
         _embedded:
           type: array

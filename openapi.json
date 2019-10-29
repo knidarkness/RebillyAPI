@@ -13320,6 +13320,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/RecalculateInvoiceLink"
+                },
+                {
+                  "$ref": "#/components/schemas/SubscriptionLink"
                 }
               ]
             }
@@ -13461,9 +13464,6 @@
               "anyOf": [
                 {
                   "$ref": "#/components/schemas/SelfLink"
-                },
-                {
-                  "$ref": "#/components/schemas/SubscriptionLink"
                 },
                 {
                   "$ref": "#/components/schemas/ProductLink"
