@@ -17302,6 +17302,7 @@
           "propertyName": "orderType"
         },
         "required": [
+          "orderType",
           "customerId",
           "websiteId",
           "items"
@@ -17324,20 +17325,6 @@
               "one-time-order"
             ],
             "default": "subscription-order"
-          },
-          "status": {
-            "type": "string",
-            "description": "The status of the subscription service. A subscription starts\nin the `pending` status, and will become `active` when the\nservice period begins.\n",
-            "readOnly": true,
-            "enum": [
-              "pending",
-              "active",
-              "canceled",
-              "churned",
-              "suspended",
-              "paused",
-              "abandoned"
-            ]
           },
           "billingStatus": {
             "description": "The billing status of the most recent invoice.  It may\nhelp you determine if you should change the service status\nsuch as suspending the service.\n",
@@ -17412,27 +17399,6 @@
               }
             }
           },
-          "invoiceTimeShift": {
-            "description": "You can shift issue time and due time of invoices for this subscription.\nThis setting overrides plan settings. To use plan settings, set `null`.\nTo use multiple plans in one subscription they all must have the same billing period,\nthis property allows to subscribe to different plans.\n",
-            "nullable": true,
-            "example": null,
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/InvoiceTimeShift"
-              }
-            ]
-          },
-          "recurringInterval": {
-            "type": "object",
-            "description": "The recurring interval to override plan settings. To use plan settings, set `null`.\nTo use multiple plans in one subscription they all must have the same recurring period length,\nthis property allows to subscribe to different plans.\n",
-            "nullable": true,
-            "example": null,
-            "properties": {
-              "periodAnchorInstruction": {
-                "$ref": "#/components/schemas/ServicePeriodAnchorInstruction"
-              }
-            }
-          },
           "deliveryAddress": {
             "description": "Delivery address",
             "nullable": true,
@@ -17450,11 +17416,6 @@
                 "$ref": "#/components/schemas/ContactObject"
               }
             ]
-          },
-          "autopay": {
-            "description": "Autopay determines if a payment attempt will be automatic",
-            "type": "boolean",
-            "default": true
           },
           "riskMetadata": {
             "nullable": true,
@@ -17490,41 +17451,10 @@
             "example": "PO123456",
             "type": "string"
           },
-          "renewalReminderTime": {
-            "description": "Time renewal reminder event will be triggered",
-            "nullable": true,
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ServerTimestamp"
-              }
-            ]
-          },
-          "renewalReminderNumber": {
-            "description": "Number of renewal reminder events triggered",
-            "type": "integer",
-            "readOnly": true
-          },
-          "trialReminderTime": {
-            "description": "Time renewal reminder event will be triggered",
-            "nullable": true,
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ServerTimestamp"
-              }
-            ]
-          },
-          "trialReminderNumber": {
-            "description": "Number of renewal reminder events triggered",
-            "type": "integer",
-            "readOnly": true
-          },
           "revision": {
             "description": "The number of times the subscription data has been modified.\nThe revision is useful when analyzing webhook data to determine if the change takes precedence over the current representation.\n",
             "type": "integer",
             "readOnly": true
-          },
-          "customFields": {
-            "$ref": "#/components/schemas/ResourceCustomFields"
           },
           "_links": {
             "type": "array",
@@ -17592,19 +17522,13 @@
                 "enum": [
                   "pending",
                   "paid",
-                  "canceled"
+                  "abandoned"
                 ]
               }
             }
           },
           {
-            "$ref": "#/components/schemas/UpcomingInvoice"
-          },
-          {
             "$ref": "#/components/schemas/SubscriptionMetadata"
-          },
-          {
-            "$ref": "#/components/schemas/SubscriptionCancellationState"
           }
         ]
       },
@@ -17616,16 +17540,17 @@
           {
             "properties": {
               "status": {
-                "description": "Subscription status is deprecated and the values will change to `active`, `canceled`.",
+                "description": "The status of the subscription service. A subscription starts\nin the `pending` status, and will become `active` when the\nservice period begins.\n",
                 "type": "string",
                 "readOnly": true,
                 "enum": [
-                  "Active",
-                  "Will become active at a future date",
-                  "Active but set to cancel at next rebill date",
-                  "Cancelled",
-                  "Inactive",
-                  "Suspended"
+                  "pending",
+                  "active",
+                  "canceled",
+                  "churned",
+                  "suspended",
+                  "paused",
+                  "abandoned"
                 ]
               },
               "inTrial": {
@@ -17651,6 +17576,32 @@
                   }
                 }
               },
+              "invoiceTimeShift": {
+                "description": "You can shift issue time and due time of invoices for this subscription.\nThis setting overrides plan settings. To use plan settings, set `null`.\nTo use multiple plans in one subscription they all must have the same billing period,\nthis property allows to subscribe to different plans.\n",
+                "nullable": true,
+                "example": null,
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/InvoiceTimeShift"
+                  }
+                ]
+              },
+              "recurringInterval": {
+                "type": "object",
+                "description": "The recurring interval to override plan settings. To use plan settings, set `null`.\nTo use multiple plans in one subscription they all must have the same recurring period length,\nthis property allows to subscribe to different plans.\n",
+                "nullable": true,
+                "example": null,
+                "properties": {
+                  "periodAnchorInstruction": {
+                    "$ref": "#/components/schemas/ServicePeriodAnchorInstruction"
+                  }
+                }
+              },
+              "autopay": {
+                "description": "Autopay determines if a payment attempt will be automatic",
+                "type": "boolean",
+                "default": true
+              },
               "startTime": {
                 "description": "Subscription start time.  When the value is sent as null, it will use the current time. This value can't be in past more than one service period.",
                 "nullable": true,
@@ -17673,6 +17624,34 @@
               },
               "rebillNumber": {
                 "description": "The current period number",
+                "type": "integer",
+                "readOnly": true
+              },
+              "renewalReminderTime": {
+                "description": "Time renewal reminder event will be triggered",
+                "nullable": true,
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ServerTimestamp"
+                  }
+                ]
+              },
+              "renewalReminderNumber": {
+                "description": "Number of renewal reminder events triggered",
+                "type": "integer",
+                "readOnly": true
+              },
+              "trialReminderTime": {
+                "description": "Time renewal reminder event will be triggered",
+                "nullable": true,
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ServerTimestamp"
+                  }
+                ]
+              },
+              "trialReminderNumber": {
+                "description": "Number of renewal reminder events triggered",
                 "type": "integer",
                 "readOnly": true
               }
