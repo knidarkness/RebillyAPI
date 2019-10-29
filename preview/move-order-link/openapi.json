@@ -13345,9 +13345,6 @@
                 },
                 {
                   "$ref": "#/components/schemas/LeadSourceEmbed"
-                },
-                {
-                  "$ref": "#/components/schemas/SubscriptionEmbed"
                 }
               ]
             }
