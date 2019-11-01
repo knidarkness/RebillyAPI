@@ -10570,6 +10570,7 @@ components:
         - check
         - paypal
         - Alipay
+        - ApplePay
         - AstroPay Card
         - bank-transfer
         - bitcoin
@@ -10578,6 +10579,7 @@ components:
         - CASHlib
         - CashToCode
         - China UnionPay
+        - Conekta-oxxo
         - domestic-cards
         - echeck
         - ecoPayz
@@ -10586,6 +10588,7 @@ components:
         - ePay.bg
         - Flexepin
         - Giropay
+        - GooglePay
         - Gpaysafe
         - iDebit
         - iDEAL
@@ -10609,6 +10612,9 @@ components:
         - online-bank-transfer
         - Onlineueberweisen
         - Pagsmile-lottery
+        - Pagsmile-deposit-express
+        - Pagsmile-boleto
+        - PayCash
         - Paysafecard
         - Pay4Fun
         - PinPay
@@ -10622,6 +10628,7 @@ components:
         - Skrill Rapid Transfer
         - SMSVoucher
         - SparkPay
+        - swift-dbt
         - ToditoCash-card
         - Trustly
         - UPayCard
