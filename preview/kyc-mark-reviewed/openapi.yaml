@@ -4366,7 +4366,7 @@ paths:
       summary: Accept a KYC document
       operationId: PostKycDocumentAcceptance
       description: |
-        Manually override automated status and accept the document
+        Manually override automated status and accept the document. Updates the reviewed time and reviewer information.
       responses:
         '201':
           description: KYC document acceptance was created
@@ -4394,7 +4394,7 @@ paths:
       summary: Reject a KYC document
       operationId: PostKycDocumentRejection
       description: |
-        Manually override automated status and reject the document
+        Manually override automated status and reject the document. Updates the reviewed time and reviewer information.
       requestBody:
         content:
           application/json:
@@ -4425,23 +4425,16 @@ paths:
   '/kyc-documents/{id}/review':
     parameters:
       - $ref: '#/components/parameters/resourceId'
-    patch:
+    post:
       tags:
         - KYC Documents
       summary: Review a KYC document
-      operationId: PatchKycDocument
+      operationId: PostKycDocumentReview
       description: |
-        Allows you to toggle the reviewed state of the KYC document when doing manual verification and store the reviewer's information.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/KycDocumentReview'
-        description: KYC document resource
-        required: true
+        Mark the KYC document as reviewed without changing its status. Updates the reviewed time and reviewer information.
       responses:
         '200':
-          description: KYC document was updated
+          description: KYC document was reviewed
           headers:
             Rate-Limit-Limit:
               $ref: '#/components/headers/Rate-Limit-Limit'
@@ -10056,10 +10049,6 @@ components:
             - in-progress
             - accepted
             - rejected
-        reviewed:
-          description: Defines whether the document was manually inspected and reviewed
-          type: boolean
-          default: false
         reviewer:
           type: object
           description: Details of the last reviewer including his name and id
@@ -10168,16 +10157,6 @@ components:
           description: The rejection message
           type: string
           example: Provided document is unreadable
-    KycDocumentReview:
-      type: object
-      required:
-        - reviewed
-      properties:
-        reviewed:
-          description: |
-            Defines whether the document was manually inspected and reviewed after the automated KYC process. Can be toggled multiple times as it goes through review.
-          type: boolean
-          default: false
     LeadSource:
       allOf:
         - $ref: '#/components/schemas/LeadSourceData'
