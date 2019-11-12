@@ -1,0 +1,156 @@
+type: object
+properties:
+  id:
+    description: The credit memo identifier string
+    readOnly: true
+    allOf:
+      - $ref: "#/components/schemas/ResourceId"
+  customerId:
+    description: Customer's ID
+    allOf:
+      - $ref: "#/components/schemas/ResourceId"
+  type:
+    description: Credit memo type
+    type: string
+    readOnly: true
+    enum:
+      - refundable
+      - adjustment
+  status:
+    description: Credit memo status
+    type: string
+    readOnly: true
+    enum:
+      - refund-due
+      - refunded
+      - refund-failed
+      - not-applied
+      - partially-applied
+      - applied
+      - voided
+      - reversed
+  reason:
+    description: Credit memo reason code
+    type: string
+    readOnly: true
+    enum:
+      - return
+      - product-unsatisfactory
+      - order-change
+      - order-cancellation
+      - chargeback
+      - write-off
+      - waiver
+      - customer-credit
+      - other
+  description:
+    description: A public description (visible to customers) clarifying the purpose of the credit memo
+    type: string
+  internalNote:
+    description: A custom note (not visible to customers) clarifying the purpose of the credit memo
+    type: string
+  createdTime:
+    description: Credit memo created time
+    allOf:
+      - $ref: "#/components/schemas/ServerTimestamp"
+  updatedTime:
+    description: Credit memo updated time
+    allOf:
+      - $ref: "#/components/schemas/ServerTimestamp"
+  currency:
+    readOnly: true
+    allOf:
+      - $ref: "#/components/schemas/CurrencyCode"
+  totalCredit:
+    description: The total credit of the Credit Memo
+    type: number
+    format: double
+    readOnly: true
+  unusedCredit:
+    description: Amount from the total credit that hasn't been allocated to any invoices yet
+    type: number
+    format: double
+    readOnly: true
+  reversedCredit:
+    description: Amount of credit that was allocated to invoices, but later reversed and returned to the customer
+    type: number
+    format: double
+    readOnly: true
+  taxCredit:
+    description: Fraction from the total credit amount that relates to taxes
+    type: number
+    format: double
+    readOnly: true
+  shippingCredit:
+    description: Fraction from the total credit amount that relates to shipping costs
+    type: number
+    format: double
+    readOnly: true
+  outsideCredit:
+    description: Fraction from the total credit amount that has been settled outside of Rebilly (e.g. cash, gift card, etc.)
+    type: number
+    format: double
+    readOnly: true
+  customerCredit:
+    description: Fraction from the total credit that has been applied towards the customer credit balance
+    type: number
+    format: double
+    readOnly: true
+  generalAdjustmentCredit:
+    type: object
+    description: Fraction from the total credit marked as a general adjustment (not related to a specific invoice item)
+    properties:
+      amount:
+        description: The amount of the general adjustment
+        type: number
+        format: double
+        readOnly: true
+      description:
+        description: A note detailing the reason for the general adjustment
+        type: string
+  allocations:
+    description: Credit memo invoice allocations
+    type: array
+    minItems: 0
+    readOnly: true,
+    items:
+      $ref: "#/components/schemas/CreditMemoAllocation"
+  refunds:
+    description: Refunds described by this credit memo
+    type: array
+    minItems: 0
+    readOnly: true,
+    items:
+      $ref: "#/components/schemas/CreditMemoRefund"
+  reversals:
+    description: Reversals of invoice allocations or unused credit
+    type: array
+    minItems: 0
+    readOnly: true,
+    items:
+      $ref: "#/components/schemas/CreditMemoReversal"
+  originTransactionIds:
+    description: The IDs of the transactions that resulted in the automatic creation of this credit memo
+    type: array
+    minItems: 0
+    readOnly: true
+    items:
+      $ref: "#/components/schemas/ResourceId"
+  number:
+    description: An auto-incrementing number based on the sequence of credit memos for any particular customer.
+    readOnly: true
+    type: integer
+  revision:
+    description: The number of times the credit memo data has been modified.
+    type: integer
+    readOnly: true
+  _links:
+    type: array
+    description: The links related to the resource
+    readOnly: true
+    minItems: 2
+    maxItems: 2
+    items:
+      anyOf:
+        - $ref: "#/components/schemas/SelfLink"
+        - $ref: "#/components/schemas/CustomerLink"

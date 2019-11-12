@@ -1,0 +1,33 @@
+type: object
+properties:
+  invoiceId:
+    readOnly: true
+    description: Id of the invoice that the credit memo was allocated to
+    allOf:
+      - $ref: "#/components/schemas/ResourceId"
+  credit:
+    description: Amount of credit from the credit memo allocated to the given invoice
+    type: number
+    format: double
+    readOnly: true
+  reversedCredit:
+    description: Amount of credit from the allocation that was reversed and returned to the customer
+    type: number
+    format: double
+    readOnly: true
+  currency:
+    readOnly: true
+    allOf:
+      - $ref: "#/components/schemas/CurrencyCode"
+  items:
+    readOnly: true
+    type: array
+  _links:
+    type: array
+    description: The links related to the resource
+    readOnly: true
+    minItems: 1
+    maxItems: 1
+    items:
+      anyOf:
+        - $ref: "#/components/schemas/InvoiceLink"

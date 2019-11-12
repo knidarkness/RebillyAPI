@@ -1,0 +1,34 @@
+type: object
+properties:
+  invoiceId:
+    readOnly: true
+    description: Id of the invoice on which the refund occurred
+    allOf:
+      - $ref: "#/components/schemas/ResourceId"
+  transactionId:
+    readOnly: true
+    description: Id of the transaction through which the refund was performed
+    allOf:
+      - $ref: "#/components/schemas/ResourceId"
+  amount:
+    description: Amount of credit refunded to the customer for this invoice and transaction
+    type: number
+    format: double
+    readOnly: true
+  currency:
+    readOnly: true
+    allOf:
+      - $ref: "#/components/schemas/CurrencyCode"
+  items:
+    readOnly: true
+    type: array
+  _links:
+    type: array
+    description: The links related to the resource
+    readOnly: true
+    minItems: 2
+    maxItems: 2
+    items:
+      anyOf:
+        - $ref: "#/components/schemas/InvoiceLink"
+        - $ref: "#/components/schemas/TransactionLink"
