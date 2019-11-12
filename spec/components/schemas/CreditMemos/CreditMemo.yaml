@@ -130,7 +130,7 @@ properties:
     items:
       $ref: "#/components/schemas/CreditMemoReversal"
   originTransactionIds:
-    description: The IDs of the transactions that resulted in the automatic creation of this credit memo
+    description: The IDs of the transaction(s) that resulted in the automatic creation of this credit memo
     type: array
     minItems: 0
     readOnly: true

@@ -180,6 +180,7 @@ x-tagGroups:
   - name: Invoices & Subscriptions
     tags:
       - Coupons
+      - Credit Memos
       - Invoices
       - Plans
       - Products
