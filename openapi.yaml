@@ -13513,6 +13513,8 @@ components:
                   - transaction
                   - email-message
                   - dispute
+                  - credit-memo
+                  - coupon
               resourceId:
                 $ref: '#/components/schemas/ResourceId'
               placeholder:

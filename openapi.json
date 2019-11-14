@@ -18767,7 +18767,9 @@
                     "subscription",
                     "transaction",
                     "email-message",
-                    "dispute"
+                    "dispute",
+                    "credit-memo",
+                    "coupon"
                   ]
                 },
                 "resourceId": {
