@@ -18362,6 +18362,7 @@
               "default-payment-instrument-changed",
               "lead-source-changed",
               "custom-fields-changed",
+              "coupon-applied",
               "coupon-redeemed",
               "coupon-redemption-canceled",
               "kyc-document-created",
@@ -18536,7 +18537,8 @@
               "invoice-refunded",
               "invoice-partially-refunded",
               "invoice-renewal-payment-declined",
-              "email-message-sent"
+              "email-message-sent",
+              "coupon-applied"
             ]
           },
           "triggeredBy": {
