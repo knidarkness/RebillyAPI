@@ -5,6 +5,16 @@ properties:
     readOnly: true
     allOf:
       - $ref: "#/components/schemas/ResourceId"
+  transactionId:
+    description: ID of the transaction being refunded
+    writeOnly: true
+    allOf:
+      - $ref: "#/components/schemas/ResourceId"
+  invoiceId:
+    description: ID of the invoice being refunded
+    writeOnly: true
+    allOf:
+      - $ref: "#/components/schemas/ResourceId"
   customerId:
     description: Customer's ID
     allOf:
@@ -32,7 +42,6 @@ properties:
   reason:
     description: Credit memo reason code
     type: string
-    readOnly: true
     enum:
       - return
       - product-unsatisfactory
@@ -80,25 +89,40 @@ properties:
     description: Fraction from the total credit amount that relates to taxes
     type: number
     format: double
-    readOnly: true
   shippingCredit:
     description: Fraction from the total credit amount that relates to shipping costs
     type: number
     format: double
-    readOnly: true
+  items:
+    type: array
+    minItems: 0
+    writeOnly: true
+    items:
+      type: object
+      properties:
+        invoiceItemId:
+          allOf:
+            - $ref: "#/components/schemas/ResourceId"
+        amount:
+          type: number
+          format: double
+  refundCredit:
+    description: Amount being refunded
+    type: number
+    format: double
+    writeOnly: true
   outsideCredit:
     description: Fraction from the total credit amount that has been settled outside of Rebilly (e.g. cash, gift card, etc.)
     type: number
     format: double
-    readOnly: true
   customerCredit:
     description: Fraction from the total credit that has been applied towards the customer credit balance
     type: number
     format: double
-    readOnly: true
   generalAdjustmentCredit:
     type: object
     description: Fraction from the total credit marked as a general adjustment (not related to a specific invoice item)
+    readOnly: true
     properties:
       amount:
         description: The amount of the general adjustment
@@ -112,21 +136,21 @@ properties:
     description: Credit memo invoice allocations
     type: array
     minItems: 0
-    readOnly: true,
+    readOnly: true
     items:
       $ref: "#/components/schemas/CreditMemoAllocation"
   refunds:
     description: Refunds described by this credit memo
     type: array
     minItems: 0
-    readOnly: true,
+    readOnly: true
     items:
       $ref: "#/components/schemas/CreditMemoRefund"
   reversals:
     description: Reversals of invoice allocations or unused credit
     type: array
     minItems: 0
-    readOnly: true,
+    readOnly: true
     items:
       $ref: "#/components/schemas/CreditMemoReversal"
   originTransactionIds:
