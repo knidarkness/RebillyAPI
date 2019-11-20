@@ -7209,38 +7209,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "required": [
-                  "websiteId",
-                  "currency"
-                ],
-                "properties": {
-                  "websiteId": {
-                    "description": "The Website ID",
-                    "type": "string"
-                  },
-                  "currency": {
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/CurrencyCode"
-                      }
-                    ]
-                  },
-                  "amount": {
-                    "description": "The amount to authorize",
-                    "type": "number",
-                    "format": "double",
-                    "default": 1
-                  },
-                  "redirectURLs": {
-                    "description": "Redirect URLs",
-                    "type": "object"
-                  },
-                  "gatewayAccountId": {
-                    "description": "The Gateway Account ID which use to send transactions",
-                    "type": "string"
-                  }
-                }
+                "$ref": "#/components/schemas/PayPalAccountAuthorization"
               }
             }
           },
@@ -15249,6 +15218,39 @@
           }
         ]
       },
+      "PayPalAccountAuthorization": {
+        "type": "object",
+        "required": [
+          "websiteId",
+          "currency"
+        ],
+        "properties": {
+          "websiteId": {
+            "description": "The Website ID",
+            "type": "string"
+          },
+          "currency": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CurrencyCode"
+              }
+            ]
+          },
+          "amount": {
+            "description": "The amount to authorize",
+            "type": "number",
+            "format": "double",
+            "default": 1
+          },
+          "gatewayAccountId": {
+            "description": "The Gateway Account ID which use to send transactions",
+            "type": "string"
+          },
+          "redirectUrl": {
+            "$ref": "#/components/schemas/TransactionRedirectUrl"
+          }
+        }
+      },
       "paypalInstrument": {
         "description": "PayPal payment instrument object",
         "allOf": [
@@ -19540,14 +19542,10 @@
             ]
           },
           "notificationUrl": {
-            "description": "The URL where a server-to-server POST notification will be sent.  It  will be sent when the\ntransaction's result is finalized after a timeout or an offsite interaction. Do not trust the\nnotification; follow with a GET request to confirm the result of the transaction. Please\nrespond with a 2xx HTTP status code, or we will reattempt the request again.\n",
-            "type": "string",
-            "format": "uri"
+            "$ref": "#/components/schemas/TransactionNotificationUrl"
           },
           "redirectUrl": {
-            "description": "The URL to redirect the end-user when an offsite transaction is completed.  Defaults to the website's configured URL.",
-            "type": "string",
-            "format": "uri"
+            "$ref": "#/components/schemas/TransactionRedirectUrl"
           },
           "retryInstruction": {
             "$ref": "#/components/schemas/PaymentRetry"
@@ -19735,6 +19733,16 @@
             }
           }
         }
+      },
+      "TransactionNotificationUrl": {
+        "description": "The URL where a server-to-server POST notification will be sent.  It  will be sent when the\ntransaction's result is finalized after a timeout or an offsite interaction. Do not trust the\nnotification; follow with a GET request to confirm the result of the transaction. Please\nrespond with a 2xx HTTP status code, or we will reattempt the request again.\nThe 2 placeholders are available to use in this URI: `{id}` and `{result}`.\n",
+        "type": "string",
+        "format": "uri"
+      },
+      "TransactionRedirectUrl": {
+        "description": "The URL to redirect the end-user when an offsite transaction is completed.\nThe 2 placeholders are available to use in this URI: `{id}` and `{result}`.\nDefaults to the website's configured URL.\n",
+        "type": "string",
+        "format": "uri"
       },
       "TransactionRequest": {
         "type": "object",
