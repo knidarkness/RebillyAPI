@@ -19735,12 +19735,12 @@
         }
       },
       "TransactionNotificationUrl": {
-        "description": "The URL where a server-to-server POST notification will be sent.  It  will be sent when the\ntransaction's result is finalized after a timeout or an offsite interaction. Do not trust the\nnotification; follow with a GET request to confirm the result of the transaction. Please\nrespond with a 2xx HTTP status code, or we will reattempt the request again.\nThe 2 placeholders are available to use in this URI: `{id}`, `{requestId}` and `{result}`.\n",
+        "description": "The URL where a server-to-server POST notification will be sent.  It  will be sent when the\ntransaction's result is finalized after a timeout or an offsite interaction. Do not trust the\nnotification; follow with a GET request to confirm the result of the transaction. Please\nrespond with a 2xx HTTP status code, or we will reattempt the request again.\nThe 2 placeholders are available to use in this URI: `{id}` and `{result}`.\n",
         "type": "string",
         "format": "uri"
       },
       "TransactionRedirectUrl": {
-        "description": "The URL to redirect the end-user when an offsite transaction is completed.\nThe 2 placeholders are available to use in this URI: `{id}`, `{requestId}` and `{result}`.\nDefaults to the website's configured URL.\n",
+        "description": "The URL to redirect the end-user when an offsite transaction is completed.\nThe 2 placeholders are available to use in this URI: `{id}` and `{result}`.\nDefaults to the website's configured URL.\n",
         "type": "string",
         "format": "uri"
       },
