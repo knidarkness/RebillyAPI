@@ -13661,28 +13661,6 @@ components:
           description: Refund amount
           type: number
           format: double
-    RedirectUrls:
-      type: object
-      deprecated: true
-      description: 'The redirect URIs, now deprecated.  Use `redirectUrl` instead.'
-      required:
-        - error
-        - success
-        - decline
-        - cancel
-      properties:
-        error:
-          type: string
-          format: url
-        success:
-          type: string
-          format: url
-        decline:
-          type: string
-          format: url
-        cancel:
-          type: string
-          format: url
     ThreeDSecureResult:
       type: object
       readOnly: true
@@ -14081,8 +14059,6 @@ components:
           description: The URL to redirect the end-user when an offsite transaction is completed.  Defaults to the website's configured URL.
           type: string
           format: uri
-        redirectUrls:
-          $ref: '#/components/schemas/RedirectUrls'
         retryInstruction:
           $ref: '#/components/schemas/PaymentRetry'
         retryNumber:
