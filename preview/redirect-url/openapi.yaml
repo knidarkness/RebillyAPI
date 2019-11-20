@@ -14163,13 +14163,13 @@ components:
         transaction's result is finalized after a timeout or an offsite interaction. Do not trust the
         notification; follow with a GET request to confirm the result of the transaction. Please
         respond with a 2xx HTTP status code, or we will reattempt the request again.
-        The 2 placeholders are available to use in this URI: `{requestId}` and `{result}`.
+        The 2 placeholders are available to use in this URI: `{id}`, `{requestId}` and `{result}`.
       type: string
       format: uri
     TransactionRedirectUrl:
       description: |
         The URL to redirect the end-user when an offsite transaction is completed.
-        The 2 placeholders are available to use in this URI: `{requestId}` and `{result}`.
+        The 2 placeholders are available to use in this URI: `{id}`, `{requestId}` and `{result}`.
         Defaults to the website's configured URL.
       type: string
       format: uri
