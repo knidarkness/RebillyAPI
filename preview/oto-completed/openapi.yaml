@@ -13235,6 +13235,7 @@ components:
             - order-created
             - order-renewed
             - order-activated
+            - order-completed
             - order-reactivated
             - order-canceled
             - order-upgraded
@@ -13388,6 +13389,7 @@ components:
             - timeline-comment-created
             - order-renewed
             - order-activated
+            - order-completed
             - order-reactivated
             - order-canceled
             - order-upgraded
