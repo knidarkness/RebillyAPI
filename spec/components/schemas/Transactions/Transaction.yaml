@@ -50,9 +50,36 @@ properties:
     format: double
     readOnly: true
   currency:
-    description: The transactions's currency
-    type: string
     readOnly: true
+    allOf:
+      - $ref: "#/components/schemas/CurrencyCode"
+  purchaseAmount:
+    description: The transactions's purchase amount
+    type: number
+    format: double
+    readOnly: true
+  purchaseCurrency:
+    readOnly: true
+    allOf:
+      - $ref: "#/components/schemas/CurrencyCode"
+  requestAmount:
+    description: The transactions's amount received in the payment request
+    type: number
+    format: double
+    readOnly: true
+  requestCurrency:
+    readOnly: true
+    allOf:
+      - $ref: "#/components/schemas/CurrencyCode"
+  reportAmount:
+    description: The transactions's amount to report
+    type: number
+    format: double
+    readOnly: true
+  reportCurrency:
+    readOnly: true
+    allOf:
+      - $ref: "#/components/schemas/CurrencyCode"
   parentTransactionId:
     description: The transactions's parent ID
     allOf:
@@ -183,7 +210,9 @@ properties:
     description: The number of transactions by the same customer in the past 24 hours
     type: integer
   revision:
-    description: The number of times the transaction data has been modified
+    description: |
+      The number of times the transaction data has been modified.
+      The revision is useful when analyzing webhook data to determine if the change takes precedence over the current representation.
     type: integer
     readOnly: true
   referenceData:
@@ -229,7 +258,8 @@ properties:
             type: number
             format: double
           currency:
-            type: string
+            allOf:
+              - $ref: "#/components/schemas/CurrencyCode"
       quote:
         type: object
         description: Suggested amount and currency to convert to
@@ -238,7 +268,8 @@ properties:
             type: number
             format: double
           currency:
-            type: string
+            allOf:
+              - $ref: "#/components/schemas/CurrencyCode"
       usdMarkup:
         description: The amount of markup translated to USD
         type: number
@@ -267,7 +298,8 @@ properties:
             type: number
             format: double
           currency:
-            type: string
+            allOf:
+              - $ref: "#/components/schemas/CurrencyCode"
       bump:
         type: object
         description: Bump amount and currency
@@ -276,7 +308,8 @@ properties:
             type: number
             format: double
           currency:
-            type: string
+            allOf:
+              - $ref: "#/components/schemas/CurrencyCode"
       bonus:
         type: object
         description: Bonus amount and currency
@@ -285,7 +318,8 @@ properties:
             type: number
             format: double
           currency:
-            type: string
+            allOf:
+              - $ref: "#/components/schemas/CurrencyCode"
       usdOrder:
         description: The amount of initial amount translated to USD
         type: number
@@ -320,19 +354,9 @@ properties:
     allOf:
       - $ref: "#/components/schemas/RiskMetadata"
   notificationUrl:
-    description: |
-      The URL where a server-to-server POST notification will be sent.  It  will be sent when the
-      transaction's result is finalized after a timeout or an offsite interaction. Do not trust the
-      notification; follow with a GET request to confirm the result of the transaction. Please
-      respond with a 2xx HTTP status code, or we will reattempt the request again.
-    type: string
-    format: uri
+    $ref: "#/components/schemas/TransactionNotificationUrl"
   redirectUrl:
-    description: The URL to redirect the end-user when an offsite transaction is completed.  Defaults to the website's configured URL.
-    type: string
-    format: uri
-  redirectUrls:
-    $ref: "#/components/schemas/RedirectUrls"
+    $ref: "#/components/schemas/TransactionRedirectUrl"
   retryInstruction:
     $ref: "#/components/schemas/PaymentRetry"
   retryNumber:

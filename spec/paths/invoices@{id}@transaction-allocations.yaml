@@ -1,16 +1,14 @@
+parameters:
+  - $ref: "#/components/parameters/resourceId"
 get:
-  deprecated: true
   tags:
-    - Payments
-  parameters:
-    - $ref: "#/components/parameters/collectionLimit"
-    - $ref: "#/components/parameters/collectionOffset"
-  summary: Retrieve a scheduled payment list
-  description: |
-    Retrieve a scheduled payment list
+    - Invoices
+  summary: Get transaction amounts allocated to an invoice
+  operationId: GetInvoiceTransactionAllocationCollection
+  description: Get the precise amounts from a transaction allocated as invoice payments
   responses:
     200:
-      description: Successful retrieve the payments list that still waiting to be processed
+      description: List of allocations was retrieved successfully.
       headers:
         Rate-Limit-Limit:
           $ref: "#/components/headers/Rate-Limit-Limit"
@@ -29,6 +27,8 @@ get:
           schema:
             type: array
             items:
-              $ref: "#/components/schemas/Payment"
+              $ref: "#/components/schemas/InvoiceTransactionAllocation"
     401:
       $ref: "#/components/responses/AccessForbidden"
+    404:
+      $ref: "#/components/responses/NotFound"

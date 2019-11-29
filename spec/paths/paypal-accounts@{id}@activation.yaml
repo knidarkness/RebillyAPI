@@ -4,34 +4,14 @@ post:
   tags:
     - PayPal Accounts
   summary: Activate a PayPal Account
+  operationId: PostPayPalAccountActivation
   description: |
     Activate a PayPal Account
   requestBody:
     content:
       application/json:
         schema:
-          type: object
-          required:
-            - websiteId
-            - currency
-          properties:
-            websiteId:
-              description: The Website ID
-              type: string
-            currency:
-              description: Currency (three letter code)
-              type: string
-            amount:
-              description: The amount to authorize
-              type: number
-              format: double
-              default: 1
-            redirectURLs:
-              description: Redirect URLs
-              type: object
-            gatewayAccountId:
-              description: The Gateway Account ID which use to send transactions
-              type: string
+          $ref: "#/components/schemas/PayPalAccountAuthorization"
     description: PayPal Account resource
     required: true
   responses:
