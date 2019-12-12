@@ -1437,6 +1437,9 @@
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
           }
         },
         "x-code-samples": [
@@ -6516,6 +6519,9 @@
           "401": {
             "$ref": "#/components/responses/AccessForbidden"
           },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
           "409": {
             "$ref": "#/components/responses/Conflict"
           }
@@ -7291,8 +7297,11 @@
           "401": {
             "$ref": "#/components/responses/AccessForbidden"
           },
-          "422": {
-            "$ref": "#/components/responses/InvalidDataError"
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
           }
         },
         "x-code-samples": [

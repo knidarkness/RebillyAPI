@@ -1115,6 +1115,8 @@ paths:
           $ref: '#/components/responses/AccessForbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
       x-code-samples:
         - lang: PHP
           source: |
@@ -4951,6 +4953,8 @@ paths:
                 $ref: '#/components/schemas/PaymentCard'
         '401':
           $ref: '#/components/responses/AccessForbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
         '409':
           $ref: '#/components/responses/Conflict'
       x-code-samples:
@@ -5582,8 +5586,10 @@ paths:
                 $ref: '#/components/schemas/PayPalAccount'
         '401':
           $ref: '#/components/responses/AccessForbidden'
-        '422':
-          $ref: '#/components/responses/InvalidDataError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
       x-code-samples:
         - lang: PHP
           source: |
