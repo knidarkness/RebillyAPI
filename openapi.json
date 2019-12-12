@@ -1201,7 +1201,7 @@
         "description": "Retrieve a Bank Account with specified identifier string\n",
         "responses": {
           "200": {
-            "description": "BankAccount was retrieved successfully",
+            "description": "Bank Account was retrieved successfully",
             "headers": {
               "Rate-Limit-Limit": {
                 "$ref": "#/components/headers/Rate-Limit-Limit"
@@ -1280,7 +1280,7 @@
         },
         "responses": {
           "200": {
-            "description": "BankAccount was updated",
+            "description": "Bank Account was updated",
             "headers": {
               "Rate-Limit-Limit": {
                 "$ref": "#/components/headers/Rate-Limit-Limit"
@@ -1315,7 +1315,7 @@
         "tags": [
           "Bank Accounts"
         ],
-        "summary": "Create a BankAccount with predefined ID",
+        "summary": "Create a Bank Account with predefined ID",
         "operationId": "PutBankAccount",
         "description": "Create or update a BankAccount with predefined identifier string\n",
         "requestBody": {
@@ -1412,7 +1412,7 @@
         "description": "Deactivate a Bank Account\n",
         "responses": {
           "201": {
-            "description": "Deactivated successfully",
+            "description": "Bank Account was deactivated",
             "headers": {
               "Rate-Limit-Limit": {
                 "$ref": "#/components/headers/Rate-Limit-Limit"
@@ -6108,7 +6108,7 @@
         },
         "responses": {
           "200": {
-            "description": "PaymentCard was updated",
+            "description": "Payment Card was updated",
             "headers": {
               "Rate-Limit-Limit": {
                 "$ref": "#/components/headers/Rate-Limit-Limit"
@@ -6443,7 +6443,7 @@
         },
         "responses": {
           "201": {
-            "description": "Authorization successful",
+            "description": "Payment Card was authorized",
             "headers": {
               "Rate-Limit-Limit": {
                 "$ref": "#/components/headers/Rate-Limit-Limit"
@@ -6493,7 +6493,7 @@
         "description": "Deactivate a Payment Card\n",
         "responses": {
           "201": {
-            "description": "Authorization successful",
+            "description": "Payment Card was deactivated",
             "headers": {
               "Rate-Limit-Limit": {
                 "$ref": "#/components/headers/Rate-Limit-Limit"
@@ -6516,8 +6516,8 @@
           "401": {
             "$ref": "#/components/responses/AccessForbidden"
           },
-          "422": {
-            "$ref": "#/components/responses/InvalidDataError"
+          "409": {
+            "$ref": "#/components/responses/Conflict"
           }
         },
         "x-code-samples": [
@@ -7218,7 +7218,7 @@
         },
         "responses": {
           "201": {
-            "description": "Activate successful",
+            "description": "PayPal Account was activated",
             "headers": {
               "Rate-Limit-Limit": {
                 "$ref": "#/components/headers/Rate-Limit-Limit"
@@ -7268,7 +7268,7 @@
         "description": "Deactivate a PayPal Account\n",
         "responses": {
           "201": {
-            "description": "Deactivate successful",
+            "description": "PayPal Account was deactivated",
             "headers": {
               "Rate-Limit-Limit": {
                 "$ref": "#/components/headers/Rate-Limit-Limit"
