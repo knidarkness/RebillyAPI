@@ -4481,7 +4481,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/KycDocumentAndCustomer'
+                  $ref: '#/components/schemas/KycDocumentsAndCustomer'
         '401':
           $ref: '#/components/responses/AccessForbidden'
   /password-tokens:
@@ -10102,28 +10102,6 @@ components:
               - $ref: '#/components/schemas/SelfLink'
               - $ref: '#/components/schemas/FileLink'
               - $ref: '#/components/schemas/CustomerLink'
-    KycDocumentAndCustomer:
-      type: object
-      description: Collection of KYC Documents and the Customer to whom they belong
-      properties:
-        customer:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/Customer'
-        documents:
-          type: array
-          readOnly: true
-          items:
-            allOf:
-              - $ref: '#/components/schemas/KycDocument'
-        _links:
-          type: array
-          description: The links related to resource
-          readOnly: true
-          minItems: 1
-          items:
-            anyOf:
-              - $ref: '#/components/schemas/SelfLink'
     KycDocumentMatches:
       type: object
       readOnly: true
@@ -10188,6 +10166,28 @@ components:
           description: The rejection message
           type: string
           example: Provided document is unreadable
+    KycDocumentsAndCustomer:
+      type: object
+      description: Collection of KYC Documents and the Customer to whom they belong
+      properties:
+        customer:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/Customer'
+        documents:
+          type: array
+          readOnly: true
+          items:
+            allOf:
+              - $ref: '#/components/schemas/KycDocument'
+        _links:
+          type: array
+          description: The links related to resource
+          readOnly: true
+          minItems: 1
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/SelfLink'
     LeadSource:
       allOf:
         - $ref: '#/components/schemas/LeadSourceData'
