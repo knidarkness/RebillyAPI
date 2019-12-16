@@ -4368,7 +4368,7 @@ paths:
       summary: Accept a KYC document
       operationId: PostKycDocumentAcceptance
       description: |
-        Marks that status of the document as `accepted`. Updates the review time and reviewer information.  Intended to be used for manual overrides.
+        Marks that status of the document as `accepted`. Updates the review time and reviewer information. Intended to be used for manual overrides.
       responses:
         '201':
           description: KYC document acceptance was created
@@ -4396,7 +4396,7 @@ paths:
       summary: Reject a KYC document
       operationId: PostKycDocumentRejection
       description: |
-        Marks that status of the document as `rejected`. Updates the review time and reviewer information.  Intended to be used for manual overrides.
+        Marks that status of the document as `rejected`. Updates the review time and reviewer information. Intended to be used for manual overrides.
       requestBody:
         content:
           application/json:
@@ -4439,11 +4439,11 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/KycDocumentReviewer'
-        description: KYC document review
+        description: KYC document review.
         required: true
       responses:
         '201':
-          description: KYC document was reviewed
+          description: KYC document was reviewed.
           headers:
             Rate-Limit-Limit:
               $ref: '#/components/headers/Rate-Limit-Limit'
