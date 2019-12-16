@@ -13826,7 +13826,7 @@
         "description": "Details of the last reviewer including his name and id.",
         "properties": {
           "id": {
-            "description": "Reviewer's user ID",
+            "description": "Reviewer's user ID.",
             "type": "string",
             "readOnly": true,
             "allOf": [
@@ -13850,7 +13850,7 @@
           },
           "status": {
             "type": "string",
-            "description": "Status of the validation",
+            "description": "Status of the validation.",
             "enum": [
               "accepted",
               "rejected"
