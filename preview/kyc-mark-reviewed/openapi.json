@@ -5752,7 +5752,7 @@
         ],
         "summary": "Accept a KYC document",
         "operationId": "PostKycDocumentAcceptance",
-        "description": "Manually override automated status and accept the document. Updates the reviewed time and reviewer information.\n",
+        "description": "Marks that status of the document as `accepted`. Updates the review time and reviewer information.  Intended to be used for manual overrides.\n",
         "responses": {
           "201": {
             "description": "KYC document acceptance was created",
