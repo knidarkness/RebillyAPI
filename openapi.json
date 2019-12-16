@@ -5752,7 +5752,7 @@
         ],
         "summary": "Accept a KYC document",
         "operationId": "PostKycDocumentAcceptance",
-        "description": "Marks that status of the document as `accepted`. Updates the review time and reviewer information.  Intended to be used for manual overrides.\n",
+        "description": "Manually override automated status and accept the document\n",
         "responses": {
           "201": {
             "description": "KYC document acceptance was created",
@@ -5796,7 +5796,7 @@
         ],
         "summary": "Reject a KYC document",
         "operationId": "PostKycDocumentRejection",
-        "description": "Marks that status of the document as `rejected`. Updates the review time and reviewer information.  Intended to be used for manual overrides.\n",
+        "description": "Manually override automated status and reject the document\n",
         "requestBody": {
           "content": {
             "application/json": {
@@ -5811,64 +5811,6 @@
         "responses": {
           "201": {
             "description": "KYC document rejection was created",
-            "headers": {
-              "Rate-Limit-Limit": {
-                "$ref": "#/components/headers/Rate-Limit-Limit"
-              },
-              "Rate-Limit-Remaining": {
-                "$ref": "#/components/headers/Rate-Limit-Remaining"
-              },
-              "Rate-Limit-Reset": {
-                "$ref": "#/components/headers/Rate-Limit-Reset"
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/KycDocument"
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/AccessForbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/InvalidDataError"
-          }
-        }
-      }
-    },
-    "/kyc-documents/{id}/review": {
-      "parameters": [
-        {
-          "$ref": "#/components/parameters/resourceId"
-        }
-      ],
-      "post": {
-        "tags": [
-          "KYC Documents"
-        ],
-        "summary": "Review a KYC document",
-        "operationId": "PostKycDocumentReview",
-        "description": "Mark the KYC document as reviewed. Updates the review time and reviewer information.\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/KycDocumentReviewer"
-              }
-            }
-          },
-          "description": "KYC document review",
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "KYC document was reviewed",
             "headers": {
               "Rate-Limit-Limit": {
                 "$ref": "#/components/headers/Rate-Limit-Limit"
@@ -13667,17 +13609,6 @@
               "rejected"
             ]
           },
-          "reviewers": {
-            "type": "array",
-            "readOnly": true,
-            "items": {
-              "allOf": [
-                {
-                  "$ref": "#/components/schemas/KycDocumentReviewer"
-                }
-              ]
-            }
-          },
           "rejectionReason": {
             "$ref": "#/components/schemas/KycDocumentRejection"
           },
@@ -13818,44 +13749,6 @@
             "description": "The rejection message",
             "type": "string",
             "example": "Provided document is unreadable"
-          }
-        }
-      },
-      "KycDocumentReviewer": {
-        "type": "object",
-        "description": "Details of the last reviewer including his name and id",
-        "readOnly": true,
-        "properties": {
-          "id": {
-            "description": "Reviewer's user ID",
-            "type": "string",
-            "readOnly": true,
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ResourceId"
-              }
-            ]
-          },
-          "name": {
-            "description": "Reviewer's first and last name",
-            "type": "string",
-            "readOnly": true
-          },
-          "reviewedTime": {
-            "description": "Date and time of manual review",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ServerTimestamp"
-              }
-            ]
-          },
-          "status": {
-            "type": "string",
-            "description": "Status of the validation",
-            "enum": [
-              "accepted",
-              "rejected"
-            ]
           }
         }
       },
