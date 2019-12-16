@@ -10077,7 +10077,6 @@ components:
             - $ref: '#/components/schemas/ServerTimestamp'
         reviewTime:
           description: Date and time of last manual review
-          readOnly: true
           allOf:
             - $ref: '#/components/schemas/ServerTimestamp'
         _links:
