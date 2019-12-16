@@ -5622,7 +5622,7 @@
         ],
         "summary": "Retrieve a KYC Document",
         "operationId": "GetKycDocument",
-        "description": "Retrieve a KYC document with specified identifier string\n",
+        "description": "Retrieve a KYC document with specified identifier string.\n",
         "parameters": [
           {
             "name": "Accept",
@@ -5673,7 +5673,7 @@
         ],
         "summary": "Create or update a KYC document with predefined ID",
         "operationId": "PutKycDocument",
-        "description": "Create or update a KYC document with predefined identifier string\n",
+        "description": "Create or update a KYC document with predefined identifier string.\n",
         "requestBody": {
           "content": {
             "application/json": {
@@ -5682,12 +5682,12 @@
               }
             }
           },
-          "description": "KYC document resource",
+          "description": "KYC document resource.",
           "required": true
         },
         "responses": {
           "200": {
-            "description": "KYC document was updated",
+            "description": "KYC document was updated.",
             "headers": {
               "Rate-Limit-Limit": {
                 "$ref": "#/components/headers/Rate-Limit-Limit"
@@ -13649,7 +13649,7 @@
             ]
           },
           "documentType": {
-            "description": "Document type submitted for validation, only identity-proof type is analyzed in an automated manner",
+            "description": "Document type submitted for validation, only identity-proof type is analyzed in an automated manner.",
             "type": "string",
             "enum": [
               "identity-proof",
@@ -13657,7 +13657,7 @@
             ]
           },
           "status": {
-            "description": "Status of the validation",
+            "description": "Status of the validation.",
             "type": "string",
             "readOnly": true,
             "enum": [
@@ -13823,8 +13823,7 @@
       },
       "KycDocumentReviewer": {
         "type": "object",
-        "description": "Details of the last reviewer including his name and id",
-        "readOnly": true,
+        "description": "Details of the last reviewer including his name and id.",
         "properties": {
           "id": {
             "description": "Reviewer's user ID",
@@ -13837,12 +13836,12 @@
             ]
           },
           "name": {
-            "description": "Reviewer's first and last name",
+            "description": "Reviewer's first and last name.",
             "type": "string",
             "readOnly": true
           },
-          "reviewedTime": {
-            "description": "Date and time of manual review",
+          "reviewTime": {
+            "description": "Date and time of manual review.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ServerTimestamp"
