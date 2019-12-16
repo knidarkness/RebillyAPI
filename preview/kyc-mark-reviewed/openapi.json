@@ -1201,7 +1201,7 @@
         "description": "Retrieve a Bank Account with specified identifier string\n",
         "responses": {
           "200": {
-            "description": "BankAccount was retrieved successfully",
+            "description": "Bank Account was retrieved successfully",
             "headers": {
               "Rate-Limit-Limit": {
                 "$ref": "#/components/headers/Rate-Limit-Limit"
@@ -1280,7 +1280,7 @@
         },
         "responses": {
           "200": {
-            "description": "BankAccount was updated",
+            "description": "Bank Account was updated",
             "headers": {
               "Rate-Limit-Limit": {
                 "$ref": "#/components/headers/Rate-Limit-Limit"
@@ -1315,7 +1315,7 @@
         "tags": [
           "Bank Accounts"
         ],
-        "summary": "Create a BankAccount with predefined ID",
+        "summary": "Create a Bank Account with predefined ID",
         "operationId": "PutBankAccount",
         "description": "Create or update a BankAccount with predefined identifier string\n",
         "requestBody": {
@@ -1412,7 +1412,7 @@
         "description": "Deactivate a Bank Account\n",
         "responses": {
           "201": {
-            "description": "Deactivated successfully",
+            "description": "Bank Account was deactivated",
             "headers": {
               "Rate-Limit-Limit": {
                 "$ref": "#/components/headers/Rate-Limit-Limit"
@@ -1437,6 +1437,9 @@
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
           }
         },
         "x-code-samples": [
@@ -6155,7 +6158,7 @@
         },
         "responses": {
           "200": {
-            "description": "PaymentCard was updated",
+            "description": "Payment Card was updated",
             "headers": {
               "Rate-Limit-Limit": {
                 "$ref": "#/components/headers/Rate-Limit-Limit"
@@ -6490,7 +6493,7 @@
         },
         "responses": {
           "201": {
-            "description": "Authorization successful",
+            "description": "Payment Card was authorized",
             "headers": {
               "Rate-Limit-Limit": {
                 "$ref": "#/components/headers/Rate-Limit-Limit"
@@ -6540,7 +6543,7 @@
         "description": "Deactivate a Payment Card\n",
         "responses": {
           "201": {
-            "description": "Authorization successful",
+            "description": "Payment Card was deactivated",
             "headers": {
               "Rate-Limit-Limit": {
                 "$ref": "#/components/headers/Rate-Limit-Limit"
@@ -6563,8 +6566,11 @@
           "401": {
             "$ref": "#/components/responses/AccessForbidden"
           },
-          "422": {
-            "$ref": "#/components/responses/InvalidDataError"
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
           }
         },
         "x-code-samples": [
@@ -7256,38 +7262,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "required": [
-                  "websiteId",
-                  "currency"
-                ],
-                "properties": {
-                  "websiteId": {
-                    "description": "The Website ID",
-                    "type": "string"
-                  },
-                  "currency": {
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/CurrencyCode"
-                      }
-                    ]
-                  },
-                  "amount": {
-                    "description": "The amount to authorize",
-                    "type": "number",
-                    "format": "double",
-                    "default": 1
-                  },
-                  "redirectURLs": {
-                    "description": "Redirect URLs",
-                    "type": "object"
-                  },
-                  "gatewayAccountId": {
-                    "description": "The Gateway Account ID which use to send transactions",
-                    "type": "string"
-                  }
-                }
+                "$ref": "#/components/schemas/PayPalAccountAuthorization"
               }
             }
           },
@@ -7296,7 +7271,7 @@
         },
         "responses": {
           "201": {
-            "description": "Activate successful",
+            "description": "PayPal Account was activated",
             "headers": {
               "Rate-Limit-Limit": {
                 "$ref": "#/components/headers/Rate-Limit-Limit"
@@ -7346,7 +7321,7 @@
         "description": "Deactivate a PayPal Account\n",
         "responses": {
           "201": {
-            "description": "Deactivate successful",
+            "description": "PayPal Account was deactivated",
             "headers": {
               "Rate-Limit-Limit": {
                 "$ref": "#/components/headers/Rate-Limit-Limit"
@@ -7369,8 +7344,11 @@
           "401": {
             "$ref": "#/components/responses/AccessForbidden"
           },
-          "422": {
-            "$ref": "#/components/responses/InvalidDataError"
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
           }
         },
         "x-code-samples": [
@@ -13260,6 +13238,20 @@
               "disputed"
             ]
           },
+          "type": {
+            "type": "string",
+            "description": "Invoice type.",
+            "readOnly": true,
+            "enum": [
+              "initial",
+              "renewal",
+              "interim",
+              "cancellation",
+              "one-time",
+              "refund",
+              "charge"
+            ]
+          },
           "delinquentCollectionPeriod": {
             "type": "integer",
             "description": "Delinquent Collection Period - difference between paidTime and dueTime in days.",
@@ -13367,6 +13359,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/RecalculateInvoiceLink"
+                },
+                {
+                  "$ref": "#/components/schemas/SubscriptionLink"
                 }
               ]
             }
@@ -13508,9 +13503,6 @@
               "anyOf": [
                 {
                   "$ref": "#/components/schemas/SelfLink"
-                },
-                {
-                  "$ref": "#/components/schemas/SubscriptionLink"
                 },
                 {
                   "$ref": "#/components/schemas/ProductLink"
@@ -14588,6 +14580,7 @@
           "check",
           "paypal",
           "Alipay",
+          "ApplePay",
           "AstroPay Card",
           "bank-transfer",
           "bitcoin",
@@ -14596,6 +14589,7 @@
           "CASHlib",
           "CashToCode",
           "China UnionPay",
+          "Conekta-oxxo",
           "domestic-cards",
           "echeck",
           "ecoPayz",
@@ -14604,6 +14598,7 @@
           "ePay.bg",
           "Flexepin",
           "Giropay",
+          "GooglePay",
           "Gpaysafe",
           "iDebit",
           "iDEAL",
@@ -14627,6 +14622,8 @@
           "online-bank-transfer",
           "Onlineueberweisen",
           "Pagsmile-lottery",
+          "Pagsmile-deposit-express",
+          "PayCash",
           "Paysafecard",
           "Pay4Fun",
           "PinPay",
@@ -14640,6 +14637,7 @@
           "Skrill Rapid Transfer",
           "SMSVoucher",
           "SparkPay",
+          "swift-dbt",
           "ToditoCash-card",
           "Trustly",
           "UPayCard",
@@ -15304,6 +15302,39 @@
             }
           }
         ]
+      },
+      "PayPalAccountAuthorization": {
+        "type": "object",
+        "required": [
+          "websiteId",
+          "currency"
+        ],
+        "properties": {
+          "websiteId": {
+            "description": "The Website ID",
+            "type": "string"
+          },
+          "currency": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CurrencyCode"
+              }
+            ]
+          },
+          "amount": {
+            "description": "The amount to authorize",
+            "type": "number",
+            "format": "double",
+            "default": 1
+          },
+          "gatewayAccountId": {
+            "description": "The Gateway Account ID which use to send transactions",
+            "type": "string"
+          },
+          "redirectUrl": {
+            "$ref": "#/components/schemas/TransactionRedirectUrl"
+          }
+        }
       },
       "paypalInstrument": {
         "description": "PayPal payment instrument object",
@@ -17378,6 +17409,7 @@
           "propertyName": "orderType"
         },
         "required": [
+          "orderType",
           "customerId",
           "websiteId",
           "items"
@@ -17400,20 +17432,6 @@
               "one-time-order"
             ],
             "default": "subscription-order"
-          },
-          "status": {
-            "type": "string",
-            "description": "The status of the subscription service. A subscription starts\nin the `pending` status, and will become `active` when the\nservice period begins.\n",
-            "readOnly": true,
-            "enum": [
-              "pending",
-              "active",
-              "canceled",
-              "churned",
-              "suspended",
-              "paused",
-              "abandoned"
-            ]
           },
           "billingStatus": {
             "description": "The billing status of the most recent invoice.  It may\nhelp you determine if you should change the service status\nsuch as suspending the service.\n",
@@ -17488,27 +17506,6 @@
               }
             }
           },
-          "invoiceTimeShift": {
-            "description": "You can shift issue time and due time of invoices for this subscription.\nThis setting overrides plan settings. To use plan settings, set `null`.\nTo use multiple plans in one subscription they all must have the same billing period,\nthis property allows to subscribe to different plans.\n",
-            "nullable": true,
-            "example": null,
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/InvoiceTimeShift"
-              }
-            ]
-          },
-          "recurringInterval": {
-            "type": "object",
-            "description": "The recurring interval to override plan settings. To use plan settings, set `null`.\nTo use multiple plans in one subscription they all must have the same recurring period length,\nthis property allows to subscribe to different plans.\n",
-            "nullable": true,
-            "example": null,
-            "properties": {
-              "periodAnchorInstruction": {
-                "$ref": "#/components/schemas/ServicePeriodAnchorInstruction"
-              }
-            }
-          },
           "deliveryAddress": {
             "description": "Delivery address",
             "nullable": true,
@@ -17526,11 +17523,6 @@
                 "$ref": "#/components/schemas/ContactObject"
               }
             ]
-          },
-          "autopay": {
-            "description": "Autopay determines if a payment attempt will be automatic",
-            "type": "boolean",
-            "default": true
           },
           "riskMetadata": {
             "nullable": true,
@@ -17566,41 +17558,10 @@
             "example": "PO123456",
             "type": "string"
           },
-          "renewalReminderTime": {
-            "description": "Time renewal reminder event will be triggered",
-            "nullable": true,
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ServerTimestamp"
-              }
-            ]
-          },
-          "renewalReminderNumber": {
-            "description": "Number of renewal reminder events triggered",
-            "type": "integer",
-            "readOnly": true
-          },
-          "trialReminderTime": {
-            "description": "Time renewal reminder event will be triggered",
-            "nullable": true,
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ServerTimestamp"
-              }
-            ]
-          },
-          "trialReminderNumber": {
-            "description": "Number of renewal reminder events triggered",
-            "type": "integer",
-            "readOnly": true
-          },
           "revision": {
             "description": "The number of times the subscription data has been modified.\nThe revision is useful when analyzing webhook data to determine if the change takes precedence over the current representation.\n",
             "type": "integer",
             "readOnly": true
-          },
-          "customFields": {
-            "$ref": "#/components/schemas/ResourceCustomFields"
           },
           "_links": {
             "type": "array",
@@ -17667,20 +17628,14 @@
                 "readOnly": true,
                 "enum": [
                   "pending",
-                  "paid",
-                  "canceled"
+                  "completed",
+                  "abandoned"
                 ]
               }
             }
           },
           {
-            "$ref": "#/components/schemas/UpcomingInvoice"
-          },
-          {
             "$ref": "#/components/schemas/SubscriptionMetadata"
-          },
-          {
-            "$ref": "#/components/schemas/SubscriptionCancellationState"
           }
         ]
       },
@@ -17692,16 +17647,17 @@
           {
             "properties": {
               "status": {
-                "description": "Subscription status is deprecated and the values will change to `active`, `canceled`.",
+                "description": "The status of the subscription service. A subscription starts\nin the `pending` status, and will become `active` when the\nservice period begins.\n",
                 "type": "string",
                 "readOnly": true,
                 "enum": [
-                  "Active",
-                  "Will become active at a future date",
-                  "Active but set to cancel at next rebill date",
-                  "Cancelled",
-                  "Inactive",
-                  "Suspended"
+                  "pending",
+                  "active",
+                  "canceled",
+                  "churned",
+                  "suspended",
+                  "paused",
+                  "abandoned"
                 ]
               },
               "inTrial": {
@@ -17727,6 +17683,32 @@
                   }
                 }
               },
+              "invoiceTimeShift": {
+                "description": "You can shift issue time and due time of invoices for this subscription.\nThis setting overrides plan settings. To use plan settings, set `null`.\nTo use multiple plans in one subscription they all must have the same billing period,\nthis property allows to subscribe to different plans.\n",
+                "nullable": true,
+                "example": null,
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/InvoiceTimeShift"
+                  }
+                ]
+              },
+              "recurringInterval": {
+                "type": "object",
+                "description": "The recurring interval to override plan settings. To use plan settings, set `null`.\nTo use multiple plans in one subscription they all must have the same recurring period length,\nthis property allows to subscribe to different plans.\n",
+                "nullable": true,
+                "example": null,
+                "properties": {
+                  "periodAnchorInstruction": {
+                    "$ref": "#/components/schemas/ServicePeriodAnchorInstruction"
+                  }
+                }
+              },
+              "autopay": {
+                "description": "Autopay determines if a payment attempt will be automatic",
+                "type": "boolean",
+                "default": true
+              },
               "startTime": {
                 "description": "Subscription start time.  When the value is sent as null, it will use the current time. This value can't be in past more than one service period.",
                 "nullable": true,
@@ -17749,6 +17731,34 @@
               },
               "rebillNumber": {
                 "description": "The current period number",
+                "type": "integer",
+                "readOnly": true
+              },
+              "renewalReminderTime": {
+                "description": "Time renewal reminder event will be triggered",
+                "nullable": true,
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ServerTimestamp"
+                  }
+                ]
+              },
+              "renewalReminderNumber": {
+                "description": "Number of renewal reminder events triggered",
+                "type": "integer",
+                "readOnly": true
+              },
+              "trialReminderTime": {
+                "description": "Time renewal reminder event will be triggered",
+                "nullable": true,
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ServerTimestamp"
+                  }
+                ]
+              },
+              "trialReminderNumber": {
+                "description": "Number of renewal reminder events triggered",
                 "type": "integer",
                 "readOnly": true
               }
@@ -18439,6 +18449,7 @@
               "default-payment-instrument-changed",
               "lead-source-changed",
               "custom-fields-changed",
+              "coupon-applied",
               "coupon-redeemed",
               "coupon-redemption-canceled",
               "kyc-document-created",
@@ -18464,6 +18475,7 @@
               "order-created",
               "order-renewed",
               "order-activated",
+              "order-completed",
               "order-reactivated",
               "order-canceled",
               "order-upgraded",
@@ -18613,7 +18625,8 @@
               "invoice-refunded",
               "invoice-partially-refunded",
               "invoice-renewal-payment-declined",
-              "email-message-sent"
+              "email-message-sent",
+              "coupon-applied"
             ]
           },
           "triggeredBy": {
@@ -18673,6 +18686,7 @@
               "timeline-comment-created",
               "order-renewed",
               "order-activated",
+              "order-completed",
               "order-reactivated",
               "order-canceled",
               "order-upgraded",
@@ -18844,7 +18858,9 @@
                     "subscription",
                     "transaction",
                     "email-message",
-                    "dispute"
+                    "dispute",
+                    "credit-memo",
+                    "coupon"
                   ]
                 },
                 "resourceId": {
@@ -19054,35 +19070,6 @@
           }
         }
       },
-      "RedirectUrls": {
-        "type": "object",
-        "deprecated": true,
-        "description": "The redirect URIs, now deprecated.  Use `redirectUrl` instead.",
-        "required": [
-          "error",
-          "success",
-          "decline",
-          "cancel"
-        ],
-        "properties": {
-          "error": {
-            "type": "string",
-            "format": "url"
-          },
-          "success": {
-            "type": "string",
-            "format": "url"
-          },
-          "decline": {
-            "type": "string",
-            "format": "url"
-          },
-          "cancel": {
-            "type": "string",
-            "format": "url"
-          }
-        }
-      },
       "ThreeDSecureResult": {
         "type": "object",
         "readOnly": true,
@@ -19153,17 +19140,18 @@
             "readOnly": true,
             "enum": [
               "completed",
-              "connection-error",
+              "conn-error",
               "disputed",
               "never-sent",
               "partially-refunded",
               "pending",
               "refunded",
               "sending",
-              "suspended",
               "timeout",
               "voided",
+              "waiting-approval",
               "waiting-capture",
+              "waiting-gateway",
               "waiting-refund"
             ]
           },
@@ -19214,6 +19202,20 @@
             "readOnly": true
           },
           "requestCurrency": {
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CurrencyCode"
+              }
+            ]
+          },
+          "reportAmount": {
+            "description": "The transactions's amount to report",
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "reportCurrency": {
             "readOnly": true,
             "allOf": [
               {
@@ -19628,17 +19630,10 @@
             ]
           },
           "notificationUrl": {
-            "description": "The URL where a server-to-server POST notification will be sent.  It  will be sent when the\ntransaction's result is finalized after a timeout or an offsite interaction. Do not trust the\nnotification; follow with a GET request to confirm the result of the transaction. Please\nrespond with a 2xx HTTP status code, or we will reattempt the request again.\n",
-            "type": "string",
-            "format": "uri"
+            "$ref": "#/components/schemas/TransactionNotificationUrl"
           },
           "redirectUrl": {
-            "description": "The URL to redirect the end-user when an offsite transaction is completed.  Defaults to the website's configured URL.",
-            "type": "string",
-            "format": "uri"
-          },
-          "redirectUrls": {
-            "$ref": "#/components/schemas/RedirectUrls"
+            "$ref": "#/components/schemas/TransactionRedirectUrl"
           },
           "retryInstruction": {
             "$ref": "#/components/schemas/PaymentRetry"
@@ -19826,6 +19821,16 @@
             }
           }
         }
+      },
+      "TransactionNotificationUrl": {
+        "description": "The URL where a server-to-server POST notification will be sent.  It  will be sent when the\ntransaction's result is finalized after a timeout or an offsite interaction. Do not trust the\nnotification; follow with a GET request to confirm the result of the transaction. Please\nrespond with a 2xx HTTP status code, or we will reattempt the request again.\nThe 2 placeholders are available to use in this URI: `{id}` and `{result}`.\n",
+        "type": "string",
+        "format": "uri"
+      },
+      "TransactionRedirectUrl": {
+        "description": "The URL to redirect the end-user when an offsite transaction is completed.\nThe 2 placeholders are available to use in this URI: `{id}` and `{result}`.\nDefaults to the website's configured URL.\n",
+        "type": "string",
+        "format": "uri"
       },
       "TransactionRequest": {
         "type": "object",

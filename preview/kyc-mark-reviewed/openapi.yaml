@@ -921,7 +921,7 @@ paths:
         Retrieve a Bank Account with specified identifier string
       responses:
         '200':
-          description: BankAccount was retrieved successfully
+          description: Bank Account was retrieved successfully
           headers:
             Rate-Limit-Limit:
               $ref: '#/components/headers/Rate-Limit-Limit'
@@ -973,7 +973,7 @@ paths:
         description: Bank Account
       responses:
         '200':
-          description: BankAccount was updated
+          description: Bank Account was updated
           headers:
             Rate-Limit-Limit:
               $ref: '#/components/headers/Rate-Limit-Limit'
@@ -994,7 +994,7 @@ paths:
     put:
       tags:
         - Bank Accounts
-      summary: Create a BankAccount with predefined ID
+      summary: Create a Bank Account with predefined ID
       operationId: PutBankAccount
       description: |
         Create or update a BankAccount with predefined identifier string
@@ -1099,7 +1099,7 @@ paths:
         Deactivate a Bank Account
       responses:
         '201':
-          description: Deactivated successfully
+          description: Bank Account was deactivated
           headers:
             Rate-Limit-Limit:
               $ref: '#/components/headers/Rate-Limit-Limit'
@@ -1115,6 +1115,8 @@ paths:
           $ref: '#/components/responses/AccessForbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
       x-code-samples:
         - lang: PHP
           source: |
@@ -4629,7 +4631,7 @@ paths:
         required: true
       responses:
         '200':
-          description: PaymentCard was updated
+          description: Payment Card was updated
           headers:
             Rate-Limit-Limit:
               $ref: '#/components/headers/Rate-Limit-Limit'
@@ -4926,7 +4928,7 @@ paths:
         required: true
       responses:
         '201':
-          description: Authorization successful
+          description: Payment Card was authorized
           headers:
             Rate-Limit-Limit:
               $ref: '#/components/headers/Rate-Limit-Limit'
@@ -4967,7 +4969,7 @@ paths:
         Deactivate a Payment Card
       responses:
         '201':
-          description: Authorization successful
+          description: Payment Card was deactivated
           headers:
             Rate-Limit-Limit:
               $ref: '#/components/headers/Rate-Limit-Limit'
@@ -4981,8 +4983,10 @@ paths:
                 $ref: '#/components/schemas/PaymentCard'
         '401':
           $ref: '#/components/responses/AccessForbidden'
-        '422':
-          $ref: '#/components/responses/InvalidDataError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
       x-code-samples:
         - lang: PHP
           source: |
@@ -5552,33 +5556,12 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              required:
-                - websiteId
-                - currency
-              properties:
-                websiteId:
-                  description: The Website ID
-                  type: string
-                currency:
-                  allOf:
-                    - $ref: '#/components/schemas/CurrencyCode'
-                amount:
-                  description: The amount to authorize
-                  type: number
-                  format: double
-                  default: 1
-                redirectURLs:
-                  description: Redirect URLs
-                  type: object
-                gatewayAccountId:
-                  description: The Gateway Account ID which use to send transactions
-                  type: string
+              $ref: '#/components/schemas/PayPalAccountAuthorization'
         description: PayPal Account resource
         required: true
       responses:
         '201':
-          description: Activate successful
+          description: PayPal Account was activated
           headers:
             Rate-Limit-Limit:
               $ref: '#/components/headers/Rate-Limit-Limit'
@@ -5619,7 +5602,7 @@ paths:
         Deactivate a PayPal Account
       responses:
         '201':
-          description: Deactivate successful
+          description: PayPal Account was deactivated
           headers:
             Rate-Limit-Limit:
               $ref: '#/components/headers/Rate-Limit-Limit'
@@ -5633,8 +5616,10 @@ paths:
                 $ref: '#/components/schemas/PayPalAccount'
         '401':
           $ref: '#/components/responses/AccessForbidden'
-        '422':
-          $ref: '#/components/responses/InvalidDataError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
       x-code-samples:
         - lang: PHP
           source: |
@@ -9795,6 +9780,18 @@ components:
             - partially-refunded
             - refunded
             - disputed
+        type:
+          type: string
+          description: Invoice type.
+          readOnly: true
+          enum:
+            - initial
+            - renewal
+            - interim
+            - cancellation
+            - one-time
+            - refund
+            - charge
         delinquentCollectionPeriod:
           type: integer
           description: Delinquent Collection Period - difference between paidTime and dueTime in days.
@@ -9854,6 +9851,7 @@ components:
               - $ref: '#/components/schemas/LeadSourceLink'
               - $ref: '#/components/schemas/TransactionAllocationsLink'
               - $ref: '#/components/schemas/RecalculateInvoiceLink'
+              - $ref: '#/components/schemas/SubscriptionLink'
         _embedded:
           type: array
           description: Any embedded objects available that are requested by the `expand` querystring parameter.
@@ -9946,7 +9944,6 @@ components:
           items:
             anyOf:
               - $ref: '#/components/schemas/SelfLink'
-              - $ref: '#/components/schemas/SubscriptionLink'
               - $ref: '#/components/schemas/ProductLink'
         _embedded:
           type: array
@@ -10618,6 +10615,7 @@ components:
         - check
         - paypal
         - Alipay
+        - ApplePay
         - AstroPay Card
         - bank-transfer
         - bitcoin
@@ -10626,6 +10624,7 @@ components:
         - CASHlib
         - CashToCode
         - China UnionPay
+        - Conekta-oxxo
         - domestic-cards
         - echeck
         - ecoPayz
@@ -10634,6 +10633,7 @@ components:
         - ePay.bg
         - Flexepin
         - Giropay
+        - GooglePay
         - Gpaysafe
         - iDebit
         - iDEAL
@@ -10657,6 +10657,8 @@ components:
         - online-bank-transfer
         - Onlineueberweisen
         - Pagsmile-lottery
+        - Pagsmile-deposit-express
+        - PayCash
         - Paysafecard
         - Pay4Fun
         - PinPay
@@ -10670,6 +10672,7 @@ components:
         - Skrill Rapid Transfer
         - SMSVoucher
         - SparkPay
+        - swift-dbt
         - ToditoCash-card
         - Trustly
         - UPayCard
@@ -11075,6 +11078,28 @@ components:
               description: The payment card identifier string
               allOf:
                 - $ref: '#/components/schemas/ResourceId'
+    PayPalAccountAuthorization:
+      type: object
+      required:
+        - websiteId
+        - currency
+      properties:
+        websiteId:
+          description: The Website ID
+          type: string
+        currency:
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
+        amount:
+          description: The amount to authorize
+          type: number
+          format: double
+          default: 1
+        gatewayAccountId:
+          description: The Gateway Account ID which use to send transactions
+          type: string
+        redirectUrl:
+          $ref: '#/components/schemas/TransactionRedirectUrl'
     paypalInstrument:
       description: PayPal payment instrument object
       allOf:
@@ -12522,6 +12547,7 @@ components:
       discriminator:
         propertyName: orderType
       required:
+        - orderType
         - customerId
         - websiteId
         - items
@@ -12539,21 +12565,6 @@ components:
             - subscription-order
             - one-time-order
           default: subscription-order
-        status:
-          type: string
-          description: |
-            The status of the subscription service. A subscription starts
-            in the `pending` status, and will become `active` when the
-            service period begins.
-          readOnly: true
-          enum:
-            - pending
-            - active
-            - canceled
-            - churned
-            - suspended
-            - paused
-            - abandoned
         billingStatus:
           description: |
             The billing status of the most recent invoice.  It may
@@ -12603,27 +12614,6 @@ components:
               quantity:
                 description: Number of units of the product on the given plan
                 type: integer
-        invoiceTimeShift:
-          description: |
-            You can shift issue time and due time of invoices for this subscription.
-            This setting overrides plan settings. To use plan settings, set `null`.
-            To use multiple plans in one subscription they all must have the same billing period,
-            this property allows to subscribe to different plans.
-          nullable: true
-          example: null
-          allOf:
-            - $ref: '#/components/schemas/InvoiceTimeShift'
-        recurringInterval:
-          type: object
-          description: |
-            The recurring interval to override plan settings. To use plan settings, set `null`.
-            To use multiple plans in one subscription they all must have the same recurring period length,
-            this property allows to subscribe to different plans.
-          nullable: true
-          example: null
-          properties:
-            periodAnchorInstruction:
-              $ref: '#/components/schemas/ServicePeriodAnchorInstruction'
         deliveryAddress:
           description: Delivery address
           nullable: true
@@ -12634,10 +12624,6 @@ components:
           nullable: true
           allOf:
             - $ref: '#/components/schemas/ContactObject'
-        autopay:
-          description: Autopay determines if a payment attempt will be automatic
-          type: boolean
-          default: true
         riskMetadata:
           nullable: true
           example: null
@@ -12675,32 +12661,12 @@ components:
           nullable: true
           example: PO123456
           type: string
-        renewalReminderTime:
-          description: Time renewal reminder event will be triggered
-          nullable: true
-          allOf:
-            - $ref: '#/components/schemas/ServerTimestamp'
-        renewalReminderNumber:
-          description: Number of renewal reminder events triggered
-          type: integer
-          readOnly: true
-        trialReminderTime:
-          description: Time renewal reminder event will be triggered
-          nullable: true
-          allOf:
-            - $ref: '#/components/schemas/ServerTimestamp'
-        trialReminderNumber:
-          description: Number of renewal reminder events triggered
-          type: integer
-          readOnly: true
         revision:
           description: |
             The number of times the subscription data has been modified.
             The revision is useful when analyzing webhook data to determine if the change takes precedence over the current representation.
           type: integer
           readOnly: true
-        customFields:
-          $ref: '#/components/schemas/ResourceCustomFields'
         _links:
           type: array
           description: The links related to resource
@@ -12735,26 +12701,28 @@ components:
               readOnly: true
               enum:
                 - pending
-                - paid
-                - canceled
-        - $ref: '#/components/schemas/UpcomingInvoice'
+                - completed
+                - abandoned
         - $ref: '#/components/schemas/SubscriptionMetadata'
-        - $ref: '#/components/schemas/SubscriptionCancellationState'
     subscription-order:
       allOf:
         - $ref: '#/components/schemas/Subscription'
         - properties:
             status:
-              description: 'Subscription status is deprecated and the values will change to `active`, `canceled`.'
+              description: |
+                The status of the subscription service. A subscription starts
+                in the `pending` status, and will become `active` when the
+                service period begins.
               type: string
               readOnly: true
               enum:
-                - Active
-                - Will become active at a future date
-                - Active but set to cancel at next rebill date
-                - Cancelled
-                - Inactive
-                - Suspended
+                - pending
+                - active
+                - canceled
+                - churned
+                - suspended
+                - paused
+                - abandoned
             inTrial:
               description: True if the subscription is currently in a trial period
               type: boolean
@@ -12772,6 +12740,31 @@ components:
                   description: The time the trial should end
                   type: string
                   format: date-time
+            invoiceTimeShift:
+              description: |
+                You can shift issue time and due time of invoices for this subscription.
+                This setting overrides plan settings. To use plan settings, set `null`.
+                To use multiple plans in one subscription they all must have the same billing period,
+                this property allows to subscribe to different plans.
+              nullable: true
+              example: null
+              allOf:
+                - $ref: '#/components/schemas/InvoiceTimeShift'
+            recurringInterval:
+              type: object
+              description: |
+                The recurring interval to override plan settings. To use plan settings, set `null`.
+                To use multiple plans in one subscription they all must have the same recurring period length,
+                this property allows to subscribe to different plans.
+              nullable: true
+              example: null
+              properties:
+                periodAnchorInstruction:
+                  $ref: '#/components/schemas/ServicePeriodAnchorInstruction'
+            autopay:
+              description: Autopay determines if a payment attempt will be automatic
+              type: boolean
+              default: true
             startTime:
               description: 'Subscription start time.  When the value is sent as null, it will use the current time. This value can''t be in past more than one service period.'
               nullable: true
@@ -12788,6 +12781,24 @@ components:
               format: date-time
             rebillNumber:
               description: The current period number
+              type: integer
+              readOnly: true
+            renewalReminderTime:
+              description: Time renewal reminder event will be triggered
+              nullable: true
+              allOf:
+                - $ref: '#/components/schemas/ServerTimestamp'
+            renewalReminderNumber:
+              description: Number of renewal reminder events triggered
+              type: integer
+              readOnly: true
+            trialReminderTime:
+              description: Time renewal reminder event will be triggered
+              nullable: true
+              allOf:
+                - $ref: '#/components/schemas/ServerTimestamp'
+            trialReminderNumber:
+              description: Number of renewal reminder events triggered
               type: integer
               readOnly: true
         - $ref: '#/components/schemas/UpcomingInvoice'
@@ -13252,6 +13263,7 @@ components:
             - default-payment-instrument-changed
             - lead-source-changed
             - custom-fields-changed
+            - coupon-applied
             - coupon-redeemed
             - coupon-redemption-canceled
             - kyc-document-created
@@ -13277,6 +13289,7 @@ components:
             - order-created
             - order-renewed
             - order-activated
+            - order-completed
             - order-reactivated
             - order-canceled
             - order-upgraded
@@ -13388,6 +13401,7 @@ components:
             - invoice-partially-refunded
             - invoice-renewal-payment-declined
             - email-message-sent
+            - coupon-applied
         triggeredBy:
           description: Shows who or what triggered the Timeline event
           type: string
@@ -13429,6 +13443,7 @@ components:
             - timeline-comment-created
             - order-renewed
             - order-activated
+            - order-completed
             - order-reactivated
             - order-canceled
             - order-upgraded
@@ -13557,6 +13572,8 @@ components:
                   - transaction
                   - email-message
                   - dispute
+                  - credit-memo
+                  - coupon
               resourceId:
                 $ref: '#/components/schemas/ResourceId'
               placeholder:
@@ -13701,28 +13718,6 @@ components:
           description: Refund amount
           type: number
           format: double
-    RedirectUrls:
-      type: object
-      deprecated: true
-      description: 'The redirect URIs, now deprecated.  Use `redirectUrl` instead.'
-      required:
-        - error
-        - success
-        - decline
-        - cancel
-      properties:
-        error:
-          type: string
-          format: url
-        success:
-          type: string
-          format: url
-        decline:
-          type: string
-          format: url
-        cancel:
-          type: string
-          format: url
     ThreeDSecureResult:
       type: object
       readOnly: true
@@ -13778,17 +13773,18 @@ components:
           readOnly: true
           enum:
             - completed
-            - connection-error
+            - conn-error
             - disputed
             - never-sent
             - partially-refunded
             - pending
             - refunded
             - sending
-            - suspended
             - timeout
             - voided
+            - waiting-approval
             - waiting-capture
+            - waiting-gateway
             - waiting-refund
         result:
           description: Transaction result
@@ -13824,6 +13820,15 @@ components:
           format: double
           readOnly: true
         requestCurrency:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
+        reportAmount:
+          description: The transactions's amount to report
+          type: number
+          format: double
+          readOnly: true
+        reportCurrency:
           readOnly: true
           allOf:
             - $ref: '#/components/schemas/CurrencyCode'
@@ -14101,19 +14106,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/RiskMetadata'
         notificationUrl:
-          description: |
-            The URL where a server-to-server POST notification will be sent.  It  will be sent when the
-            transaction's result is finalized after a timeout or an offsite interaction. Do not trust the
-            notification; follow with a GET request to confirm the result of the transaction. Please
-            respond with a 2xx HTTP status code, or we will reattempt the request again.
-          type: string
-          format: uri
+          $ref: '#/components/schemas/TransactionNotificationUrl'
         redirectUrl:
-          description: The URL to redirect the end-user when an offsite transaction is completed.  Defaults to the website's configured URL.
-          type: string
-          format: uri
-        redirectUrls:
-          $ref: '#/components/schemas/RedirectUrls'
+          $ref: '#/components/schemas/TransactionRedirectUrl'
         retryInstruction:
           $ref: '#/components/schemas/PaymentRetry'
         retryNumber:
@@ -14219,6 +14214,22 @@ components:
               - $ref: '#/components/schemas/PaymentCardEmbed'
               - $ref: '#/components/schemas/BankAccountEmbed'
               - $ref: '#/components/schemas/InvoicesEmbed'
+    TransactionNotificationUrl:
+      description: |
+        The URL where a server-to-server POST notification will be sent.  It  will be sent when the
+        transaction's result is finalized after a timeout or an offsite interaction. Do not trust the
+        notification; follow with a GET request to confirm the result of the transaction. Please
+        respond with a 2xx HTTP status code, or we will reattempt the request again.
+        The 2 placeholders are available to use in this URI: `{id}` and `{result}`.
+      type: string
+      format: uri
+    TransactionRedirectUrl:
+      description: |
+        The URL to redirect the end-user when an offsite transaction is completed.
+        The 2 placeholders are available to use in this URI: `{id}` and `{result}`.
+        Defaults to the website's configured URL.
+      type: string
+      format: uri
     TransactionRequest:
       type: object
       required:
