@@ -5851,7 +5851,7 @@
         ],
         "summary": "Review a KYC document",
         "operationId": "PostKycDocumentReview",
-        "description": "Mark the KYC document as reviewed without changing its status. Updates the reviewed time and reviewer information.\n",
+        "description": "Mark the KYC document as reviewed without changing its status. Updates the review time and reviewer information.\n",
         "responses": {
           "201": {
             "description": "KYC document was reviewed",
