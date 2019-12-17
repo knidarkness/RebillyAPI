@@ -4431,27 +4431,6 @@ paths:
       summary: Review a KYC document
       operationId: PostKycDocumentReview
       description: Mark the KYC document as reviewed. Updates the review time and reviewer information.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              required:
-                - status
-              type: object
-              description: Details of the last reviewer including his name and id.
-              properties:
-                status:
-                  type: string
-                  description: Status of the validation.
-                  enum:
-                    - accepted
-                    - rejected
-                rejection:
-                  description: Only necessary if status is changed to `"rejected"`.
-                  allOf:
-                    - $ref: '#/components/schemas/KycDocumentRejection'
-        description: KYC document review.
-        required: true
       responses:
         '201':
           description: KYC document was reviewed.
@@ -10082,9 +10061,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ServerTimestamp'
         rejectionReason:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/KycDocumentRejection'
+          $ref: '#/components/schemas/KycDocumentRejection'
         documentMatches:
           $ref: '#/components/schemas/KycDocumentMatches'
         createdTime:
@@ -10159,6 +10136,7 @@ components:
               example: true
     KycDocumentRejection:
       type: object
+      readOnly: true
       properties:
         type:
           type: string
