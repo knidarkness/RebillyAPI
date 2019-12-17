@@ -5622,7 +5622,7 @@
         ],
         "summary": "Retrieve a KYC Document",
         "operationId": "GetKycDocument",
-        "description": "Retrieve a KYC document with specified identifier string.\n",
+        "description": "Retrieve a KYC document with specified identifier string.",
         "parameters": [
           {
             "name": "Accept",
@@ -5673,7 +5673,7 @@
         ],
         "summary": "Create or update a KYC document with predefined ID",
         "operationId": "PutKycDocument",
-        "description": "Create or update a KYC document with predefined identifier string.\n",
+        "description": "Create or update a KYC document with predefined identifier string.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -5854,7 +5854,7 @@
         ],
         "summary": "Review a KYC document",
         "operationId": "PostKycDocumentReview",
-        "description": "Mark the KYC document as reviewed. Updates the review time and reviewer information.\n",
+        "description": "Mark the KYC document as reviewed. Updates the review time and reviewer information.",
         "requestBody": {
           "content": {
             "application/json": {
