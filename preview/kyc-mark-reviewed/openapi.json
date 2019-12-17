@@ -5873,21 +5873,8 @@
                       "rejected"
                     ]
                   },
-                  "rejectionType": {
-                    "type": "string",
-                    "description": "Rejection type if status is set to `rejected`.",
-                    "enum": [
-                      "document-unreadable",
-                      "document-expired",
-                      "document-not-matching",
-                      "underage-person",
-                      "other"
-                    ]
-                  },
-                  "rejectionMessage": {
-                    "description": "The rejection message if status is set to `rejected`.",
-                    "type": "string",
-                    "example": "Provided document is unreadable"
+                  "rejection": {
+                    "$ref": "#/components/schemas/KycDocumentRejection"
                   }
                 }
               }
@@ -13724,7 +13711,12 @@
             ]
           },
           "rejectionReason": {
-            "$ref": "#/components/schemas/KycDocumentRejection"
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/KycDocumentRejection"
+              }
+            ]
           },
           "documentMatches": {
             "$ref": "#/components/schemas/KycDocumentMatches"
@@ -13847,7 +13839,6 @@
       },
       "KycDocumentRejection": {
         "type": "object",
-        "readOnly": true,
         "properties": {
           "type": {
             "type": "string",
