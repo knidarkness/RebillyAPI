@@ -10710,6 +10710,7 @@
           "status": {
             "description": "Bank Account status",
             "type": "string",
+            "readOnly": true,
             "enum": [
               "active",
               "deactivated"
