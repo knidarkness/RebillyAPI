@@ -4438,7 +4438,29 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/KycDocumentReviewer'
+              type: object
+              description: Details of the last reviewer including his name and id.
+              properties:
+                id:
+                  description: Reviewer's user ID.
+                  type: string
+                  readOnly: true
+                  allOf:
+                    - $ref: '#/components/schemas/ResourceId'
+                name:
+                  description: Reviewer's first and last name.
+                  type: string
+                  readOnly: true
+                reviewTime:
+                  description: Date and time of manual review.
+                  allOf:
+                    - $ref: '#/components/schemas/ServerTimestamp'
+                reviewStatus:
+                  type: string
+                  description: Status of the validation.
+                  enum:
+                    - accepted
+                    - rejected
         description: KYC document review.
         required: true
       responses:
@@ -10053,12 +10075,33 @@ components:
             - in-progress
             - accepted
             - rejected
-        reviewers:
-          type: array
+        review:
+          type: object
           readOnly: true
-          items:
-            allOf:
-              - $ref: '#/components/schemas/KycDocumentReviewer'
+          nullable: true
+          description: Review of document.
+          properties:
+            reviewerId:
+              description: Reviewer's user ID.
+              type: string
+              readOnly: true
+              allOf:
+                - $ref: '#/components/schemas/ResourceId'
+            reviewerName:
+              description: Reviewer's first and last name.
+              type: string
+              readOnly: true
+            reviewTime:
+              description: Date and time of manual review.
+              allOf:
+                - $ref: '#/components/schemas/ServerTimestamp'
+            reviewStatus:
+              type: string
+              readOnly: true
+              description: Status of the validation.
+              enum:
+                - accepted
+                - rejected
         rejectionReason:
           $ref: '#/components/schemas/KycDocumentRejection'
         documentMatches:
@@ -10149,30 +10192,6 @@ components:
           description: The rejection message
           type: string
           example: Provided document is unreadable
-    KycDocumentReviewer:
-      type: object
-      description: Details of the last reviewer including his name and id.
-      properties:
-        id:
-          description: Reviewer's user ID.
-          type: string
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-        name:
-          description: Reviewer's first and last name.
-          type: string
-          readOnly: true
-        reviewTime:
-          description: Date and time of manual review.
-          allOf:
-            - $ref: '#/components/schemas/ServerTimestamp'
-        status:
-          type: string
-          description: Status of the validation.
-          enum:
-            - accepted
-            - rejected
     LeadSource:
       allOf:
         - $ref: '#/components/schemas/LeadSourceData'
