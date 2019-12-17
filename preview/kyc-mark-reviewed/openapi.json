@@ -5874,7 +5874,12 @@
                     ]
                   },
                   "rejection": {
-                    "$ref": "#/components/schemas/KycDocumentRejection"
+                    "description": "Only necessary if status is changed to `\"rejected\"`.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/KycDocumentRejection"
+                      }
+                    ]
                   }
                 }
               }
