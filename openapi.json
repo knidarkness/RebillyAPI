@@ -5622,7 +5622,7 @@
         ],
         "summary": "Retrieve a KYC Document",
         "operationId": "GetKycDocument",
-        "description": "Retrieve a KYC document with specified identifier string\n",
+        "description": "Retrieve a KYC document with specified identifier string.",
         "parameters": [
           {
             "name": "Accept",
@@ -5673,7 +5673,7 @@
         ],
         "summary": "Create or update a KYC document with predefined ID",
         "operationId": "PutKycDocument",
-        "description": "Create or update a KYC document with predefined identifier string\n",
+        "description": "Create or update a KYC document with predefined identifier string.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -5682,12 +5682,12 @@
               }
             }
           },
-          "description": "KYC document resource",
+          "description": "KYC document resource.",
           "required": true
         },
         "responses": {
           "200": {
-            "description": "KYC document was updated",
+            "description": "KYC document was updated.",
             "headers": {
               "Rate-Limit-Limit": {
                 "$ref": "#/components/headers/Rate-Limit-Limit"
@@ -5752,7 +5752,7 @@
         ],
         "summary": "Accept a KYC document",
         "operationId": "PostKycDocumentAcceptance",
-        "description": "Manually override automated status and accept the document\n",
+        "description": "Marks that status of the document as `accepted`. Updates the review time and reviewer information. Intended to be used for manual overrides.\n",
         "responses": {
           "201": {
             "description": "KYC document acceptance was created",
@@ -5796,7 +5796,7 @@
         ],
         "summary": "Reject a KYC document",
         "operationId": "PostKycDocumentRejection",
-        "description": "Manually override automated status and reject the document\n",
+        "description": "Marks that status of the document as `rejected`. Updates the review time and reviewer information. Intended to be used for manual overrides.\n",
         "requestBody": {
           "content": {
             "application/json": {
@@ -5811,6 +5811,53 @@
         "responses": {
           "201": {
             "description": "KYC document rejection was created",
+            "headers": {
+              "Rate-Limit-Limit": {
+                "$ref": "#/components/headers/Rate-Limit-Limit"
+              },
+              "Rate-Limit-Remaining": {
+                "$ref": "#/components/headers/Rate-Limit-Remaining"
+              },
+              "Rate-Limit-Reset": {
+                "$ref": "#/components/headers/Rate-Limit-Reset"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KycDocument"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/AccessForbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidDataError"
+          }
+        }
+      }
+    },
+    "/kyc-documents/{id}/review": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/resourceId"
+        }
+      ],
+      "post": {
+        "tags": [
+          "KYC Documents"
+        ],
+        "summary": "Review a KYC document",
+        "operationId": "PostKycDocumentReview",
+        "description": "Mark the KYC document as reviewed. Updates the review time and reviewer information.",
+        "responses": {
+          "201": {
+            "description": "KYC document was reviewed.",
             "headers": {
               "Rate-Limit-Limit": {
                 "$ref": "#/components/headers/Rate-Limit-Limit"
@@ -13576,7 +13623,7 @@
             ]
           },
           "documentType": {
-            "description": "Document type submitted for validation, only identity-proof type is analyzed in an automated manner",
+            "description": "Document type submitted for validation, only identity-proof type is analyzed in an automated manner.",
             "type": "string",
             "enum": [
               "identity-proof",
@@ -13584,7 +13631,7 @@
             ]
           },
           "status": {
-            "description": "Status of the validation",
+            "description": "Status of the validation.",
             "type": "string",
             "readOnly": true,
             "enum": [
@@ -13592,6 +13639,32 @@
               "in-progress",
               "accepted",
               "rejected"
+            ]
+          },
+          "reviewerId": {
+            "description": "Reviewer's user ID.",
+            "type": "string",
+            "nullable": true,
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResourceId"
+              }
+            ]
+          },
+          "reviewerName": {
+            "description": "Reviewer's first and last name.",
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "reviewTime": {
+            "description": "Date and time of manual review.",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServerTimestamp"
+              }
             ]
           },
           "rejectionReason": {
