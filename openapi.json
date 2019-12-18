@@ -16962,8 +16962,7 @@
             "type": "string",
             "description": "The chronology of the billing time relatively to the service period start.",
             "enum": [
-              "before",
-              "after"
+              "before"
             ]
           },
           "duration": {
