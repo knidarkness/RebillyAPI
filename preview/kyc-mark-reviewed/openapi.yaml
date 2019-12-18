@@ -7949,12 +7949,6 @@ components:
               description: The Address.
               allOf:
                 - $ref: '#/components/schemas/ContactObject'
-            status:
-              description: Bank Account status.
-              type: string
-              enum:
-                - active
-                - deactivated
             customFields:
               $ref: '#/components/schemas/ResourceCustomFields'
     IBANType:
@@ -7986,12 +7980,6 @@ components:
               description: The Address.
               allOf:
                 - $ref: '#/components/schemas/ContactObject'
-            status:
-              description: Bank Account status.
-              type: string
-              enum:
-                - active
-                - deactivated
             customFields:
               $ref: '#/components/schemas/ResourceCustomFields'
     BankAccount:
@@ -8052,6 +8040,7 @@ components:
         status:
           description: Bank Account status
           type: string
+          readOnly: true
           enum:
             - active
             - deactivated
@@ -12335,7 +12324,6 @@ components:
           description: The chronology of the billing time relatively to the service period start.
           enum:
             - before
-            - after
         duration:
           type: integer
           description: The number of the units

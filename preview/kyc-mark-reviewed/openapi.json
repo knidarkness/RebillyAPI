@@ -10603,14 +10603,6 @@
                   }
                 ]
               },
-              "status": {
-                "description": "Bank Account status.",
-                "type": "string",
-                "enum": [
-                  "active",
-                  "deactivated"
-                ]
-              },
               "customFields": {
                 "$ref": "#/components/schemas/ResourceCustomFields"
               }
@@ -10658,14 +10650,6 @@
                   {
                     "$ref": "#/components/schemas/ContactObject"
                   }
-                ]
-              },
-              "status": {
-                "description": "Bank Account status.",
-                "type": "string",
-                "enum": [
-                  "active",
-                  "deactivated"
                 ]
               },
               "customFields": {
@@ -10757,6 +10741,7 @@
           "status": {
             "description": "Bank Account status",
             "type": "string",
+            "readOnly": true,
             "enum": [
               "active",
               "deactivated"
@@ -17050,8 +17035,7 @@
             "type": "string",
             "description": "The chronology of the billing time relatively to the service period start.",
             "enum": [
-              "before",
-              "after"
+              "before"
             ]
           },
           "duration": {
