@@ -10616,6 +10616,7 @@ components:
         - ecoVoucher
         - EPS
         - ePay.bg
+        - Finrax
         - Flexepin
         - Giropay
         - GooglePay
