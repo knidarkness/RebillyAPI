@@ -14604,7 +14604,7 @@ components:
       in: header
       description: 'Organization identifier in scope of which need to perform request (if not specified, the default organization will be used)'
       schema:
-        type: string
+        $ref: '#/components/schemas/ResourceId'
       required: false
     resourceId:
       name: id
