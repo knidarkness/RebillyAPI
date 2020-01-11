@@ -6449,7 +6449,7 @@
         ],
         "summary": "Authorize a Payment Card",
         "operationId": "PostPaymentCardAuthorization",
-        "description": "Authorize a Payment Card\n\nInstead of using this endpoint to authorize a Payment Card\ncreate Transaction with type `authorize`.\n",
+        "description": "Authorize a Payment Card\n\nA Payment Card card will be authorized on first usage: on new transaction or order.\ncreate Transaction with type `authorize`.\n",
         "deprecated": true,
         "requestBody": {
           "content": {
