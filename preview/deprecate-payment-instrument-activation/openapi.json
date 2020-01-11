@@ -7258,7 +7258,7 @@
         ],
         "summary": "Activate a PayPal Account",
         "operationId": "PostPayPalAccountActivation",
-        "description": "Activate a PayPal Account\n\nInstead of using this endpoint to activate PayPal Account\ncreate Transaction with type `authorize`.\n",
+        "description": "Activate a PayPal Account\n\nInstead of using this endpoint to activate a PayPal Account\ncreate Transaction with type `authorize`.\n",
         "deprecated": true,
         "requestBody": {
           "content": {
