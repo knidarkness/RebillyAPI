@@ -4897,8 +4897,8 @@ paths:
       description: |
         Authorize a Payment Card
 
-        A Payment Card card will be authorized on first usage: on new transaction or order.
-        create Transaction with type `authorize`.
+        Instead of using this endpoint a Payment Card will
+        be authorized on first usage (new transaction or order).
       deprecated: true
       requestBody:
         content:
@@ -5554,8 +5554,8 @@ paths:
       description: |
         Activate a PayPal Account
 
-        Instead of using this endpoint to activate a PayPal Account
-        create Transaction with type `authorize`.
+        Instead of using this endpoint a PayPal Account will
+        be authorized on first usage (new transaction or order).
       deprecated: true
       requestBody:
         content:
