@@ -1311,6 +1311,7 @@ paths:
         - Contacts
       summary: Retrieve a list of contacts
       operationId: GetContactCollection
+      deprecated: true
       description: |
         Retrieve a list of contacts.  This may be useful
         when giving the customer a choice between previous
@@ -1353,6 +1354,7 @@ paths:
         - Contacts
       summary: Create a contact
       operationId: PostContact
+      deprecated: true
       description: |
         Contacts are created automatically by data passed to the 
         contact-related hashes within the customer, invoice,
@@ -1429,6 +1431,7 @@ paths:
         - Contacts
       summary: Retrieve a contact
       operationId: GetContact
+      deprecated: true
       description: |
         Retrieve a contact with specified identifier string
       responses:
@@ -1458,6 +1461,7 @@ paths:
         - Contacts
       summary: Create or update a contact with predefined ID
       operationId: PutContact
+      deprecated: true
       description: |
         Create or update a contact with predefined identifier string
       requestBody:
@@ -1528,6 +1532,7 @@ paths:
         - Contacts
       summary: Delete a contact
       operationId: DeleteContact
+      deprecated: true
       description: |
         Delete a contact with predefined identifier string
       responses:

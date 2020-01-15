@@ -1707,6 +1707,7 @@
         ],
         "summary": "Retrieve a list of contacts",
         "operationId": "GetContactCollection",
+        "deprecated": true,
         "description": "Retrieve a list of contacts.  This may be useful\nwhen giving the customer a choice between previous\naddresses they've used before.\n",
         "parameters": [
           {
@@ -1767,6 +1768,7 @@
         ],
         "summary": "Create a contact",
         "operationId": "PostContact",
+        "deprecated": true,
         "description": "Contacts are created automatically by data passed to the \ncontact-related hashes within the customer, invoice,\npayment instrument (like payment card), subscriptions,\nand more.    \n<div class=\"alert alert-warning\">\n  Note: This method should almost never be used.\n  Please check with us on your use case before using it.\n</div>  \n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Contact"
@@ -1820,6 +1822,7 @@
         ],
         "summary": "Retrieve a contact",
         "operationId": "GetContact",
+        "deprecated": true,
         "description": "Retrieve a contact with specified identifier string\n",
         "responses": {
           "200": {
@@ -1863,6 +1866,7 @@
         ],
         "summary": "Create or update a contact with predefined ID",
         "operationId": "PutContact",
+        "deprecated": true,
         "description": "Create or update a contact with predefined identifier string\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Contact"
@@ -1915,6 +1919,7 @@
         ],
         "summary": "Delete a contact",
         "operationId": "DeleteContact",
+        "deprecated": true,
         "description": "Delete a contact with predefined identifier string\n",
         "responses": {
           "204": {
