@@ -13131,7 +13131,7 @@
           "couponIds": {
             "type": "array",
             "nullable": true,
-            "description": "A list of coupons to redeem on the customer and restrict to this invoice.\nRead more about [coupons here](https://help.rebilly.com/invoices-and-subscriptions/coupons-discounts).\n\nThis parameter respects the following logic:\n\n- When not passed then applied coupons will not be changed.\n\n- When empty array passed then all applied coupon redemptions will be canceled.\n\n- When list of coupons is passed then not applied yet coupons will be applied, already applied coupons\nwill not change their state, applied coupons that are not presented in passed list will be canceled.\n",
+            "description": "A list of coupons to redeem on the customer and restrict to this invoice.\nRead more about [coupons here](https://help.rebilly.com/invoices-and-subscriptions/coupons-discounts).\n\nThis parameter respects the following logic:\n- When not passed then applied coupons will not be changed.\n- When empty array passed then all applied coupon redemptions will be canceled.\n- When list of coupons is passed then not applied yet coupons will be applied, already applied coupons\nwill not change their state, applied coupons that are not presented in passed list will be canceled.\n",
             "writeOnly": true,
             "items": {
               "type": "string",
