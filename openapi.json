@@ -18616,7 +18616,13 @@
               "invoice-partially-refunded",
               "invoice-renewal-payment-declined",
               "email-message-sent",
-              "coupon-applied"
+              "coupon-applied",
+              "transaction-approved",
+              "transaction-abandoned",
+              "transaction-canceled",
+              "transaction-declined",
+              "transaction-refunded",
+              "transaction-voided"
             ]
           },
           "triggeredBy": {
