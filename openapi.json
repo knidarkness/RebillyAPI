@@ -9507,7 +9507,7 @@
             "$ref": "#/components/responses/Conflict"
           },
           "422": {
-            "$ref": "#/components/schemas/InvalidError"
+            "$ref": "#/components/responses/InvalidDataError"
           }
         }
       },
@@ -9576,7 +9576,7 @@
             "$ref": "#/components/responses/AccessForbidden"
           },
           "422": {
-            "$ref": "#/components/schemas/InvalidError"
+            "$ref": "#/components/responses/InvalidDataError"
           }
         }
       },
@@ -9619,7 +9619,7 @@
             "$ref": "#/components/responses/AccessForbidden"
           },
           "422": {
-            "$ref": "#/components/schemas/InvalidError"
+            "$ref": "#/components/responses/InvalidDataError"
           }
         }
       }
