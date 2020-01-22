@@ -1332,6 +1332,7 @@ paths:
         - Contacts
       summary: Retrieve a list of contacts
       operationId: GetContactCollection
+      deprecated: true
       description: |
         Retrieve a list of contacts.  This may be useful
         when giving the customer a choice between previous
@@ -1374,6 +1375,7 @@ paths:
         - Contacts
       summary: Create a contact
       operationId: PostContact
+      deprecated: true
       description: |
         Contacts are created automatically by data passed to the 
         contact-related hashes within the customer, invoice,
@@ -1451,6 +1453,7 @@ paths:
         - Contacts
       summary: Retrieve a contact
       operationId: GetContact
+      deprecated: true
       description: |
         Retrieve a contact with specified identifier string
       responses:
@@ -1480,6 +1483,7 @@ paths:
         - Contacts
       summary: Create or update a contact with predefined ID
       operationId: PutContact
+      deprecated: true
       description: |
         Create or update a contact with predefined identifier string
       requestBody:
@@ -1550,6 +1554,7 @@ paths:
         - Contacts
       summary: Delete a contact
       operationId: DeleteContact
+      deprecated: true
       description: |
         Delete a contact with predefined identifier string
       responses:
@@ -4978,6 +4983,10 @@ paths:
       operationId: PostPaymentCardAuthorization
       description: |
         Authorize a Payment Card
+
+        Instead of using this endpoint a Payment Card will
+        be authorized on first usage (new transaction or order).
+      deprecated: true
       requestBody:
         content:
           application/json:
@@ -5643,6 +5652,10 @@ paths:
       operationId: PostPayPalAccountActivation
       description: |
         Activate a PayPal Account
+
+        Instead of using this endpoint a PayPal Account will
+        be authorized on first usage (new transaction or order).
+      deprecated: true
       requestBody:
         content:
           application/json:
@@ -7281,7 +7294,7 @@ paths:
         '409':
           $ref: '#/components/responses/Conflict'
         '422':
-          $ref: '#/components/schemas/InvalidError'
+          $ref: '#/components/responses/InvalidDataError'
     delete:
       tags:
         - Tags
@@ -7332,7 +7345,7 @@ paths:
         '401':
           $ref: '#/components/responses/AccessForbidden'
         '422':
-          $ref: '#/components/schemas/InvalidError'
+          $ref: '#/components/responses/InvalidDataError'
     delete:
       tags:
         - Tags
@@ -7364,7 +7377,7 @@ paths:
         '401':
           $ref: '#/components/responses/AccessForbidden'
         '422':
-          $ref: '#/components/schemas/InvalidError'
+          $ref: '#/components/responses/InvalidDataError'
   '/tags/{tag}/customers/{customerId}':
     parameters:
       - $ref: '#/components/parameters/tag'
@@ -10748,6 +10761,7 @@ components:
         - CASHlib
         - CashToCode
         - China UnionPay
+        - CODVoucher
         - Conekta-oxxo
         - domestic-cards
         - echeck
@@ -10776,6 +10790,7 @@ components:
         - LPG-online
         - LPG-payment-card
         - miscellaneous
+        - Netbanking
         - Neteller
         - Nordea-Solo
         - OchaPay
@@ -13526,6 +13541,12 @@ components:
             - invoice-renewal-payment-declined
             - email-message-sent
             - coupon-applied
+            - transaction-approved
+            - transaction-abandoned
+            - transaction-canceled
+            - transaction-declined
+            - transaction-refunded
+            - transaction-voided
         triggeredBy:
           description: Shows who or what triggered the Timeline event
           type: string

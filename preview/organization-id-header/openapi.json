@@ -1763,6 +1763,7 @@
         ],
         "summary": "Retrieve a list of contacts",
         "operationId": "GetContactCollection",
+        "deprecated": true,
         "description": "Retrieve a list of contacts.  This may be useful\nwhen giving the customer a choice between previous\naddresses they've used before.\n",
         "parameters": [
           {
@@ -1823,6 +1824,7 @@
         ],
         "summary": "Create a contact",
         "operationId": "PostContact",
+        "deprecated": true,
         "description": "Contacts are created automatically by data passed to the \ncontact-related hashes within the customer, invoice,\npayment instrument (like payment card), subscriptions,\nand more.    \n<div class=\"alert alert-warning\">\n  Note: This method should almost never be used.\n  Please check with us on your use case before using it.\n</div>  \n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Contact"
@@ -1879,6 +1881,7 @@
         ],
         "summary": "Retrieve a contact",
         "operationId": "GetContact",
+        "deprecated": true,
         "description": "Retrieve a contact with specified identifier string\n",
         "responses": {
           "200": {
@@ -1922,6 +1925,7 @@
         ],
         "summary": "Create or update a contact with predefined ID",
         "operationId": "PutContact",
+        "deprecated": true,
         "description": "Create or update a contact with predefined identifier string\n",
         "requestBody": {
           "$ref": "#/components/requestBodies/Contact"
@@ -1974,6 +1978,7 @@
         ],
         "summary": "Delete a contact",
         "operationId": "DeleteContact",
+        "deprecated": true,
         "description": "Delete a contact with predefined identifier string\n",
         "responses": {
           "204": {
@@ -6676,7 +6681,8 @@
         ],
         "summary": "Authorize a Payment Card",
         "operationId": "PostPaymentCardAuthorization",
-        "description": "Authorize a Payment Card\n",
+        "description": "Authorize a Payment Card\n\nInstead of using this endpoint a Payment Card will\nbe authorized on first usage (new transaction or order).\n",
+        "deprecated": true,
         "requestBody": {
           "content": {
             "application/json": {
@@ -7517,7 +7523,8 @@
         ],
         "summary": "Activate a PayPal Account",
         "operationId": "PostPayPalAccountActivation",
-        "description": "Activate a PayPal Account\n",
+        "description": "Activate a PayPal Account\n\nInstead of using this endpoint a PayPal Account will\nbe authorized on first usage (new transaction or order).\n",
+        "deprecated": true,
         "requestBody": {
           "content": {
             "application/json": {
@@ -9845,7 +9852,7 @@
             "$ref": "#/components/responses/Conflict"
           },
           "422": {
-            "$ref": "#/components/schemas/InvalidError"
+            "$ref": "#/components/responses/InvalidDataError"
           }
         }
       },
@@ -9917,7 +9924,7 @@
             "$ref": "#/components/responses/AccessForbidden"
           },
           "422": {
-            "$ref": "#/components/schemas/InvalidError"
+            "$ref": "#/components/responses/InvalidDataError"
           }
         }
       },
@@ -9960,7 +9967,7 @@
             "$ref": "#/components/responses/AccessForbidden"
           },
           "422": {
-            "$ref": "#/components/schemas/InvalidError"
+            "$ref": "#/components/responses/InvalidDataError"
           }
         }
       }
@@ -14956,6 +14963,7 @@
           "CASHlib",
           "CashToCode",
           "China UnionPay",
+          "CODVoucher",
           "Conekta-oxxo",
           "domestic-cards",
           "echeck",
@@ -14984,6 +14992,7 @@
           "LPG-online",
           "LPG-payment-card",
           "miscellaneous",
+          "Netbanking",
           "Neteller",
           "Nordea-Solo",
           "OchaPay",
@@ -18993,7 +19002,13 @@
               "invoice-partially-refunded",
               "invoice-renewal-payment-declined",
               "email-message-sent",
-              "coupon-applied"
+              "coupon-applied",
+              "transaction-approved",
+              "transaction-abandoned",
+              "transaction-canceled",
+              "transaction-declined",
+              "transaction-refunded",
+              "transaction-voided"
             ]
           },
           "triggeredBy": {
