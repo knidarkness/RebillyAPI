@@ -195,6 +195,11 @@
   ],
   "paths": {
     "/3dsecure": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "3D Secure"
@@ -301,6 +306,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -342,6 +350,11 @@
       }
     },
     "/attachments": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Files"
@@ -497,6 +510,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -653,6 +669,11 @@
       }
     },
     "/authentication-options": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Customer Authentication"
@@ -752,6 +773,11 @@
       }
     },
     "/authentication-tokens": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Customer Authentication"
@@ -888,6 +914,9 @@
           "schema": {
             "type": "string"
           }
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -1002,6 +1031,9 @@
           "schema": {
             "type": "string"
           }
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "post": {
@@ -1064,6 +1096,11 @@
       }
     },
     "/bank-accounts": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "post": {
         "tags": [
           "Bank Accounts"
@@ -1190,6 +1227,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -1401,6 +1441,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "post": {
@@ -1451,6 +1494,11 @@
       }
     },
     "/blacklists": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Blacklists"
@@ -1562,6 +1610,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -1701,6 +1752,11 @@
       }
     },
     "/contacts": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Contacts"
@@ -1814,6 +1870,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -1949,6 +2008,11 @@
       }
     },
     "/coupons-redemptions": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Coupons"
@@ -2076,6 +2140,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -2114,6 +2181,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "post": {
@@ -2142,6 +2212,11 @@
       }
     },
     "/coupons": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Coupons"
@@ -2268,6 +2343,9 @@
           "schema": {
             "type": "string"
           }
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -2397,6 +2475,9 @@
           "schema": {
             "type": "string"
           }
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "post": {
@@ -2461,6 +2542,11 @@
       }
     },
     "/credentials": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Customer Authentication"
@@ -2572,6 +2658,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -2728,6 +2817,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/customFieldResource"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -2790,6 +2882,9 @@
             "maxLength": 60,
             "pattern": "^[\\w-]+$"
           }
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -2922,6 +3017,11 @@
       }
     },
     "/customer-timeline-custom-events": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Customers"
@@ -3032,6 +3132,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -3079,6 +3182,11 @@
       }
     },
     "/customer-timeline-events": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Customers"
@@ -3138,6 +3246,11 @@
       }
     },
     "/customers": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Customers"
@@ -3300,6 +3413,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -3425,6 +3541,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -3568,6 +3687,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -3689,6 +3811,9 @@
           "schema": {
             "type": "string"
           }
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -3766,6 +3891,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -3815,6 +3943,11 @@
       }
     },
     "/disputes": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Disputes"
@@ -3926,6 +4059,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -4043,6 +4179,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -4087,6 +4226,11 @@
       }
     },
     "/files": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Files"
@@ -4266,6 +4410,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -4409,6 +4556,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -4474,6 +4624,9 @@
               ".gif"
             ]
           }
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -4522,6 +4675,11 @@
       }
     },
     "/invoices": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Invoices"
@@ -4654,6 +4812,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -4794,6 +4955,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "post": {
@@ -4844,6 +5008,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "post": {
@@ -4908,6 +5075,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -5023,6 +5193,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -5070,6 +5243,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "post": {
@@ -5117,6 +5293,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "post": {
@@ -5175,6 +5354,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -5296,6 +5478,9 @@
           "schema": {
             "type": "string"
           }
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -5373,6 +5558,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -5429,6 +5617,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "post": {
@@ -5476,6 +5667,11 @@
       }
     },
     "/kyc-documents": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "KYC Documents"
@@ -5619,6 +5815,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -5749,6 +5948,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "post": {
@@ -5793,6 +5995,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "post": {
@@ -5851,6 +6056,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "post": {
@@ -5895,6 +6103,11 @@
       }
     },
     "/password-tokens": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Customer Authentication"
@@ -6002,6 +6215,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -6076,6 +6292,11 @@
       }
     },
     "/payment-cards": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Payment Cards"
@@ -6223,6 +6444,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -6446,6 +6670,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "post": {
@@ -6538,6 +6765,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "post": {
@@ -6591,6 +6821,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -6635,6 +6868,11 @@
       }
     },
     "/payment-instrument-validation": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Payment Instrument Validation"
@@ -6738,6 +6976,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -6793,6 +7034,11 @@
       }
     },
     "/payments": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Payments"
@@ -6935,6 +7181,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -7054,6 +7303,11 @@
       }
     },
     "/paypal-accounts": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "PayPal Accounts"
@@ -7142,6 +7396,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -7255,6 +7512,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "post": {
@@ -7317,6 +7577,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "post": {
@@ -7367,6 +7630,11 @@
       }
     },
     "/plans": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Plans"
@@ -7467,6 +7735,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -7623,6 +7894,11 @@
       }
     },
     "/products": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Products"
@@ -7722,6 +7998,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -7854,6 +8133,11 @@
       }
     },
     "/search": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Search"
@@ -7935,6 +8219,11 @@
       }
     },
     "/shipping-zones": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Shipping Zones"
@@ -8042,6 +8331,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -8182,6 +8474,11 @@
       }
     },
     "/subscription-cancellations": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Subscriptions"
@@ -8287,6 +8584,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -8422,6 +8722,11 @@
       }
     },
     "/subscription-reactivations": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Subscriptions"
@@ -8529,6 +8834,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -8570,6 +8878,11 @@
       }
     },
     "/subscriptions": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Subscriptions"
@@ -8710,6 +9023,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -8840,6 +9156,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "post": {
@@ -8901,6 +9220,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "post": {
@@ -8956,6 +9278,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -9003,6 +9328,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -9124,6 +9452,9 @@
           "schema": {
             "type": "string"
           }
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -9201,6 +9532,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -9262,6 +9596,9 @@
           "schema": {
             "type": "string"
           }
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "post": {
@@ -9317,6 +9654,11 @@
       }
     },
     "/tags": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "get": {
         "tags": [
           "Tags"
@@ -9448,6 +9790,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/tag"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -9535,6 +9880,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/tag"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "post": {
@@ -9631,6 +9979,9 @@
         },
         {
           "$ref": "#/components/parameters/customerId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "post": {
@@ -9673,6 +10024,11 @@
       }
     },
     "/tokens": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "post": {
         "tags": [
           "Payment Tokens"
@@ -9829,6 +10185,9 @@
           "schema": {
             "type": "string"
           }
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -9881,6 +10240,11 @@
       }
     },
     "/transactions": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/organizationId"
+        }
+      ],
       "post": {
         "tags": [
           "Transactions"
@@ -10011,6 +10375,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -10061,6 +10428,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "post": {
@@ -10111,6 +10481,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -10144,6 +10517,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -10191,6 +10567,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "post": {
@@ -10252,6 +10631,9 @@
       "parameters": [
         {
           "$ref": "#/components/parameters/resourceId"
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -10373,6 +10755,9 @@
           "schema": {
             "type": "string"
           }
+        },
+        {
+          "$ref": "#/components/parameters/organizationId"
         }
       ],
       "get": {
@@ -20138,6 +20523,15 @@
           ],
           "default": "application/json"
         }
+      },
+      "organizationId": {
+        "name": "Organization-Id",
+        "in": "header",
+        "description": "Organization identifier in scope of which need to perform request (if not specified, the default organization will be used)",
+        "schema": {
+          "$ref": "#/components/schemas/ResourceId"
+        },
+        "required": false
       },
       "resourceId": {
         "name": "id",
