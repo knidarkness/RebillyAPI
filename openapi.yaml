@@ -13606,6 +13606,7 @@ components:
             - order-recurring-interval-changed
             - order-risk-metadata-changed
             - order-paid-early
+            - order-quantity-changed
             - email-message-sent
             - coupon-applied
             - invoice-created
