@@ -1,0 +1,130 @@
+type: object
+properties:
+  firstName:
+    type: string
+    description: First Name
+    required: true
+  lastName:
+    type: string
+    description: Last Name
+    required: true
+  source:
+    type: string
+    readOnly: true
+    description: Which list this came from.
+  sourceType:
+    readOnly: true
+    description: The list type
+    type: string
+    enum:
+      - pep
+      - sanctions
+      - adverse-media
+  gender:
+    type: string
+    readOnly: true
+    nullable: true
+    description: Gender of returned identity (if `type` is `individual`)
+  title:
+    type: array
+    readOnly: true
+    description: The identity's title(s)
+    items:
+      type: string
+  type:
+    type: string
+    readOnly: true
+    description: The record type
+    enum:
+      - individual
+      - entity
+  legalBasis:
+    type: array
+    readOnly: true
+    description: List of references to legal documents if they exist
+    items:
+      type: string
+  regime:
+    type: string
+    readOnly: true
+    description: Regime
+    nullable: true
+  authenticity:
+    type: string
+    description: The source list's confidence in information
+    readOnly: true
+    enum:
+      - strong
+      - weak
+      - unknown
+  nationality:
+    type: string
+    readOnly: true
+    description: The nationality of the identity
+  address:
+    type: array
+    readOnly: true
+    description: Addresses related to the identity
+    items:
+      type: object
+      properties:
+        address:
+          type: string
+          nullable: true
+          description: Street Address Line 1
+        address2:
+          type: string
+          nullable: true
+          description: Street Address Line 2
+        city:
+          type: string
+          nullable: true
+          description: City
+        region:
+          type: string
+          nullable: true
+          description: State/Province/Region
+        country:
+          type: string
+          nullable: true
+          description: Country
+        birthplace:
+          type: boolean
+          default: false
+          description: This address is their birth place
+  dob:
+    type: array
+    readOnly: true
+    description: One or more possible dates of birth
+    items:
+      type: string
+      description: Date of birth
+      format: date
+  passport:
+    type: array
+    readOnly: true
+    description: Passport information
+    items:
+      type: object
+      properties:
+        number:
+          type: string
+          description: Passport number
+        registrationDate:
+          type: string
+          format: date
+          description: Passport registration date
+  comments:
+    type: string
+    readOnly: true
+    nullable: true
+    description: Extra information (the content varies per list)
+  _links:
+    type: array
+    description: The links related to resource
+    readOnly: true
+    minItems: 1
+    items:
+      anyOf:
+        - $ref: ./Links/SelfLink.yaml
+        - $ref: ./Links/CustomerLink.yaml

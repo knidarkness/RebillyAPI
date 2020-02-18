@@ -1,0 +1,6 @@
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/AML.yaml
+description: AML search request
+required: true
