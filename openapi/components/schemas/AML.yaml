@@ -3,11 +3,9 @@ properties:
   firstName:
     type: string
     description: First Name
-    required: true
   lastName:
     type: string
     description: Last Name
-    required: true
   source:
     type: string
     readOnly: true
@@ -121,10 +119,10 @@ properties:
     description: Extra information (the content varies per list)
   _links:
     type: array
-    description: The links related to resource
+    description: The links related to resource, including links provided by the list
     readOnly: true
     minItems: 1
     items:
       anyOf:
         - $ref: ./Links/SelfLink.yaml
-        - $ref: ./Links/CustomerLink.yaml
+        - $ref: ./Links/AmlLink.yaml
