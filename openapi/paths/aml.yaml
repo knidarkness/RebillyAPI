@@ -12,11 +12,9 @@ get:
     - $ref: ../components/parameters/organizationId.yaml
     - name: firstName
       in: query
-      type: string
       description: First name of individual to search.
     - name: lastName
       in: query
-      type: string
       description: Last name of individual to search.
   responses:
     '200':
