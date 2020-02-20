@@ -27,7 +27,8 @@ properties:
     type: array
     readOnly: true
     nullable: true
-    description: The identity's title of their position, i.e. `President` or `General`
+    description: The title of their position.
+    example: President
     items:
       type: string
   type:
