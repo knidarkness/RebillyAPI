@@ -2,9 +2,11 @@ type: object
 properties:
   firstName:
     type: string
+    readOnLy: true
     description: First Name
   lastName:
     type: string
+    readOnly: true
     description: Last Name
   source:
     type: string
@@ -26,7 +28,8 @@ properties:
   title:
     type: array
     readOnly: true
-    description: The identity's title(s)
+    nullable: true
+    description: The identity's title of their position, i.e. `President` or `General`
     items:
       type: string
   type:
@@ -98,6 +101,27 @@ properties:
       type: string
       description: Date of birth
       format: date
+  aliases:
+    type: array
+    readOnly: true
+    description: List of aliases, if any
+    items:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: First name of alias
+        lastName:
+          type: string
+          description: Last name of alias
+        authenticity:
+          type: string
+          description: The level of confidence in the alias
+          readOnly: true
+          enum:
+            - strong
+            - weak
+            - unknown
   passport:
     type: array
     readOnly: true
