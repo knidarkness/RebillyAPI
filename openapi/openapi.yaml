@@ -233,13 +233,13 @@ tags:
 x-tagGroups:
   - name: Customers
     tags:
-      - AML
       - Customers
       - Customer Authentication
       - Custom Fields
       - Contacts
       - Files
       - KYC Documents
+      - AML
       - Tags
       - Customers Timeline
   - name: Payment Instruments
