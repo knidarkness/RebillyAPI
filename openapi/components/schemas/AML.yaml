@@ -30,7 +30,11 @@ properties:
     readOnly: true
     nullable: true
     description: The title of their position.
-    example: President
+    example: 
+      - Postmaster General
+      - Ambassador to France
+      - Ambassador to Sweden
+      - Supreme Executive Council of Commonwealth of Pennsylvania
     items:
       type: string
   type:
