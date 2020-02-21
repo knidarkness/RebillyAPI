@@ -114,6 +114,7 @@ properties:
       readOnly: true
       description: Date of birth
       format: date
+      example: 1706-01-17
   aliases:
     type: array
     readOnly: true
