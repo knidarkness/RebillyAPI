@@ -72,26 +72,32 @@ properties:
         address:
           type: string
           nullable: true
+          readOnly: true
           description: Street Address Line 1
         address2:
           type: string
           nullable: true
+          readOnly: true
           description: Street Address Line 2
         city:
           type: string
           nullable: true
+          readOnly: true
           description: City
         region:
           type: string
           nullable: true
+          readOnly: true
           description: State/Province/Region
         country:
           type: string
           nullable: true
+          readOnly: true
           description: Country
         birthplace:
           type: boolean
           default: false
+          readOnly: true
           description: This address is their birth place
   dob:
     type: array
@@ -99,6 +105,7 @@ properties:
     description: One or more possible dates of birth
     items:
       type: string
+      readOnly: true
       description: Date of birth
       format: date
   aliases:
@@ -111,9 +118,11 @@ properties:
         firstName:
           type: string
           description: First name of alias
+          readOnly: true
         lastName:
           type: string
           description: Last name of alias
+          readOnly: true
         authenticity:
           type: string
           description: The level of confidence in the alias
@@ -131,10 +140,12 @@ properties:
       properties:
         number:
           type: string
+          readOnly: true
           description: Passport number
         registrationDate:
           type: string
           format: date
+          readOnly: true
           description: Passport registration date
   comments:
     type: string
