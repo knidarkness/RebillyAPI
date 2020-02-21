@@ -3,6 +3,7 @@ properties:
   firstName:
     type: string
     description: First Name
+    example: Benjamin
   lastName:
     type: string
     description: Last Name
