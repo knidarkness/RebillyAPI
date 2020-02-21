@@ -51,6 +51,7 @@ properties:
     readOnly: true
     description: Regime
     nullable: true
+    example: ISIL
   authenticity:
     type: string
     description: The source list's confidence in information
